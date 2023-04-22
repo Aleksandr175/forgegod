@@ -1,35 +1,45 @@
-import {Pressable, StyleSheet, Text, View} from "react-native";
-import {StatusBar} from "expo-status-bar";
-import React from "react";
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
 
 export const App = () => {
   return (
     <>
-      <View><Text style={styles.header}>Open123 app!</Text></View>
+      <View>
+        <Text style={styles.header}>Open123 app!</Text>
+      </View>
       <StatusBar style="auto" />
 
       <View style={styles.gameContent}>
-        <View><Text>Content</Text></View>
+        <View>
+          <Text>Content</Text>
+        </View>
         <View style={styles.bottomMenu}>
-          <Pressable style={styles.menuItem} onPress={() => {
-            alert('1');
-          }}>
+          <Pressable
+            style={styles.menuItem}
+            onPress={() => {
+              alert('1');
+            }}
+          >
             <Text>Menu</Text>
           </Pressable>
-          <Pressable style={styles.menuItem} onPress={() => {
-            alert('1');
-          }}>
+          <Pressable
+            style={styles.menuItem}
+            onPress={() => {
+              alert('1');
+            }}
+          >
             <Text>Menu</Text>
           </Pressable>
         </View>
       </View>
     </>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   header: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     padding: 10,
   },
   gameContent: {
@@ -48,5 +58,5 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     backgroundColor: 'green',
-  }
+  },
 });
