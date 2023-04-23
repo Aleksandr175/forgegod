@@ -1,72 +1,50 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Panel } from './Panel';
 import React from 'react';
-import { Panel } from './components/Panel';
-import { PanelSelectedGood } from './components/PanelSelectedGood';
-import { PanelGoods } from './components/PanelGoods';
-import { PanelStorage } from './components/PanelStorage';
 
-export const App = () => {
+export const PanelSelectedGood = () => {
   return (
-    <View style={styles.appWrapper}>
-      <View style={styles.headerBlock}>
-        <Text style={styles.header}>Forge God</Text>
-      </View>
-
-      <View style={styles.appContent}>
-        <View style={styles.forgeBlock}>
-          <View style={styles.columnLeft}>
-            <Panel title={'In Process'}>
-              <Text>Left</Text>
-            </Panel>
-          </View>
-          <View style={styles.columnRight}>
-            <View style={styles.orderBlock}>
-              <PanelSelectedGood />
-            </View>
-            <PanelGoods />
-          </View>
+    <Panel title={'Order'}>
+      <View style={styles.selectedItem}>
+        <View style={styles.selectedItemImage}>
+          <Image style={styles.iconBig} source={require('../images/ore.png')} />
         </View>
-
-        <View style={styles.storageBlock}>
-          <PanelStorage />
+        <View style={styles.selectedItemInfo}>
+          <Text style={styles.selectedItemTitle}>Ore</Text>
+          <Text style={styles.selectedItemTitle}>Required:</Text>
+          <View style={styles.selectedItemRequired}>
+            <Image
+              style={styles.iconSmall}
+              source={require('../images/ore.png')}
+            />
+            <Text>12</Text>
+          </View>
+          <View style={styles.selectedItemRequired}>
+            <Image
+              style={styles.iconSmall}
+              source={require('../images/ore.png')}
+            />
+            <Text>12</Text>
+          </View>
+          <View style={styles.selectedItemRequired}>
+            <Image
+              style={styles.iconSmall}
+              source={require('../images/ore.png')}
+            />
+            <Text>12</Text>
+          </View>
+          <View style={styles.separator}></View>
+          <Pressable
+            style={styles.button}
+            onPress={() => {
+              alert('button');
+            }}
+          >
+            <Text style={styles.buttonText}>Order</Text>
+          </Pressable>
         </View>
       </View>
-
-      <View style={styles.bottomMenu}>
-        <Pressable
-          style={styles.menuItem}
-          onPress={() => {
-            alert('1');
-          }}
-        >
-          <Text>Forge</Text>
-        </Pressable>
-        <Pressable
-          style={styles.menuItem}
-          onPress={() => {
-            alert('1');
-          }}
-        >
-          <Text>Skills</Text>
-        </Pressable>
-        <Pressable
-          style={styles.menuItem}
-          onPress={() => {
-            alert('1');
-          }}
-        >
-          <Text>Mine</Text>
-        </Pressable>
-        <Pressable
-          style={styles.menuItem}
-          onPress={() => {
-            alert('1');
-          }}
-        >
-          <Text>Orders</Text>
-        </Pressable>
-      </View>
-    </View>
+    </Panel>
   );
 };
 
