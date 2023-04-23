@@ -5,9 +5,10 @@ import { dictionary } from '../dictionary';
 
 interface IProps {
   goodId?: number;
+  onCreateOrder: (id: number, qty: number) => void;
 }
 
-export const PanelSelectedGood = ({ goodId }: IProps) => {
+export const PanelSelectedGood = ({ goodId, onCreateOrder }: IProps) => {
   const good = dictionary.goods.find((item) => item.id === goodId);
 
   return (
@@ -47,7 +48,8 @@ export const PanelSelectedGood = ({ goodId }: IProps) => {
               <Pressable
                 style={styles.button}
                 onPress={() => {
-                  alert('button');
+                  // qty = 1;
+                  onCreateOrder(goodId, 1);
                 }}
               >
                 <Text style={styles.buttonText}>Order</Text>

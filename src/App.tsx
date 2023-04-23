@@ -1,10 +1,12 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Panel } from './components/Panel';
 import { PanelSelectedGood } from './components/PanelSelectedGood';
 import { PanelGoods } from './components/PanelGoods';
 import { PanelStorage } from './components/PanelStorage';
 import { IStorageGood } from './types';
+import { PanelOrders } from './components/PanelOrders';
+import { dictionary } from './dictionary';
 
 export const App = () => {
   const [selectedGoodId, setSelectedGoodId] = useState<number>(2);
@@ -23,6 +25,77 @@ export const App = () => {
     },
   ]);
 
+  const [orders, setOrders] = useState([
+    {
+      goodId: 2,
+      qty: 1,
+      timeLeft: 3, // for 1 qty item
+    },
+  ]);
+
+  const timer = useRef();
+
+  useEffect(() => {
+    // @ts-ignore
+    timer.current = setInterval(handleTimer, 1000);
+
+    return () => {
+      clearInterval(timer.current);
+    };
+  }, []);
+
+  const handleTimer = () => {
+    setOrders((prevOrders) => {
+      let newOrders = [...prevOrders];
+
+      newOrders = newOrders
+        .map((order) => {
+          order.timeLeft = order.timeLeft - 1;
+
+          if (order.timeLeft === 0) {
+            order.qty = order.qty - 1;
+
+            if (order.qty > 0) {
+              order.timeLeft =
+                dictionary.goods.find((good) => good.id === order.goodId)
+                  ?.time || 0;
+            } else {
+              addToStorage(order.goodId, 1);
+            }
+          }
+
+          return order;
+        })
+        .filter((order) => order.timeLeft > 0);
+
+      return newOrders;
+    });
+  };
+
+  const createOrder = (id: number, qty: number) => {};
+
+  const addToStorage = (goodId: number, qty: number) => {
+    setStorage((prevStorage) => {
+      let newStorage = [...prevStorage];
+      const index = newStorage.findIndex(
+        (storageItem) => storageItem.id === goodId,
+      );
+
+      if (index > -1) {
+        // update qty
+        newStorage[index].qty += 1;
+      } else {
+        // add new storage item
+        newStorage.push({
+          id: goodId,
+          qty: qty,
+        });
+      }
+
+      return newStorage;
+    });
+  };
+
   return (
     <View style={styles.appWrapper}>
       <View style={styles.headerBlock}>
@@ -32,13 +105,14 @@ export const App = () => {
       <View style={styles.appContent}>
         <View style={styles.forgeBlock}>
           <View style={styles.columnLeft}>
-            <Panel title={'In Process'}>
-              <Text>Left</Text>
-            </Panel>
+            <PanelOrders orders={orders} />
           </View>
           <View style={styles.columnRight}>
             <View style={styles.orderBlock}>
-              <PanelSelectedGood goodId={selectedGoodId} />
+              <PanelSelectedGood
+                goodId={selectedGoodId}
+                onCreateOrder={createOrder}
+              />
             </View>
             <PanelGoods onChangeGoodId={(id) => setSelectedGoodId(id)} />
           </View>
