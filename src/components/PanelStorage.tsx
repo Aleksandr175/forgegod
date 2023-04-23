@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   storageGridItem: {
     margin: 5,
-    backgroundColor: 'blue',
+    backgroundColor: '#614D41',
     width: 48,
     height: 48,
   },

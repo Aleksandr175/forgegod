@@ -146,41 +146,6 @@ const styles = StyleSheet.create({
   storageGridGoodsList: {
     height: 240,
   },
-  storageGridItem: {
-    margin: 5,
-    backgroundColor: 'blue',
-    width: 48,
-    height: 48,
-  },
-  selectedItem: {
-    padding: 5,
-    backgroundColor: '#D9D9D9',
-    flexDirection: 'row',
-  },
-  selectedItemImage: {
-    width: 40,
-    height: 40,
-    backgroundColor: 'red',
-    marginRight: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  selectedItemInfo: {},
-  selectedItemTitle: {
-    color: 'white',
-    paddingBottom: 5,
-  },
-  selectedItemRequired: {
-    flexDirection: 'row',
-  },
-  iconSmall: {
-    width: 16,
-    height: 16,
-  },
-  iconBig: {
-    width: 32,
-    height: 32,
-  },
   button: {
     backgroundColor: '#444',
   },

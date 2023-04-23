@@ -8,79 +8,29 @@ import {
 } from 'react-native';
 import { Panel } from './Panel';
 import React from 'react';
+import { dictionary } from '../dictionary';
+import { styles as stylesCommon } from '../styles';
 
 export const PanelGoods = () => {
+  const goods = dictionary.goods.filter((item) => {
+    // add some conditions, check upgrades
+    return item.type === 'good';
+  });
+
   return (
     <Panel title={'Goods'}>
       <View style={styles.storageGrid}>
         <FlatList
           style={styles.storageGridGoodsList}
-          data={[
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-          ]}
+          data={goods}
           numColumns={3}
           renderItem={({ item }) => (
-            <View style={styles.storageGridItem}></View>
+            <View style={styles.storageGridItem}>
+              <Image
+                style={stylesCommon.iconBig}
+                source={require('../images/' + item.id + '.png')}
+              />
+            </View>
           )}
           keyExtractor={(item) => item.id}
         />
@@ -91,7 +41,7 @@ export const PanelGoods = () => {
 
 const styles = StyleSheet.create({
   storageGrid: {
-    backgroundColor: '#D9D9D9',
+    backgroundColor: '#614D41',
     flexDirection: 'row',
     flexWrap: 'wrap',
     width: '100%',
@@ -104,8 +54,13 @@ const styles = StyleSheet.create({
   },
   storageGridItem: {
     margin: 5,
-    backgroundColor: 'blue',
+    backgroundColor: '#71635B',
     width: 48,
     height: 48,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 2,
+    borderStyle: 'solid',
+    borderColor: 'black',
   },
 });
