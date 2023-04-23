@@ -12,14 +12,14 @@ import React from 'react';
 
 export const App = () => {
   return (
-    <>
-      <View>
+    <View style={styles.appWrapper}>
+      <View style={styles.headerBlock}>
         <Text style={styles.header}>Open123 app!</Text>
       </View>
-      <StatusBar style="auto" />
+      {/*<StatusBar style="auto" />*/}
 
       <View style={styles.appContent}>
-        <View style={styles.screenContent}>
+        <View style={styles.forgeBlock}>
           <View style={styles.columnLeft}>
             <View style={styles.containerWrapper}>
               <View style={styles.containerTitle}>
@@ -31,46 +31,53 @@ export const App = () => {
             </View>
           </View>
           <View style={styles.columnRight}>
-            <View style={styles.containerWrapper}>
-              <View style={styles.containerTitle}>
-                <Text>Order</Text>
-              </View>
-              <View style={styles.container}>
-                <View style={styles.selectedItem}>
-                  <View style={styles.selectedItemImage}></View>
-                  <View style={styles.selectedItemInfo}>
-                    <Text style={styles.selectedItemTitle}>Ore</Text>
-                    <Text style={styles.selectedItemTitle}>Required:</Text>
-                    <View style={styles.selectedItemRequired}>
+            <View style={styles.orderBlock}>
+              <View style={styles.containerWrapper}>
+                <View style={styles.containerTitle}>
+                  <Text>Order</Text>
+                </View>
+                <View style={styles.container}>
+                  <View style={styles.selectedItem}>
+                    <View style={styles.selectedItemImage}>
                       <Image
-                        style={styles.iconSmall}
+                        style={styles.iconBig}
                         source={require('./images/ore.png')}
                       />
-                      <Text>12</Text>
                     </View>
-                    <View style={styles.selectedItemRequired}>
-                      <Image
-                        style={styles.iconSmall}
-                        source={require('./images/ore.png')}
-                      />
-                      <Text>12</Text>
+                    <View style={styles.selectedItemInfo}>
+                      <Text style={styles.selectedItemTitle}>Ore</Text>
+                      <Text style={styles.selectedItemTitle}>Required:</Text>
+                      <View style={styles.selectedItemRequired}>
+                        <Image
+                          style={styles.iconSmall}
+                          source={require('./images/ore.png')}
+                        />
+                        <Text>12</Text>
+                      </View>
+                      <View style={styles.selectedItemRequired}>
+                        <Image
+                          style={styles.iconSmall}
+                          source={require('./images/ore.png')}
+                        />
+                        <Text>12</Text>
+                      </View>
+                      <View style={styles.selectedItemRequired}>
+                        <Image
+                          style={styles.iconSmall}
+                          source={require('./images/ore.png')}
+                        />
+                        <Text>12</Text>
+                      </View>
+                      <View style={styles.separator}></View>
+                      <Pressable
+                        style={styles.button}
+                        onPress={() => {
+                          alert('button');
+                        }}
+                      >
+                        <Text style={styles.buttonText}>Order</Text>
+                      </Pressable>
                     </View>
-                    <View style={styles.selectedItemRequired}>
-                      <Image
-                        style={styles.iconSmall}
-                        source={require('./images/ore.png')}
-                      />
-                      <Text>12</Text>
-                    </View>
-                    <View style={styles.separator}></View>
-                    <Pressable
-                      style={styles.button}
-                      onPress={() => {
-                        alert('button');
-                      }}
-                    >
-                      <Text style={styles.buttonText}>Order</Text>
-                    </Pressable>
                   </View>
                 </View>
               </View>
@@ -81,79 +88,162 @@ export const App = () => {
               </View>
               <View style={styles.container}>
                 <View style={styles.storageGrid}>
-                  <View style={styles.storageGridItem}></View>
-                  <View style={styles.storageGridItem}></View>
-                  <View style={styles.storageGridItem}></View>
-                  <View style={styles.storageGridItem}></View>
-                  <View style={styles.storageGridItem}></View>
-                  <View style={styles.storageGridItem}></View>
-                  <View style={styles.storageGridItem}></View>
-                  <View style={styles.storageGridItem}></View>
-                  <View style={styles.storageGridItem}></View>
-                  <View style={styles.storageGridItem}></View>
-                  <View style={styles.storageGridItem}></View>
-                  <View style={styles.storageGridItem}></View>
-                  <View style={styles.storageGridItem}></View>
-                  <View style={styles.storageGridItem}></View>
-                  <View style={styles.storageGridItem}></View>
+                  <FlatList
+                    style={styles.storageGridGoodsList}
+                    data={[
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                      { id: 1 },
+                    ]}
+                    numColumns={3}
+                    renderItem={({ item }) => (
+                      <View style={styles.storageGridItem}></View>
+                    )}
+                    keyExtractor={(item) => item.id}
+                  />
                 </View>
               </View>
             </View>
           </View>
         </View>
 
-        <View style={styles.containerWrapper}>
-          <View style={styles.containerTitle}>
-            <Text>Storage</Text>
-          </View>
-          <View style={styles.container}>
-            <View style={styles.storageGrid}>
-              <FlatList
-                style={styles.storageGridList}
-                data={[
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                  { id: 1 },
-                ]}
-                numColumns={6}
-                renderItem={({ item }) => (
-                  <View style={styles.storageGridItem}></View>
-                )}
-                keyExtractor={(item) => item.id}
-              />
+        <View style={styles.storageBlock}>
+          <View style={styles.containerWrapper}>
+            <View style={styles.containerTitle}>
+              <Text>Storage</Text>
+            </View>
+            <View style={styles.container}>
+              <View style={styles.storageGrid}>
+                <FlatList
+                  style={styles.storageGridList}
+                  data={[
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                    { id: 1 },
+                  ]}
+                  numColumns={6}
+                  renderItem={({ item }) => (
+                    <View style={styles.storageGridItem}></View>
+                  )}
+                  keyExtractor={(item) => item.id}
+                />
+              </View>
             </View>
           </View>
         </View>
@@ -165,7 +255,7 @@ export const App = () => {
             alert('1');
           }}
         >
-          <Text>Menu1</Text>
+          <Text>Forge</Text>
         </Pressable>
         <Pressable
           style={styles.menuItem}
@@ -173,7 +263,7 @@ export const App = () => {
             alert('1');
           }}
         >
-          <Text>Menu2</Text>
+          <Text>Skills</Text>
         </Pressable>
         <Pressable
           style={styles.menuItem}
@@ -181,7 +271,7 @@ export const App = () => {
             alert('1');
           }}
         >
-          <Text>Menu3</Text>
+          <Text>Mine</Text>
         </Pressable>
         <Pressable
           style={styles.menuItem}
@@ -189,10 +279,10 @@ export const App = () => {
             alert('1');
           }}
         >
-          <Text>Menu4</Text>
+          <Text>Orders</Text>
         </Pressable>
       </View>
-    </>
+    </View>
   );
 };
 
@@ -201,9 +291,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     padding: 10,
   },
-  appContent: {
-    width: '100%',
+  headerBlock: {
+    flexDirection: 'column',
+    /*paddingTop: 50,*/
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    height: '10%',
+  },
+  appWrapper: {
+    flexDirection: 'column',
     flex: 1,
+  },
+  appContent: {
+    height: '80%',
+    width: '100%',
+    /*flex: 1,*/
     backgroundColor: '#888',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -215,6 +317,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingBottom: 30,
     flexDirection: 'row',
+    height: '10%',
   },
   menuItem: {
     width: '25%',
@@ -227,6 +330,15 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '75%',
   },
+  forgeBlock: {
+    flexDirection: 'row',
+    width: '100%',
+    height: '75%',
+  },
+  storageBlock: {
+    height: '25%',
+    width: '100%',
+  },
   columnLeft: {
     backgroundColor: 'blue',
     width: '50%',
@@ -235,6 +347,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'green',
     width: '50%',
   },
+  orderBlock: {},
   panelOrdersInProcess: {
     backgroundColor: '#444',
   },
@@ -246,6 +359,9 @@ const styles = StyleSheet.create({
   },
   storageGridList: {
     height: 140,
+  },
+  storageGridGoodsList: {
+    height: 240,
   },
   storageGridItem: {
     margin: 5,
@@ -263,6 +379,8 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: 'red',
     marginRight: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   selectedItemInfo: {},
   selectedItemTitle: {
@@ -276,6 +394,10 @@ const styles = StyleSheet.create({
     width: 16,
     height: 16,
   },
+  iconBig: {
+    width: 32,
+    height: 32,
+  },
   button: {
     backgroundColor: '#444',
   },
@@ -287,7 +409,8 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   containerWrapper: {
-    margin: 5,
+    padding: 5,
+    width: '100%',
   },
   containerTitle: {
     backgroundColor: 'yellow',
