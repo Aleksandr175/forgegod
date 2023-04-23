@@ -17,3 +17,8 @@ export interface IGood {
 }
 
 export type TTypeGood = 'resource' | 'good';
+
+export interface IStorageGood {
+  id: number;
+  qty: number;
+}

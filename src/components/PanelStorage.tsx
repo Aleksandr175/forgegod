@@ -8,14 +8,20 @@ import {
 } from 'react-native';
 import { Panel } from './Panel';
 import React from 'react';
+import { IStorageGood } from '../types';
+import { styles as stylesCommon } from '../styles';
 
-export const PanelStorage = () => {
+interface IProps {
+  storage: IStorageGood[];
+}
+export const PanelStorage = ({ storage }: IProps) => {
   return (
     <Panel title={'Storage'}>
-      <View style={styles.storageGrid}>
+      <View style={stylesCommon.storageGrid}>
         <FlatList
-          style={styles.storageGridList}
-          data={[
+          style={stylesCommon.storageGridList}
+          data={
+            storage /*[
             { id: 1 },
             { id: 1 },
             { id: 1 },
@@ -77,35 +83,21 @@ export const PanelStorage = () => {
             { id: 1 },
             { id: 1 },
             { id: 1 },
-          ]}
+          ]*/
+          }
           numColumns={6}
           renderItem={({ item }) => (
-            <View style={styles.storageGridItem}></View>
+            <View style={stylesCommon.storageGridItem}>
+              <Image
+                style={stylesCommon.iconBig}
+                source={require('../images/' + item.id + '.png')}
+              />
+              <Text style={stylesCommon.storageGridItemQty}>{item.qty}</Text>
+            </View>
           )}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => String(item.id)}
         />
       </View>
     </Panel>
   );
 };
-
-const styles = StyleSheet.create({
-  storageGrid: {
-    backgroundColor: '#D9D9D9',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    width: '100%',
-  },
-  storageGridList: {
-    height: 140,
-  },
-  storageGridGoodsList: {
-    height: 240,
-  },
-  storageGridItem: {
-    margin: 5,
-    backgroundColor: '#614D41',
-    width: 48,
-    height: 48,
-  },
-});

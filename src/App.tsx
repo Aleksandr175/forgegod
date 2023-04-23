@@ -1,11 +1,28 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { Panel } from './components/Panel';
 import { PanelSelectedGood } from './components/PanelSelectedGood';
 import { PanelGoods } from './components/PanelGoods';
 import { PanelStorage } from './components/PanelStorage';
+import { IStorageGood } from './types';
 
 export const App = () => {
+  const [selectedGoodId, setSelectedGoodId] = useState<number>(2);
+  const [storage, setStorage] = useState<IStorageGood[]>([
+    {
+      id: 1,
+      qty: 2,
+    },
+    {
+      id: 2,
+      qty: 1,
+    },
+    {
+      id: 3,
+      qty: 1,
+    },
+  ]);
+
   return (
     <View style={styles.appWrapper}>
       <View style={styles.headerBlock}>
@@ -21,14 +38,14 @@ export const App = () => {
           </View>
           <View style={styles.columnRight}>
             <View style={styles.orderBlock}>
-              <PanelSelectedGood />
+              <PanelSelectedGood goodId={selectedGoodId} />
             </View>
-            <PanelGoods />
+            <PanelGoods onChangeGoodId={(id) => setSelectedGoodId(id)} />
           </View>
         </View>
 
         <View style={styles.storageBlock}>
-          <PanelStorage />
+          <PanelStorage storage={storage} />
         </View>
       </View>
 
@@ -84,11 +101,11 @@ const styles = StyleSheet.create({
   appWrapper: {
     flexDirection: 'column',
     flex: 1,
+    width: '100%',
   },
   appContent: {
     height: '80%',
     width: '100%',
-    /*flex: 1,*/
     backgroundColor: '#888',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -108,11 +125,6 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     backgroundColor: 'green',
   },
-  screenContent: {
-    flexDirection: 'row',
-    width: '100%',
-    height: '75%',
-  },
   forgeBlock: {
     flexDirection: 'row',
     width: '100%',
@@ -123,7 +135,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   columnLeft: {
-    backgroundColor: 'blue',
+    backgroundColor: '#008888',
     width: '50%',
   },
   columnRight: {
@@ -131,40 +143,4 @@ const styles = StyleSheet.create({
     width: '50%',
   },
   orderBlock: {},
-  panelOrdersInProcess: {
-    backgroundColor: '#444',
-  },
-  storageGrid: {
-    backgroundColor: '#D9D9D9',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    width: '100%',
-  },
-  storageGridList: {
-    height: 140,
-  },
-  storageGridGoodsList: {
-    height: 240,
-  },
-  button: {
-    backgroundColor: '#444',
-  },
-  buttonText: {
-    textAlign: 'center', // <-- the magic
-    color: 'white',
-  },
-  separator: {
-    padding: 5,
-  },
-  containerWrapper: {
-    padding: 5,
-    width: '100%',
-  },
-  containerTitle: {
-    backgroundColor: 'yellow',
-  },
-  container: {
-    backgroundColor: '#888',
-    width: '100%',
-  },
 });
