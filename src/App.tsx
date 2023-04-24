@@ -31,7 +31,14 @@ export const App = () => {
     {
       goodId: 2,
       qty: 1,
-      timeLeft: 3, // for 1 qty item
+      timeLeft: 5, // for 1 qty item
+      timePerItem: 5,
+    },
+    {
+      goodId: 3,
+      qty: 1,
+      timeLeft: 30, // for 1 qty item
+      timePerItem: 30,
     },
   ]);
 
@@ -168,11 +175,9 @@ export const App = () => {
 const SHeader = styled.Text`
   font-weight: 700;
   padding: 10px;
-  display: flex;
 `;
 
 const SHeaderBlock = styled.View`
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
