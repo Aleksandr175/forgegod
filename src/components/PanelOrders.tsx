@@ -15,6 +15,11 @@ interface IProps {
 export const PanelOrders = ({ orders }: IProps) => {
   return (
     <Panel title={'Orders'}>
+      {orders.length === 0 && (
+        <SNoOrders>
+          No current orders. You can order something in right panel
+        </SNoOrders>
+      )}
       {orders.map((order) => {
         return (
           <SOrderInProcessWrapper>
@@ -80,3 +85,5 @@ const SOrderInProcessWrapper = styled.View`
 `;
 
 const SOrderDetails = styled.View``;
+
+const SNoOrders = styled.Text``;

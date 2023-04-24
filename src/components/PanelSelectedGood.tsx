@@ -1,15 +1,43 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Panel } from './Panel';
-import React from 'react';
+import React, { useState } from 'react';
 import { dictionary } from '../dictionary';
+import { IStorageGood } from '../types';
+import styled from 'styled-components/native';
 
 interface IProps {
   goodId?: number;
   onCreateOrder: (id: number, qty: number) => void;
+  storage: IStorageGood[];
 }
 
-export const PanelSelectedGood = ({ goodId, onCreateOrder }: IProps) => {
+export const PanelSelectedGood = ({
+  goodId,
+  onCreateOrder,
+  storage,
+}: IProps) => {
   const good = dictionary.goods.find((item) => item.id === goodId);
+  const [qty, setQty] = useState(1);
+
+  const isAvailableToOrder = (): boolean => {
+    let canOrder = true;
+
+    good?.requirements.resources.forEach((requiredResource) => {
+      const itemInStorage = storage.find(
+        (item) => item.id === requiredResource.id,
+      );
+
+      console.log(itemInStorage, requiredResource);
+
+      if (itemInStorage) {
+        if (itemInStorage.qty < requiredResource.qty) {
+          canOrder = false;
+        }
+      }
+    });
+
+    return canOrder;
+  };
 
   return (
     <Panel title={'Order'}>
@@ -44,16 +72,16 @@ export const PanelSelectedGood = ({ goodId, onCreateOrder }: IProps) => {
                   })}
                 </>
               )}
-              <View style={styles.separator}></View>
-              <Pressable
-                style={styles.button}
+              <SSeparator />
+
+              <SButton
                 onPress={() => {
-                  // qty = 1;
-                  onCreateOrder(goodId, 1);
+                  onCreateOrder(goodId, qty);
                 }}
+                disabled={!isAvailableToOrder()}
               >
                 <Text style={styles.buttonText}>Order</Text>
-              </Pressable>
+              </SButton>
             </>
           )}
         </View>
@@ -92,15 +120,9 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
   },
-  button: {
-    backgroundColor: '#444',
-  },
   buttonText: {
     textAlign: 'center', // <-- the magic
     color: 'white',
-  },
-  separator: {
-    padding: 5,
   },
   containerWrapper: {
     padding: 5,
@@ -114,3 +136,18 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 });
+
+const SSeparator = styled.View`
+  padding: 5px;
+`;
+
+const SButton = styled.Pressable<{ disabled?: boolean }>`
+  background-color: ${(props) => (props.disabled ? '#444' : '#F49300')};
+
+  ${({ disabled }) =>
+    disabled
+      ? `
+      opacity: .5;
+      `
+      : ''};
+`;

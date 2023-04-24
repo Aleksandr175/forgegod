@@ -81,7 +81,37 @@ export const App = () => {
     });
   };
 
-  const createOrder = (id: number, qty: number) => {};
+  const createOrder = (id: number, qty: number) => {
+    const item = dictionary.goods.find((good) => good.id === id);
+
+    if (item) {
+      setOrders((prevOrders) => {
+        return [
+          ...prevOrders,
+          {
+            goodId: id,
+            qty,
+            timeLeft: item.time,
+            timePerItem: item.time,
+          },
+        ];
+      });
+
+      setStorage((prevStorage) => {
+        const newStorage = [...prevStorage];
+
+        item.requirements.resources.forEach((requiredResource) => {
+          const indexInStorage = storage.findIndex(
+            (item) => item.id === requiredResource.id,
+          );
+
+          newStorage[indexInStorage].qty -= requiredResource.qty;
+        });
+
+        return newStorage;
+      });
+    }
+  };
 
   const addToStorage = (goodId: number, qty: number) => {
     setStorage((prevStorage) => {
@@ -121,6 +151,7 @@ export const App = () => {
           <View style={styles.columnRight}>
             <View style={styles.orderBlock}>
               <PanelSelectedGood
+                storage={storage}
                 goodId={selectedGoodId}
                 onCreateOrder={createOrder}
               />

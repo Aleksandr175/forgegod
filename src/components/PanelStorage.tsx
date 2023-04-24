@@ -15,76 +15,14 @@ interface IProps {
   storage: IStorageGood[];
 }
 export const PanelStorage = ({ storage }: IProps) => {
+  const availableItems = storage.filter((item) => item.qty > 0);
+
   return (
     <Panel title={'Storage'}>
       <View style={stylesCommon.storageGrid}>
         <FlatList
           style={stylesCommon.storageGridList}
-          data={
-            storage /*[
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-            { id: 1 },
-          ]*/
-          }
+          data={availableItems}
           numColumns={6}
           renderItem={({ item }) => (
             <View style={stylesCommon.storageGridItem}>
