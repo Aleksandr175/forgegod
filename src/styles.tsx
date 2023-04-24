@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
   },
 
   storageGrid: {
-    backgroundColor: '#614D41',
     flexDirection: 'row',
     flexWrap: 'wrap',
     width: '100%',

@@ -27,8 +27,6 @@ export const PanelSelectedGood = ({
         (item) => item.id === requiredResource.id,
       );
 
-      console.log(itemInStorage, requiredResource);
-
       if (itemInStorage) {
         if (itemInStorage.qty < requiredResource.qty) {
           canOrder = false;

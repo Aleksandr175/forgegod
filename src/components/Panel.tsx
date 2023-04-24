@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'yellow',
   },
   panelContent: {
-    backgroundColor: '#888',
+    backgroundColor: '#614D41',
     width: '100%',
     padding: 5,
   },

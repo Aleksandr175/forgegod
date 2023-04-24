@@ -2,14 +2,10 @@ import React from 'react';
 import { Panel } from './Panel';
 import styled from 'styled-components/native';
 import { SIcon } from '../styles';
+import { IOrder } from '../types';
 
 interface IProps {
-  orders: {
-    goodId: number;
-    qty: number;
-    timeLeft: number;
-    timePerItem: number;
-  }[];
+  orders: IOrder[];
 }
 
 export const PanelOrders = ({ orders }: IProps) => {
@@ -23,7 +19,13 @@ export const PanelOrders = ({ orders }: IProps) => {
       {orders.map((order) => {
         return (
           <SOrderInProcessWrapper>
-            <SWorkerImage source={require('../images/workers/1.png')} />
+            {order.workerId ? (
+              <SWorkerImage
+                source={require('../images/workers/' + order.workerId + '.png')}
+              />
+            ) : (
+              <SWorkerEmpty />
+            )}
             <SOrderDetails>
               <SResource>
                 <SIcon
@@ -63,16 +65,17 @@ const SProgress = styled.View<{ progressWidth?: number }>`
   left: 0;
   top: 0;
   bottom: 0;
-  background-color: red;
+  background-color: #f49300;
   width: ${(props) => props.progressWidth}px;
 `;
 const SProgressWrapper = styled.View`
   position: relative;
   height: 5px;
-  background-color: yellow;
+  background-color: #71635b;
   width: 100px;
 `;
 const SWorkerImage = styled.Image`
+  background-color: #71635b;
   width: 48px;
   height: 48px;
 `;
@@ -86,4 +89,12 @@ const SOrderInProcessWrapper = styled.View`
 
 const SOrderDetails = styled.View``;
 
-const SNoOrders = styled.Text``;
+const SNoOrders = styled.Text`
+  color: white;
+`;
+
+const SWorkerEmpty = styled.View`
+  width: 48px;
+  height: 48px;
+  background-color: #71635b;
+`;

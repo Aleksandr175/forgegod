@@ -4,7 +4,7 @@ import { Panel } from './components/Panel';
 import { PanelSelectedGood } from './components/PanelSelectedGood';
 import { PanelGoods } from './components/PanelGoods';
 import { PanelStorage } from './components/PanelStorage';
-import { IStorageGood } from './types';
+import { IOrder, IStorageGood, IWorker } from './types';
 import { PanelOrders } from './components/PanelOrders';
 import { dictionary } from './dictionary';
 import { StatusBar } from 'expo-status-bar';
@@ -15,30 +15,69 @@ export const App = () => {
   const [storage, setStorage] = useState<IStorageGood[]>([
     {
       id: 1,
-      qty: 2,
+      qty: 20,
     },
     {
       id: 2,
-      qty: 1,
+      qty: 10,
     },
     {
       id: 3,
-      qty: 1,
+      qty: 5,
     },
   ]);
 
-  const [orders, setOrders] = useState([
+  const orderId = useRef(1);
+
+  const [orders, setOrders] = useState<IOrder[]>([]);
+
+  useEffect(() => {
+    createOrder(2, 3);
+    createOrder(3, 2);
+    createOrder(3, 1);
+    createOrder(3, 1);
+  }, []);
+
+  useEffect(() => {
+    const workerIds = orders
+      .filter((order) => order.workerId)
+      .map((order) => order.workerId);
+    const ordersWithoutWorker = orders.filter((order) => !order.workerId);
+
+    const restedWorkerIds = workers
+      .filter((worker) => !workerIds.includes(worker.id))
+      .map((worker) => worker.id);
+
+    console.log('restedWorkerIds', restedWorkerIds);
+
+    if (ordersWithoutWorker.length && restedWorkerIds) {
+      setOrders((prevOrders) => {
+        return [...prevOrders].map((order) => {
+          if (!order.workerId && restedWorkerIds.length) {
+            order.workerId = restedWorkerIds.shift();
+          }
+
+          return order;
+        });
+      });
+    }
+  }, [orders.length]);
+
+  const [workers, setWorkers] = useState<IWorker[]>([
     {
-      goodId: 2,
-      qty: 1,
-      timeLeft: 5, // for 1 qty item
-      timePerItem: 5,
+      id: 1,
+      name: 'You',
+      orderId: null,
     },
     {
-      goodId: 3,
-      qty: 1,
-      timeLeft: 30, // for 1 qty item
-      timePerItem: 30,
+      id: 2,
+      name: 'Worker',
+      orderId: null,
+    },
+    {
+      id: 3,
+      name: 'Worker2',
+      orderId: null,
     },
   ]);
 
@@ -59,17 +98,19 @@ export const App = () => {
 
       newOrders = newOrders
         .map((order) => {
-          order.timeLeft = order.timeLeft - 1;
+          if (order.workerId) {
+            order.timeLeft = order.timeLeft - 1;
 
-          if (order.timeLeft === 0) {
-            order.qty = order.qty - 1;
+            if (order.timeLeft === 0) {
+              order.qty = order.qty - 1;
 
-            if (order.qty > 0) {
-              order.timeLeft =
-                dictionary.goods.find((good) => good.id === order.goodId)
-                  ?.time || 0;
-            } else {
-              addToStorage(order.goodId, 1);
+              if (order.qty > 0) {
+                order.timeLeft =
+                  dictionary.goods.find((good) => good.id === order.goodId)
+                    ?.time || 0;
+              } else {
+                addToStorage(order.goodId, 1);
+              }
             }
           }
 
@@ -86,6 +127,8 @@ export const App = () => {
 
     if (item) {
       setOrders((prevOrders) => {
+        orderId.current += 1;
+
         return [
           ...prevOrders,
           {
@@ -93,6 +136,8 @@ export const App = () => {
             qty,
             timeLeft: item.time,
             timePerItem: item.time,
+            orderId: orderId.current,
+            workerId: null,
           },
         ];
       });
@@ -206,6 +251,7 @@ export const App = () => {
 const SHeader = styled.Text`
   font-weight: 700;
   padding: 10px;
+  color: white;
 `;
 
 const SHeaderBlock = styled.View`
@@ -220,11 +266,12 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flex: 1,
     width: '100%',
+    backgroundColor: '#614D41',
   },
   appContent: {
     height: '80%',
     width: '100%',
-    backgroundColor: '#888',
+    backgroundColor: '#967766',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
@@ -253,11 +300,9 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   columnLeft: {
-    backgroundColor: '#008888',
     width: '50%',
   },
   columnRight: {
-    backgroundColor: 'green',
     width: '50%',
   },
   orderBlock: {},

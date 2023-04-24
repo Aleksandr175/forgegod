@@ -22,3 +22,18 @@ export interface IStorageGood {
   id: number;
   qty: number;
 }
+
+export interface IOrder {
+  goodId: number;
+  qty: number;
+  timeLeft: number;
+  timePerItem: number;
+  orderId: number;
+  workerId: number | null;
+}
+
+export interface IWorker {
+  id: number;
+  name: string;
+  orderId: number | null;
+}
