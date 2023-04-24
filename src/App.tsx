@@ -7,6 +7,8 @@ import { PanelStorage } from './components/PanelStorage';
 import { IStorageGood } from './types';
 import { PanelOrders } from './components/PanelOrders';
 import { dictionary } from './dictionary';
+import { StatusBar } from 'expo-status-bar';
+import styled from 'styled-components/native';
 
 export const App = () => {
   const [selectedGoodId, setSelectedGoodId] = useState<number>(2);
@@ -98,9 +100,11 @@ export const App = () => {
 
   return (
     <View style={styles.appWrapper}>
-      <View style={styles.headerBlock}>
-        <Text style={styles.header}>Forge God</Text>
-      </View>
+      <StatusBar style="auto" />
+
+      <SHeaderBlock>
+        <SHeader>Forge God</SHeader>
+      </SHeaderBlock>
 
       <View style={styles.appContent}>
         <View style={styles.forgeBlock}>
@@ -161,17 +165,21 @@ export const App = () => {
   );
 };
 
+const SHeader = styled.Text`
+  font-weight: 700;
+  padding: 10px;
+  display: flex;
+`;
+
+const SHeaderBlock = styled.View`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 10%;
+`;
+
 const styles = StyleSheet.create({
-  header: {
-    fontWeight: 'bold',
-    padding: 10,
-  },
-  headerBlock: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    height: '10%',
-  },
   appWrapper: {
     flexDirection: 'column',
     flex: 1,
