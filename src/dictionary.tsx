@@ -49,5 +49,20 @@ export const dictionary: IDictionary = {
         upgrades: {},
       },
     },
+
+    {
+      id: 11,
+      name: 'Blue Sword',
+      time: 20,
+      cost: 35,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 2, qty: 2 },
+          { id: 3, qty: 2 },
+        ],
+        upgrades: {},
+      },
+    },
   ],
 };

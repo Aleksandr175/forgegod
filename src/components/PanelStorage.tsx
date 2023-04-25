@@ -9,7 +9,7 @@ interface IProps {
   storage: IStorageGood[];
 }
 
-export const PanelStorage = ({ storage }: IProps) => {
+export const PanelStorage = React.memo(({ storage }: IProps) => {
   const availableItems = storage.filter((item) => item.qty > 0);
 
   return (
@@ -30,4 +30,4 @@ export const PanelStorage = ({ storage }: IProps) => {
       </View>
     </Panel>
   );
-};
+});

@@ -24,7 +24,8 @@ export const styles = StyleSheet.create({
     height: 240,
   },
   storageGridItem: {
-    margin: 5,
+    marginRight: 5,
+    marginBottom: 5,
     backgroundColor: '#71635B',
     width: 48,
     height: 48,

@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { ReactNode } from 'react';
+import styled from 'styled-components/native';
 
 interface IProps {
   title: string;
@@ -11,7 +12,7 @@ export const Panel = ({ title, children }: IProps) => {
     <View style={styles.panelWrapper}>
       {title && (
         <View style={styles.panelTitle}>
-          <Text>{title}</Text>
+          <STitle>{title}</STitle>
         </View>
       )}
       <View style={styles.panelContent}>{children}</View>
@@ -25,7 +26,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   panelTitle: {
-    backgroundColor: 'yellow',
+    backgroundColor: '#71635B',
+    paddingLeft: 5,
   },
   panelContent: {
     backgroundColor: '#614D41',
@@ -33,3 +35,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
 });
+
+const STitle = styled.Text`
+  color: white;
+`;

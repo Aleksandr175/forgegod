@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Panel } from './components/Panel';
 import { PanelSelectedGood } from './components/PanelSelectedGood';
 import { PanelGoods } from './components/PanelGoods';
@@ -24,6 +24,18 @@ export const App = () => {
     {
       id: 3,
       qty: 5,
+    },
+    {
+      id: 11,
+      qty: 1,
+    },
+    {
+      id: 12,
+      qty: 2,
+    },
+    {
+      id: 13,
+      qty: 1,
     },
   ]);
 
@@ -108,9 +120,9 @@ export const App = () => {
                 order.timeLeft =
                   dictionary.goods.find((good) => good.id === order.goodId)
                     ?.time || 0;
-              } else {
-                addToStorage(order.goodId, 1);
               }
+
+              addToStorage(order.goodId, 1);
             }
           }
 
@@ -180,6 +192,9 @@ export const App = () => {
     });
   };
 
+  const onChangeGoodId = useCallback((id: number) => setSelectedGoodId(id), []);
+  const onCreateOrder = useCallback(createOrder, []);
+
   return (
     <View style={styles.appWrapper}>
       <StatusBar style="auto" />
@@ -198,10 +213,10 @@ export const App = () => {
               <PanelSelectedGood
                 storage={storage}
                 goodId={selectedGoodId}
-                onCreateOrder={createOrder}
+                onCreateOrder={onCreateOrder}
               />
             </View>
-            <PanelGoods onChangeGoodId={(id) => setSelectedGoodId(id)} />
+            <PanelGoods onChangeGoodId={onChangeGoodId} />
           </View>
         </View>
 

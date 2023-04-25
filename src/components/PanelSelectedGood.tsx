@@ -12,78 +12,77 @@ interface IProps {
   storage: IStorageGood[];
 }
 
-export const PanelSelectedGood = ({
-  goodId,
-  onCreateOrder,
-  storage,
-}: IProps) => {
-  const good = dictionary.goods.find((item) => item.id === goodId);
-  const [qty, setQty] = useState(1);
+export const PanelSelectedGood = React.memo(
+  ({ goodId, onCreateOrder, storage }: IProps) => {
+    const good = dictionary.goods.find((item) => item.id === goodId);
+    const [qty, setQty] = useState(1);
 
-  const isAvailableToOrder = (): boolean => {
-    let canOrder = true;
+    const isAvailableToOrder = (): boolean => {
+      let canOrder = true;
 
-    good?.requirements.resources.forEach((requiredResource) => {
-      const itemInStorage = storage.find(
-        (item) => item.id === requiredResource.id,
-      );
+      good?.requirements.resources.forEach((requiredResource) => {
+        const itemInStorage = storage.find(
+          (item) => item.id === requiredResource.id,
+        );
 
-      if (itemInStorage) {
-        if (itemInStorage.qty < requiredResource.qty) {
-          canOrder = false;
+        if (itemInStorage) {
+          if (itemInStorage.qty < requiredResource.qty) {
+            canOrder = false;
+          }
         }
-      }
-    });
+      });
 
-    return canOrder;
-  };
+      return canOrder;
+    };
 
-  return (
-    <Panel title={'Order'}>
-      <View style={styles.selectedItem}>
-        <View style={styles.selectedItemImage}>
-          {goodId && <CustomImage id={goodId} size={'big'} />}
-        </View>
-        <View style={styles.selectedItemInfo}>
-          {goodId && good && (
-            <>
-              <Text style={styles.selectedItemTitle}>{good.name}</Text>
-              {good.requirements.resources?.length > 0 && (
-                <>
-                  <Text style={styles.selectedItemTitle}>Required:</Text>
-                  {good.requirements.resources.map((requirement) => {
-                    return (
-                      <View style={styles.selectedItemRequired}>
-                        <CustomImage id={requirement.id} size={'small'} />
-                        <SQty>{requirement.qty}</SQty>
-                      </View>
-                    );
-                  })}
-                </>
-              )}
-              <SSeparator />
+    return (
+      <Panel title={'Order'}>
+        <SSelectedItem>
+          <View style={styles.selectedItemImage}>
+            {goodId && <CustomImage id={goodId} size={'big'} />}
+          </View>
+          <View style={styles.selectedItemInfo}>
+            {goodId && good && (
+              <>
+                <Text style={styles.selectedItemTitle}>{good.name}</Text>
+                {good.requirements.resources?.length > 0 && (
+                  <>
+                    <Text style={styles.selectedItemTitle}>Required:</Text>
+                    {good.requirements.resources.map((requirement) => {
+                      return (
+                        <View style={styles.selectedItemRequired}>
+                          <CustomImage id={requirement.id} size={'small'} />
+                          <SQty>{requirement.qty}</SQty>
+                        </View>
+                      );
+                    })}
+                  </>
+                )}
+                <SSeparator />
 
-              <SButton
-                onPress={() => {
-                  onCreateOrder(goodId, qty);
-                }}
-                disabled={!isAvailableToOrder()}
-              >
-                <Text style={styles.buttonText}>Order</Text>
-              </SButton>
-            </>
-          )}
-        </View>
-      </View>
-    </Panel>
-  );
-};
+                <SButton
+                  onPress={() => {
+                    onCreateOrder(goodId, qty);
+                  }}
+                  disabled={!isAvailableToOrder()}
+                >
+                  <Text style={styles.buttonText}>Order</Text>
+                </SButton>
+              </>
+            )}
+          </View>
+        </SSelectedItem>
+      </Panel>
+    );
+  },
+);
+
+const SSelectedItem = styled.View`
+  flex-direction: row;
+  width: 100%;
+`;
 
 const styles = StyleSheet.create({
-  selectedItem: {
-    padding: 5,
-    flexDirection: 'row',
-  },
   selectedItemImage: {
     width: 40,
     height: 40,
@@ -92,7 +91,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  selectedItemInfo: {},
+  selectedItemInfo: {
+    flex: 1,
+  },
   selectedItemTitle: {
     color: 'white',
     paddingBottom: 5,
@@ -112,6 +113,7 @@ const SSeparator = styled.View`
 
 const SButton = styled.Pressable<{ disabled?: boolean }>`
   background-color: ${(props) => (props.disabled ? '#444' : '#F49300')};
+  padding: 5px;
 
   ${({ disabled }) =>
     disabled

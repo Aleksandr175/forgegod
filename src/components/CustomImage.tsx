@@ -30,6 +30,16 @@ const getImageSource = (id: number, type?: TImage) => {
   if (id === 4) {
     return require(`../images/4.png`);
   }
+
+  if (id === 11) {
+    return require(`../images/11.png`);
+  }
+  if (id === 12) {
+    return require(`../images/12.png`);
+  }
+  if (id === 13) {
+    return require(`../images/13.png`);
+  }
 };
 
 export const CustomImage = ({

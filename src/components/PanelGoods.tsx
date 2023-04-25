@@ -9,7 +9,7 @@ interface IProps {
   onChangeGoodId: (goodId: number) => void;
 }
 
-export const PanelGoods = ({ onChangeGoodId }: IProps) => {
+export const PanelGoods = React.memo(({ onChangeGoodId }: IProps) => {
   const goods = dictionary.goods.filter((item) => {
     // add some conditions, check upgrades
     return item.type === 'good';
@@ -34,4 +34,4 @@ export const PanelGoods = ({ onChangeGoodId }: IProps) => {
       </View>
     </Panel>
   );
-};
+});
