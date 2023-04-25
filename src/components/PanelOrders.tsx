@@ -3,6 +3,8 @@ import { Panel } from './Panel';
 import styled from 'styled-components/native';
 import { IOrder } from '../types';
 import { CustomImage } from './CustomImage';
+import { styles as stylesCommon } from '../styles';
+import { FlatList } from 'react-native';
 
 interface IProps {
   orders: IOrder[];
@@ -13,17 +15,20 @@ export const PanelOrders = ({ orders }: IProps) => {
     <Panel title={'Orders'}>
       {orders.length === 0 && (
         <SNoOrders>
-          No current orders. You can order something in right panel
+          No current orders. You can order something in the right panel
         </SNoOrders>
       )}
-      {orders.map((order) => {
-        return (
+      <FlatList
+        style={stylesCommon.orderGridList}
+        data={orders}
+        numColumns={1}
+        renderItem={({ item }) => (
           <SOrderInProcessWrapper>
-            {order.workerId ? (
+            {item.workerId ? (
               <SWorkerImage>
                 <CustomImage
                   type={'workers'}
-                  id={order.workerId}
+                  id={item.workerId}
                   size={'superBig'}
                 />
               </SWorkerImage>
@@ -32,22 +37,23 @@ export const PanelOrders = ({ orders }: IProps) => {
             )}
             <SOrderDetails>
               <SResource>
-                <CustomImage id={order.goodId} size={'big'} />
-                <SQty>{order.qty}</SQty>
+                <CustomImage id={item.goodId} size={'big'} />
+                <SQty>{item.qty}</SQty>
               </SResource>
 
               <SProgressWrapper>
                 <SProgress
                   progressWidth={
-                    ((order.timePerItem - order.timeLeft) / order.timePerItem) *
+                    ((item.timePerItem - item.timeLeft) / item.timePerItem) *
                     100
                   }
                 ></SProgress>
               </SProgressWrapper>
             </SOrderDetails>
           </SOrderInProcessWrapper>
-        );
-      })}
+        )}
+        keyExtractor={(item) => String(item.orderId)}
+      />
     </Panel>
   );
 };

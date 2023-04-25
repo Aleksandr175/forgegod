@@ -5,11 +5,30 @@ import styled from 'styled-components/native';
 interface IProps {
   title: string;
   children: ReactNode;
+  height?: number;
 }
 
-export const Panel = ({ title, children }: IProps) => {
+export const Panel = ({ title, children, height }: IProps) => {
+  const getPanelStyles = () => {
+    if (height) {
+      return {
+        padding: 5,
+        width: '100%',
+        height: height,
+        flexShrink: 1,
+      };
+    }
+
+    return {
+      padding: 5,
+      width: '100%',
+      height: '100%',
+      flexShrink: 1,
+    };
+  };
+
   return (
-    <View style={styles.panelWrapper}>
+    <View style={getPanelStyles()}>
       {title && (
         <View style={styles.panelTitle}>
           <STitle>{title}</STitle>
@@ -24,6 +43,8 @@ const styles = StyleSheet.create({
   panelWrapper: {
     padding: 5,
     width: '100%',
+    height: '100%',
+    flexShrink: 1,
   },
   panelTitle: {
     backgroundColor: '#71635B',
@@ -33,6 +54,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#614D41',
     width: '100%',
     padding: 5,
+    flex: 1,
   },
 });
 

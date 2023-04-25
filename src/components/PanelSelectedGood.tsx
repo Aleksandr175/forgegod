@@ -36,7 +36,7 @@ export const PanelSelectedGood = React.memo(
     };
 
     return (
-      <Panel title={'Order'}>
+      <Panel title={'Order'} height={150}>
         <SSelectedItem>
           <View style={styles.selectedItemImage}>
             {goodId && <CustomImage id={goodId} size={'big'} />}

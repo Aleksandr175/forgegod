@@ -48,6 +48,15 @@ export const App = () => {
     createOrder(3, 2);
     createOrder(3, 1);
     createOrder(3, 1);
+    createOrder(3, 1);
+    createOrder(3, 1);
+    createOrder(3, 1);
+    createOrder(3, 1);
+    createOrder(3, 1);
+    createOrder(3, 1);
+    createOrder(3, 1);
+    createOrder(3, 1);
+    createOrder(3, 1);
   }, []);
 
   useEffect(() => {
@@ -309,6 +318,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     height: '75%',
+    alignItems: 'stretch',
   },
   storageBlock: {
     height: '25%',

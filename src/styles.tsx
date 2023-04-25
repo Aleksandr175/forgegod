@@ -16,12 +16,16 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     width: '100%',
+    height: '100%',
   },
   storageGridList: {
     height: 140,
   },
   storageGridGoodsList: {
-    height: 240,
+    height: '100%',
+  },
+  orderGridList: {
+    height: 360,
   },
   storageGridItem: {
     marginRight: 5,
