@@ -65,4 +65,29 @@ export const dictionary: IDictionary = {
       },
     },
   ],
+  mine: [
+    {
+      nextLvl: 2,
+      requirements: {
+        resources: [
+          { id: 2, qty: 20 },
+          { id: 3, qty: 20 },
+        ],
+        upgrades: {},
+      },
+      provideResourceIds: [3],
+    },
+    {
+      nextLvl: 3,
+      requirements: {
+        resources: [
+          { id: 2, qty: 20 },
+          { id: 3, qty: 20 },
+          { id: 4, qty: 20 },
+        ],
+        upgrades: {},
+      },
+      provideResourceIds: [3, 4],
+    },
+  ],
 };

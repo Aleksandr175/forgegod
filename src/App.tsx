@@ -9,8 +9,12 @@ import { PanelOrders } from './components/PanelOrders';
 import { dictionary } from './dictionary';
 import { StatusBar } from 'expo-status-bar';
 import styled from 'styled-components/native';
+import { PageMine } from './components/PageMine';
 
 export const App = () => {
+  const [page, setPage] = useState('mine');
+  const [mineLvl, setMineLvl] = useState(1);
+
   const [selectedGoodId, setSelectedGoodId] = useState<number>(2);
   const [storage, setStorage] = useState<IStorageGood[]>([
     {
@@ -68,8 +72,6 @@ export const App = () => {
     const restedWorkerIds = workers
       .filter((worker) => !workerIds.includes(worker.id))
       .map((worker) => worker.id);
-
-    console.log('restedWorkerIds', restedWorkerIds);
 
     if (ordersWithoutWorker.length && restedWorkerIds) {
       setOrders((prevOrders) => {
@@ -213,32 +215,40 @@ export const App = () => {
       </SHeaderBlock>
 
       <View style={styles.appContent}>
-        <View style={styles.forgeBlock}>
-          <View style={styles.columnLeft}>
-            <PanelOrders orders={orders} />
-          </View>
-          <View style={styles.columnRight}>
-            <View style={styles.orderBlock}>
-              <PanelSelectedGood
-                storage={storage}
-                goodId={selectedGoodId}
-                onCreateOrder={onCreateOrder}
-              />
+        {page === 'main' && (
+          <>
+            <View style={styles.forgeBlock}>
+              <View style={styles.columnLeft}>
+                <PanelOrders orders={orders} />
+              </View>
+              <View style={styles.columnRight}>
+                <View style={styles.orderBlock}>
+                  <PanelSelectedGood
+                    storage={storage}
+                    goodId={selectedGoodId}
+                    onCreateOrder={onCreateOrder}
+                  />
+                </View>
+                <PanelGoods onChangeGoodId={onChangeGoodId} />
+              </View>
             </View>
-            <PanelGoods onChangeGoodId={onChangeGoodId} />
-          </View>
-        </View>
 
-        <View style={styles.storageBlock}>
-          <PanelStorage storage={storage} />
-        </View>
+            <View style={styles.storageBlock}>
+              <PanelStorage storage={storage} />
+            </View>
+          </>
+        )}
+
+        {page === 'mine' && (
+          <PageMine dictionary={dictionary.mine} lvl={mineLvl} />
+        )}
       </View>
 
       <View style={styles.bottomMenu}>
         <Pressable
           style={styles.menuItem}
           onPress={() => {
-            alert('1');
+            setPage('main');
           }}
         >
           <Text>Forge</Text>
@@ -246,7 +256,7 @@ export const App = () => {
         <Pressable
           style={styles.menuItem}
           onPress={() => {
-            alert('1');
+            setPage('skills');
           }}
         >
           <Text>Skills</Text>
@@ -254,7 +264,7 @@ export const App = () => {
         <Pressable
           style={styles.menuItem}
           onPress={() => {
-            alert('1');
+            setPage('mine');
           }}
         >
           <Text>Mine</Text>
@@ -262,7 +272,7 @@ export const App = () => {
         <Pressable
           style={styles.menuItem}
           onPress={() => {
-            alert('1');
+            setPage('orders');
           }}
         >
           <Text>Orders</Text>

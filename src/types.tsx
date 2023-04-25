@@ -1,5 +1,6 @@
 export interface IDictionary {
   goods: IGood[];
+  mine: IMine[];
 }
 
 export interface IGood {
@@ -14,6 +15,17 @@ export interface IGood {
       minerLvl?: number;
     };
   };
+}
+
+export interface IMine {
+  nextLvl: number;
+  requirements: {
+    resources: { id: number; qty: number }[];
+    upgrades?: {
+      minerLvl?: number;
+    };
+  };
+  provideResourceIds: number[];
 }
 
 export type TTypeGood = 'resource' | 'good';
