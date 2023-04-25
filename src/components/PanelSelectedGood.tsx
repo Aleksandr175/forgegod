@@ -1,9 +1,10 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Panel } from './Panel';
 import React, { useState } from 'react';
 import { dictionary } from '../dictionary';
 import { IStorageGood } from '../types';
 import styled from 'styled-components/native';
+import { CustomImage } from './CustomImage';
 
 interface IProps {
   goodId?: number;
@@ -41,12 +42,7 @@ export const PanelSelectedGood = ({
     <Panel title={'Order'}>
       <View style={styles.selectedItem}>
         <View style={styles.selectedItemImage}>
-          {goodId && (
-            <Image
-              style={styles.iconBig}
-              source={require('../images/' + goodId + '.png')}
-            />
-          )}
+          {goodId && <CustomImage id={goodId} size={'big'} />}
         </View>
         <View style={styles.selectedItemInfo}>
           {goodId && good && (
@@ -58,13 +54,8 @@ export const PanelSelectedGood = ({
                   {good.requirements.resources.map((requirement) => {
                     return (
                       <View style={styles.selectedItemRequired}>
-                        <Image
-                          style={styles.iconSmall}
-                          source={require('../images/' +
-                            requirement.id +
-                            '.png')}
-                        />
-                        <Text>{requirement.qty}</Text>
+                        <CustomImage id={requirement.id} size={'small'} />
+                        <SQty>{requirement.qty}</SQty>
                       </View>
                     );
                   })}
@@ -91,7 +82,6 @@ export const PanelSelectedGood = ({
 const styles = StyleSheet.create({
   selectedItem: {
     padding: 5,
-    backgroundColor: '#D9D9D9',
     flexDirection: 'row',
   },
   selectedItemImage: {
@@ -110,28 +100,9 @@ const styles = StyleSheet.create({
   selectedItemRequired: {
     flexDirection: 'row',
   },
-  iconSmall: {
-    width: 16,
-    height: 16,
-  },
-  iconBig: {
-    width: 32,
-    height: 32,
-  },
   buttonText: {
     textAlign: 'center', // <-- the magic
     color: 'white',
-  },
-  containerWrapper: {
-    padding: 5,
-    width: '100%',
-  },
-  containerTitle: {
-    backgroundColor: 'yellow',
-  },
-  container: {
-    backgroundColor: '#888',
-    width: '100%',
   },
 });
 
@@ -148,4 +119,8 @@ const SButton = styled.Pressable<{ disabled?: boolean }>`
       opacity: .5;
       `
       : ''};
+`;
+
+const SQty = styled.Text`
+  color: white;
 `;

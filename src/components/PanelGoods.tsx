@@ -1,15 +1,9 @@
-import {
-  FlatList,
-  Image,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { FlatList, Pressable, View } from 'react-native';
 import { Panel } from './Panel';
 import React from 'react';
 import { dictionary } from '../dictionary';
 import { styles as stylesCommon } from '../styles';
+import { CustomImage } from './CustomImage';
 
 interface IProps {
   onChangeGoodId: (goodId: number) => void;
@@ -31,10 +25,7 @@ export const PanelGoods = ({ onChangeGoodId }: IProps) => {
           renderItem={({ item }) => (
             <Pressable onPress={() => onChangeGoodId(item.id)}>
               <View style={stylesCommon.storageGridItem}>
-                <Image
-                  style={stylesCommon.iconBig}
-                  source={require('../images/' + item.id + '.png')}
-                />
+                <CustomImage id={item.id} size={'big'} />
               </View>
             </Pressable>
           )}

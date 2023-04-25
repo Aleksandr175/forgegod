@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
+import { TSize } from './types';
 
 export const styles = StyleSheet.create({
   iconSmall: {
@@ -42,7 +43,7 @@ export const styles = StyleSheet.create({
   },
 });
 
-export const SIcon = styled.Image<{ size?: 'big' | 'small' }>`
+export const SIcon = styled.Image<{ size?: TSize }>`
   width: 32px;
   height: 32px;
 

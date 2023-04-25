@@ -1,8 +1,8 @@
 import React from 'react';
 import { Panel } from './Panel';
 import styled from 'styled-components/native';
-import { SIcon } from '../styles';
 import { IOrder } from '../types';
+import { CustomImage } from './CustomImage';
 
 interface IProps {
   orders: IOrder[];
@@ -20,18 +20,19 @@ export const PanelOrders = ({ orders }: IProps) => {
         return (
           <SOrderInProcessWrapper>
             {order.workerId ? (
-              <SWorkerImage
-                source={require('../images/workers/' + order.workerId + '.png')}
-              />
+              <SWorkerImage>
+                <CustomImage
+                  type={'workers'}
+                  id={order.workerId}
+                  size={'superBig'}
+                />
+              </SWorkerImage>
             ) : (
               <SWorkerEmpty />
             )}
             <SOrderDetails>
               <SResource>
-                <SIcon
-                  size={'big'}
-                  source={require('../images/' + order.goodId + '.png')}
-                ></SIcon>
+                <CustomImage id={order.goodId} size={'big'} />
                 <SQty>{order.qty}</SQty>
               </SResource>
 
@@ -74,7 +75,7 @@ const SProgressWrapper = styled.View`
   background-color: #71635b;
   width: 100px;
 `;
-const SWorkerImage = styled.Image`
+const SWorkerImage = styled.View`
   background-color: #71635b;
   width: 48px;
   height: 48px;

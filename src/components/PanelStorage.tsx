@@ -1,19 +1,14 @@
-import {
-  FlatList,
-  Image,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 import { Panel } from './Panel';
 import React from 'react';
 import { IStorageGood } from '../types';
 import { styles as stylesCommon } from '../styles';
+import { CustomImage } from './CustomImage';
 
 interface IProps {
   storage: IStorageGood[];
 }
+
 export const PanelStorage = ({ storage }: IProps) => {
   const availableItems = storage.filter((item) => item.qty > 0);
 
@@ -26,10 +21,7 @@ export const PanelStorage = ({ storage }: IProps) => {
           numColumns={6}
           renderItem={({ item }) => (
             <View style={stylesCommon.storageGridItem}>
-              <Image
-                style={stylesCommon.iconBig}
-                source={require('../images/' + item.id + '.png')}
-              />
+              <CustomImage id={item.id} size={'big'} />
               <Text style={stylesCommon.storageGridItemQty}>{item.qty}</Text>
             </View>
           )}

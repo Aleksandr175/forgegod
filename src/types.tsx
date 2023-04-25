@@ -37,3 +37,7 @@ export interface IWorker {
   name: string;
   orderId: number | null;
 }
+
+export type TSize = 'small' | 'big' | 'superBig';
+
+export type TImage = 'workers';
