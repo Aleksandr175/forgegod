@@ -257,9 +257,7 @@ export const App = () => {
               </View>
             </View>
 
-            <View style={styles.storageBlock}>
-              <PanelStorage storage={storage} />
-            </View>
+            <PanelStorage storage={storage} />
           </>
         )}
 

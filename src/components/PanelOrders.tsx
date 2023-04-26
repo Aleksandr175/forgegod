@@ -12,7 +12,7 @@ interface IProps {
 
 export const PanelOrders = ({ orders }: IProps) => {
   return (
-    <Panel title={'Orders'}>
+    <Panel title={'Orders ' + orders.length + '/10'}>
       {orders.length === 0 && (
         <SNoOrders>
           No current orders. You can order something in the right panel

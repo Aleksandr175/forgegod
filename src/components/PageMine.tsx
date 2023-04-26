@@ -27,48 +27,54 @@ export const PageMine = ({ lvl, dictionary, onBuyGood }: IProps) => {
         </SMineDetails>
       </SMineInfo>
 
-      <Panel title={'Improve Mine'}>
-        {currentMineLvlInfo &&
-          currentMineLvlInfo.requirements.resources?.length > 0 && (
-            <>
-              <SText>Required:</SText>
-              <SResources>
-                {currentMineLvlInfo.requirements.resources.map(
-                  (requirement) => {
-                    return (
-                      <SResourceRequired>
-                        <CustomImage id={requirement.id} size={'small'} />
-                        <SQty>{requirement.qty}</SQty>
-                      </SResourceRequired>
-                    );
-                  },
-                )}
-              </SResources>
-              <SText>It will provide you:</SText>
-              {currentMineLvlInfo.provideResourceIds.map((id) => {
-                return (
-                  <SResourceRequired>
-                    <CustomImage id={id} size={'small'} />
-                  </SResourceRequired>
-                );
-              })}
+      <SPanelWrapper>
+        <Panel title={'Improve Mine'}>
+          {currentMineLvlInfo &&
+            currentMineLvlInfo.requirements.resources?.length > 0 && (
+              <>
+                <SText>Required:</SText>
+                <SResources>
+                  {currentMineLvlInfo.requirements.resources.map(
+                    (requirement) => {
+                      return (
+                        <SResourceRequired key={requirement.id}>
+                          <CustomImage id={requirement.id} size={'small'} />
+                          <SQty>{requirement.qty}</SQty>
+                        </SResourceRequired>
+                      );
+                    },
+                  )}
+                </SResources>
+                <SText>It will provide you:</SText>
+                {currentMineLvlInfo.provideResourceIds.map((id) => {
+                  return (
+                    <SResourceRequired key={id}>
+                      <CustomImage id={id} size={'small'} />
+                    </SResourceRequired>
+                  );
+                })}
 
-              <SButton
-                onPress={() => {
-                  //onCreateOrder(goodId, qty);
-                }}
-                //disabled={!isAvailableToOrder()}
-              >
-                <Text>Improve</Text>
-              </SButton>
-            </>
-          )}
-      </Panel>
+                <SButton
+                  onPress={() => {
+                    //onCreateOrder(goodId, qty);
+                  }}
+                  //disabled={!isAvailableToOrder()}
+                >
+                  <Text>Improve</Text>
+                </SButton>
+              </>
+            )}
+        </Panel>
+      </SPanelWrapper>
 
       <PanelShop mineLvl={lvl || 1} onBuyGood={onBuyGood}></PanelShop>
     </SPageMine>
   );
 };
+
+const SPanelWrapper = styled.View`
+  height: 150px;
+`;
 
 const SPageMine = styled.View`
   padding-top: 10px;
@@ -111,7 +117,6 @@ const SMineDetails = styled.View`
 const SMineTitle = styled.Text`
   color: white;
   font-weight: 700;
-  display: inline-block;
   margin-right: 8px;
 `;
 
