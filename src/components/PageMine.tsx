@@ -1,17 +1,19 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Image, Text, View } from 'react-native';
+import { Text } from 'react-native';
 import { Panel } from './Panel';
 import { IMine } from '../types';
 import { CustomImage } from './CustomImage';
+import { PanelShop } from './PanelShop';
 
 interface IProps {
   lvl: number;
   dictionary: IMine[];
+  onBuyGood: (goodId: number, qty: number) => void;
 }
 
-export const PageMine = ({ lvl, dictionary }: IProps) => {
-  const currentMineLvl =
+export const PageMine = ({ lvl, dictionary, onBuyGood }: IProps) => {
+  const currentMineLvlInfo =
     dictionary.find((mineLvl) => mineLvl.nextLvl === lvl + 1) || null;
   //console.log('page mine');
 
@@ -26,22 +28,24 @@ export const PageMine = ({ lvl, dictionary }: IProps) => {
       </SMineInfo>
 
       <Panel title={'Improve Mine'}>
-        {currentMineLvl &&
-          currentMineLvl.requirements.resources?.length > 0 && (
+        {currentMineLvlInfo &&
+          currentMineLvlInfo.requirements.resources?.length > 0 && (
             <>
               <SText>Required:</SText>
               <SResources>
-                {currentMineLvl.requirements.resources.map((requirement) => {
-                  return (
-                    <SResourceRequired>
-                      <CustomImage id={requirement.id} size={'small'} />
-                      <SQty>{requirement.qty}</SQty>
-                    </SResourceRequired>
-                  );
-                })}
+                {currentMineLvlInfo.requirements.resources.map(
+                  (requirement) => {
+                    return (
+                      <SResourceRequired>
+                        <CustomImage id={requirement.id} size={'small'} />
+                        <SQty>{requirement.qty}</SQty>
+                      </SResourceRequired>
+                    );
+                  },
+                )}
               </SResources>
               <SText>It will provide you:</SText>
-              {currentMineLvl.provideResourceIds.map((id) => {
+              {currentMineLvlInfo.provideResourceIds.map((id) => {
                 return (
                   <SResourceRequired>
                     <CustomImage id={id} size={'small'} />
@@ -60,12 +64,15 @@ export const PageMine = ({ lvl, dictionary }: IProps) => {
             </>
           )}
       </Panel>
+
+      <PanelShop mineLvl={lvl || 1} onBuyGood={onBuyGood}></PanelShop>
     </SPageMine>
   );
 };
 
 const SPageMine = styled.View`
   padding-top: 10px;
+  width: 100%;
 `;
 
 const SMineInfo = styled.View`
@@ -74,10 +81,12 @@ const SMineInfo = styled.View`
 
 const SText = styled.Text`
   color: white;
+  font-family: 'LGGothic';
 `;
 
 const SQty = styled.Text`
   color: white;
+  font-family: 'LGGothic';
 `;
 
 const SResourceRequired = styled.View`

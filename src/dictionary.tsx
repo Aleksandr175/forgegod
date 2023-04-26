@@ -51,6 +51,18 @@ export const dictionary: IDictionary = {
     },
 
     {
+      id: 6,
+      name: 'Row Bronze Ore',
+      time: 2,
+      cost: 3,
+      type: 'resource',
+      requirements: {
+        resources: [],
+        upgrades: {},
+      },
+    },
+
+    {
       id: 11,
       name: 'Blue Sword',
       time: 20,

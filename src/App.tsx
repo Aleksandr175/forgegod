@@ -10,10 +10,16 @@ import { dictionary } from './dictionary';
 import { StatusBar } from 'expo-status-bar';
 import styled from 'styled-components/native';
 import { PageMine } from './components/PageMine';
+import { useFonts } from 'expo-font';
 
 export const App = () => {
   const [page, setPage] = useState('mine');
   const [mineLvl, setMineLvl] = useState(1);
+  const [money, setMoney] = useState(1000);
+
+  const [loaded] = useFonts({
+    LGGothic: require('./fonts/LGGothic.ttf'),
+  });
 
   const [selectedGoodId, setSelectedGoodId] = useState<number>(2);
   const [storage, setStorage] = useState<IStorageGood[]>([
@@ -206,12 +212,30 @@ export const App = () => {
   const onChangeGoodId = useCallback((id: number) => setSelectedGoodId(id), []);
   const onCreateOrder = useCallback(createOrder, []);
 
+  const onBuyGood = (goodId: number, qty: number) => {
+    const item = dictionary.goods.find((good) => good.id === goodId)!;
+    const needMoney = item.cost * qty;
+
+    if (money >= needMoney) {
+      setMoney((prevMoney) => {
+        return prevMoney - needMoney;
+      });
+
+      addToStorage(goodId, qty);
+    }
+  };
+
+  if (!loaded) {
+    return null;
+  }
+
   return (
     <View style={styles.appWrapper}>
       <StatusBar style="auto" />
 
       <SHeaderBlock>
         <SHeader>Forge God</SHeader>
+        <SMoney>{money}</SMoney>
       </SHeaderBlock>
 
       <View style={styles.appContent}>
@@ -240,7 +264,11 @@ export const App = () => {
         )}
 
         {page === 'mine' && (
-          <PageMine dictionary={dictionary.mine} lvl={mineLvl} />
+          <PageMine
+            dictionary={dictionary.mine}
+            lvl={mineLvl}
+            onBuyGood={onBuyGood}
+          />
         )}
       </View>
 
@@ -286,6 +314,12 @@ const SHeader = styled.Text`
   font-weight: 700;
   padding: 10px;
   color: white;
+  font-family: 'LGGothic';
+  font-size: 18px;
+`;
+
+const SMoney = styled.Text`
+  color: yellow;
 `;
 
 const SHeaderBlock = styled.View`
