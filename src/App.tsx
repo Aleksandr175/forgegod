@@ -54,7 +54,7 @@ export const App = () => {
   const [orders, setOrders] = useState<IOrder[]>([]);
 
   useEffect(() => {
-    createOrder(2, 3);
+    createOrder(2, 10);
     createOrder(3, 2);
     createOrder(3, 1);
     createOrder(3, 1);

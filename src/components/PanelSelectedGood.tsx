@@ -50,7 +50,10 @@ export const PanelSelectedGood = React.memo(
                     <Text style={styles.selectedItemTitle}>Required:</Text>
                     {good.requirements.resources.map((requirement) => {
                       return (
-                        <View style={styles.selectedItemRequired}>
+                        <View
+                          style={styles.selectedItemRequired}
+                          key={requirement.id}
+                        >
                           <CustomImage id={requirement.id} size={'small'} />
                           <SQty>{requirement.qty}</SQty>
                         </View>
