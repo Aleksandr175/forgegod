@@ -15,12 +15,16 @@ interface IProps {
 }
 
 export const PageOrders = ({ storage, orders, onCompleteOrder }: IProps) => {
+  const resourceInStorage = (goodId: number) => {
+    return storage.find((good) => good.id === goodId)?.qty || 0;
+  };
+
   return (
     <SPageOrders>
       <Panel title={'Customer Orders'}>
         {orders.length === 0 && (
           <SNoOrders>
-            No current orders. You can order something in the right panel
+            No current orders from customers. We need to wait for new customers.
           </SNoOrders>
         )}
         <FlatList
@@ -47,7 +51,9 @@ export const PageOrders = ({ storage, orders, onCompleteOrder }: IProps) => {
                       return (
                         <>
                           <CustomImage id={good.id} size={'big'} />
-                          <SQty>{good.qty}</SQty>
+                          <SQty>
+                            {good.qty} / {resourceInStorage(good.id)}
+                          </SQty>
                         </>
                       );
                     })}

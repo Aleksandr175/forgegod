@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components/native';
+import { CustomText } from './CustomText';
 
 interface IProps {
   title: string;
@@ -58,6 +59,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const STitle = styled.Text`
+const STitle = styled(CustomText)`
+  font-size: 14px;
   color: white;
 `;

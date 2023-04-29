@@ -8,11 +8,12 @@ import { FlatList } from 'react-native';
 
 interface IProps {
   orders: IOrder[];
+  maxOrders: number;
 }
 
-export const PanelOrders = ({ orders }: IProps) => {
+export const PanelOrders = ({ orders, maxOrders }: IProps) => {
   return (
-    <Panel title={'Orders ' + orders.length + '/10'}>
+    <Panel title={'In Process ' + orders.length + '/' + maxOrders}>
       {orders.length === 0 && (
         <SNoOrders>
           No current orders. You can order something in the right panel

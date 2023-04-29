@@ -24,6 +24,7 @@ export const App = () => {
   const [page, setPage] = useState('orders');
   const [mineLvl, setMineLvl] = useState(1);
   const [money, setMoney] = useState(1000);
+  const [maxOrders, setMaxOrders] = useState(5);
 
   const [loaded] = useFonts({
     LGGothic: require('./fonts/LGGothic.ttf'),
@@ -208,6 +209,21 @@ export const App = () => {
 
       return newOrders;
     });
+
+    setCustomerOrders((prevOrders) => {
+      let newOrders = [...prevOrders];
+
+      newOrders = newOrders
+        .map((order) => {
+          return {
+            ...order,
+            timeLeft: order.timeLeft - 1,
+          };
+        })
+        .filter((order) => order.timeLeft > 0);
+
+      return newOrders;
+    });
   };
 
   const createOrder = (id: number, qty: number) => {
@@ -246,6 +262,11 @@ export const App = () => {
     }
   };
 
+  const randomIntFromInterval = (min: number, max: number) => {
+    // min and max included
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  };
+
   const createCustomerOrder = (
     goods: IGoodInfo[],
     timeLeft: number,
@@ -260,7 +281,7 @@ export const App = () => {
           timeTotal: timeLeft,
           cost,
           id: nanoid(),
-          customerId: Math.random(),
+          customerId: randomIntFromInterval(1, 4),
         },
       ];
     });
@@ -275,7 +296,33 @@ export const App = () => {
 
       if (index > -1) {
         // update qty
-        newStorage[index].qty += 1;
+        newStorage[index].qty += qty;
+      } else {
+        // add new storage item
+        newStorage.push({
+          id: goodId,
+          qty: qty,
+        });
+      }
+
+      return newStorage;
+    });
+  };
+
+  const removeFromStorage = (goodId: number, qty: number) => {
+    setStorage((prevStorage) => {
+      let newStorage = [...prevStorage];
+      const index = newStorage.findIndex(
+        (storageItem) => storageItem.id === goodId,
+      );
+
+      if (index > -1) {
+        // update qty
+        newStorage[index].qty -= qty;
+
+        if (newStorage[index].qty < 0) {
+          newStorage[index].qty = 0;
+        }
       } else {
         // add new storage item
         newStorage.push({
@@ -304,6 +351,61 @@ export const App = () => {
     }
   };
 
+  const completeCustomerOrder = (customerOrderId: string) => {
+    const customerOrder = customerOrders.find(
+      (order) => order.id === customerOrderId,
+    );
+
+    if (customerOrder) {
+      if (hasEnoughResourcesForCustomerOrder(storage, customerOrder)) {
+        // remove resources for order
+        customerOrder.goods.forEach((good) => {
+          removeFromStorage(good.id, good.qty);
+        });
+
+        // add money from order
+        setMoney((prevState) => {
+          return prevState + customerOrder.cost;
+        });
+
+        removeCustomerOrder(customerOrderId);
+      }
+    }
+  };
+
+  const removeCustomerOrder = (customerOrderId: string) => {
+    setCustomerOrders((prevState) => {
+      return prevState.filter((order) => order.id !== customerOrderId);
+    });
+  };
+
+  const hasEnoughResourcesForCustomerOrder = (
+    resources: IStorageGood[],
+    customerOrder: ICustomerOrder,
+  ) => {
+    if (customerOrder) {
+      // Convert the resources array into an object
+      let resourceObj = {};
+      for (let resource of storage) {
+        resourceObj[resource.id] = resource.qty;
+      }
+
+      // Check if you have enough resources for the order
+      for (let good of customerOrder.goods) {
+        if (
+          !resourceObj.hasOwnProperty(good.id) ||
+          resourceObj[good.id] < good.qty
+        ) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+  };
+
+  // TODO: refactor code, separate to hooks
+
   if (!loaded) {
     return null;
   }
@@ -322,7 +424,7 @@ export const App = () => {
           <>
             <View style={styles.forgeBlock}>
               <View style={styles.columnLeft}>
-                <PanelOrders orders={orders} />
+                <PanelOrders orders={orders} maxOrders={maxOrders} />
               </View>
               <View style={styles.columnRight}>
                 <View style={styles.orderBlock}>
@@ -354,7 +456,7 @@ export const App = () => {
             storage={storage}
             orders={customerOrders}
             onCompleteOrder={(orderId: string) => {
-              console.log('complete order');
+              completeCustomerOrder(orderId);
             }}
           />
         )}
