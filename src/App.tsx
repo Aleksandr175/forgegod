@@ -47,6 +47,46 @@ export const App = () => {
       id: 13,
       qty: 1,
     },
+    {
+      id: 30,
+      qty: 1,
+    },
+    {
+      id: 31,
+      qty: 1,
+    },
+    {
+      id: 32,
+      qty: 1,
+    },
+    {
+      id: 33,
+      qty: 1,
+    },
+    {
+      id: 34,
+      qty: 1,
+    },
+    {
+      id: 35,
+      qty: 1,
+    },
+    {
+      id: 36,
+      qty: 1,
+    },
+    {
+      id: 37,
+      qty: 1,
+    },
+    {
+      id: 38,
+      qty: 1,
+    },
+    {
+      id: 39,
+      qty: 1,
+    },
   ]);
 
   const orderId = useRef(1);
