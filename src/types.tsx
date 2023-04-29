@@ -10,7 +10,7 @@ export interface IGood {
   cost: number;
   type: TTypeGood;
   requirements: {
-    resources: { id: number; qty: number }[];
+    resources: IGoodInfo[];
     upgrades?: {
       minerLvl?: number;
     };
@@ -20,7 +20,7 @@ export interface IGood {
 export interface IMine {
   nextLvl: number;
   requirements: {
-    resources: { id: number; qty: number }[];
+    resources: IGoodInfo[];
     upgrades?: {
       minerLvl?: number;
     };
@@ -44,6 +44,15 @@ export interface IOrder {
   workerId: number | null;
 }
 
+export interface ICustomerOrder {
+  goods: IGoodInfo[];
+  timeLeft: number;
+  timeTotal: number;
+  id: string;
+  cost: number;
+  customerId: number;
+}
+
 export interface IWorker {
   id: number;
   name: string;
@@ -52,4 +61,9 @@ export interface IWorker {
 
 export type TSize = 'small' | 'big' | 'superBig';
 
-export type TImage = 'workers';
+export type TImage = 'workers' | 'customers';
+
+export interface IGoodInfo {
+  id: number;
+  qty: number;
+}

@@ -5,6 +5,7 @@ import { dictionary } from '../dictionary';
 import { IStorageGood } from '../types';
 import styled from 'styled-components/native';
 import { CustomImage } from './CustomImage';
+import { SButton } from '../styles';
 
 interface IProps {
   goodId?: number;
@@ -112,18 +113,6 @@ const styles = StyleSheet.create({
 
 const SSeparator = styled.View`
   padding: 5px;
-`;
-
-const SButton = styled.Pressable<{ disabled?: boolean }>`
-  background-color: ${(props) => (props.disabled ? '#444' : '#F49300')};
-  padding: 5px;
-
-  ${({ disabled }) =>
-    disabled
-      ? `
-      opacity: .5;
-      `
-      : ''};
 `;
 
 const SQty = styled.Text`

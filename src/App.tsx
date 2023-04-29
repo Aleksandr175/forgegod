@@ -4,16 +4,24 @@ import { Panel } from './components/Panel';
 import { PanelSelectedGood } from './components/PanelSelectedGood';
 import { PanelGoods } from './components/PanelGoods';
 import { PanelStorage } from './components/PanelStorage';
-import { IOrder, IStorageGood, IWorker } from './types';
+import {
+  ICustomerOrder,
+  IGoodInfo,
+  IOrder,
+  IStorageGood,
+  IWorker,
+} from './types';
 import { PanelOrders } from './components/PanelOrders';
 import { dictionary } from './dictionary';
 import { StatusBar } from 'expo-status-bar';
 import styled from 'styled-components/native';
 import { PageMine } from './components/PageMine';
 import { useFonts } from 'expo-font';
+import { PageOrders } from './components/PageOrders';
+import { nanoid } from 'nanoid';
 
 export const App = () => {
-  const [page, setPage] = useState('mine');
+  const [page, setPage] = useState('orders');
   const [mineLvl, setMineLvl] = useState(1);
   const [money, setMoney] = useState(1000);
 
@@ -92,6 +100,7 @@ export const App = () => {
   const orderId = useRef(1);
 
   const [orders, setOrders] = useState<IOrder[]>([]);
+  const [customerOrders, setCustomerOrders] = useState<ICustomerOrder[]>([]);
 
   useEffect(() => {
     createOrder(2, 10);
@@ -107,6 +116,16 @@ export const App = () => {
     createOrder(3, 1);
     createOrder(3, 1);
     createOrder(3, 1);
+
+    createCustomerOrder(
+      [
+        { id: 3, qty: 2 },
+        { id: 30, qty: 1 },
+      ],
+      100,
+      200,
+    );
+    createCustomerOrder([{ id: 3, qty: 5 }], 200, 100);
   }, []);
 
   useEffect(() => {
@@ -227,6 +246,26 @@ export const App = () => {
     }
   };
 
+  const createCustomerOrder = (
+    goods: IGoodInfo[],
+    timeLeft: number,
+    cost: number,
+  ) => {
+    setCustomerOrders((prevOrders) => {
+      return [
+        ...prevOrders,
+        {
+          goods,
+          timeLeft,
+          timeTotal: timeLeft,
+          cost,
+          id: nanoid(),
+          customerId: Math.random(),
+        },
+      ];
+    });
+  };
+
   const addToStorage = (goodId: number, qty: number) => {
     setStorage((prevStorage) => {
       let newStorage = [...prevStorage];
@@ -306,6 +345,17 @@ export const App = () => {
             dictionary={dictionary.mine}
             lvl={mineLvl}
             onBuyGood={onBuyGood}
+          />
+        )}
+
+        {page === 'orders' && (
+          <PageOrders
+            dictionary={dictionary.mine}
+            storage={storage}
+            orders={customerOrders}
+            onCompleteOrder={(orderId: string) => {
+              console.log('complete order');
+            }}
           />
         )}
       </View>

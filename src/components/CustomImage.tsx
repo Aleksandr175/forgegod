@@ -18,6 +18,21 @@ const getImageSource = (id: number, type?: TImage) => {
     }
   }
 
+  if (type === 'customers') {
+    if (id === 1) {
+      return require(`../images/customers/1.png`);
+    }
+    if (id === 2) {
+      return require(`../images/customers/2.png`);
+    }
+    if (id === 3) {
+      return require(`../images/customers/3.png`);
+    }
+    if (id === 4) {
+      return require(`../images/customers/4.png`);
+    }
+  }
+
   if (id === 1) {
     return require(`../images/goods/1.png`);
   }

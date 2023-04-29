@@ -59,3 +59,15 @@ export const SIcon = styled.Image<{ size?: TSize }>`
       height: 16px;`
       : ''};
 `;
+
+export const SButton = styled.Pressable<{ disabled?: boolean }>`
+  background-color: ${(props) => (props.disabled ? '#444' : '#F49300')};
+  padding: 5px;
+
+  ${({ disabled }) =>
+    disabled
+      ? `
+      opacity: .5;
+      `
+      : ''};
+`;
