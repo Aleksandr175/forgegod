@@ -21,7 +21,7 @@ export const PanelShop = React.memo(({ mineLvl, onBuyGood }: IProps) => {
   });
 
   return (
-    <Panel title={'Storage'}>
+    <Panel title={'Shop'}>
       <View style={stylesCommon.storageGrid}>
         <FlatList
           style={stylesCommon.storageGridList}

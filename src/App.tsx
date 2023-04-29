@@ -19,6 +19,7 @@ import { PageMine } from './components/PageMine';
 import { useFonts } from 'expo-font';
 import { PageOrders } from './components/PageOrders';
 import { nanoid } from 'nanoid';
+import { CustomText } from './components/CustomText';
 
 export const App = () => {
   const [page, setPage] = useState('orders');
@@ -415,8 +416,12 @@ export const App = () => {
       <StatusBar style="auto" />
 
       <SHeaderBlock>
+        <SSomePoint></SSomePoint>
         <SHeader>Forge God</SHeader>
-        <SMoney>{money}</SMoney>
+        <SMoneyWrapper>
+          <SImage source={require('./images/gold.png')} />
+          <SMoney>{money}</SMoney>
+        </SMoneyWrapper>
       </SHeaderBlock>
 
       <View style={styles.appContent}>
@@ -500,6 +505,15 @@ export const App = () => {
   );
 };
 
+const SImage = styled.Image`
+  height: 16px;
+  width: 16px;
+`;
+
+const SSomePoint = styled.View`
+  width: 80px;
+`;
+
 const SHeader = styled.Text`
   font-weight: 700;
   padding: 10px;
@@ -508,14 +522,23 @@ const SHeader = styled.Text`
   font-size: 18px;
 `;
 
-const SMoney = styled.Text`
+const SMoneyWrapper = styled.View`
+  width: 100px;
+  padding: 10px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+const SMoney = styled(CustomText)`
   color: yellow;
+  font-size: 18px;
 `;
 
 const SHeaderBlock = styled.View`
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
   height: 10%;
 `;
 

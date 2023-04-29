@@ -92,8 +92,8 @@ const SPanelWrapper = styled.View`
 `;
 
 const SPageOrders = styled.View`
-  padding-top: 10px;
   width: 100%;
+  height: 100%;
 `;
 
 const SNoOrders = styled.Text`
