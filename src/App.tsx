@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { PanelSelectedGood } from './components/PanelSelectedGood';
 import { PanelGoods } from './components/PanelGoods';
 import { PanelStorage } from './components/PanelStorage';
-import { IOrder, IStorageGood, IWorker } from './types';
+import { IOrder, IStorageGood, IWorker, TPage } from './types';
 import { PanelOrders } from './components/PanelOrders';
 import { dictionary } from './dictionary';
 import { StatusBar } from 'expo-status-bar';
@@ -15,9 +15,10 @@ import 'react-native-get-random-values';
 import { CustomText } from './components/CustomText';
 import { useCustomerOrdersLogic } from './hooks/useCustomerOrdersLogic';
 import { hasEnoughResourcesToImproveMine } from './utils';
+import { PageCity } from './components/PageCity';
 
 export const App = () => {
-  const [page, setPage] = useState('mine');
+  const [page, setPage] = useState<TPage>('city');
   const [mineLvl, setMineLvl] = useState(1);
   const [money, setMoney] = useState(1000);
   const [maxOrdersQty, setMaxOrdersQty] = useState(5);
@@ -347,7 +348,7 @@ export const App = () => {
       </SHeaderBlock>
 
       <View style={styles.appContent}>
-        {page === 'main' && (
+        {page === 'forge' && (
           <>
             <View style={styles.forgeBlock}>
               <View style={styles.columnLeft}>
@@ -390,13 +391,15 @@ export const App = () => {
             }}
           />
         )}
+
+        {page === 'city' && <PageCity onSetPage={setPage} />}
       </View>
 
       <View style={styles.bottomMenu}>
         <Pressable
           style={styles.menuItem}
           onPress={() => {
-            setPage('main');
+            setPage('forge');
           }}
         >
           <Text>Forge</Text>
@@ -404,10 +407,10 @@ export const App = () => {
         <Pressable
           style={styles.menuItem}
           onPress={() => {
-            setPage('skills');
+            setPage('hero');
           }}
         >
-          <Text>Skills</Text>
+          <Text>Hero</Text>
         </Pressable>
         <Pressable
           style={styles.menuItem}
@@ -424,6 +427,14 @@ export const App = () => {
           }}
         >
           <Text>Orders</Text>
+        </Pressable>
+        <Pressable
+          style={styles.menuItem}
+          onPress={() => {
+            setPage('city');
+          }}
+        >
+          <Text>City</Text>
         </Pressable>
       </View>
     </View>
@@ -491,10 +502,9 @@ const styles = StyleSheet.create({
     height: '10%',
   },
   menuItem: {
-    width: '25%',
+    width: '20%',
     paddingTop: 20,
     paddingBottom: 20,
-    backgroundColor: 'green',
   },
   forgeBlock: {
     flexDirection: 'row',

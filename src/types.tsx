@@ -69,3 +69,5 @@ export interface IGoodInfo {
   id: number;
   qty: number;
 }
+
+export type TPage = 'forge' | 'orders' | 'city' | 'hero' | 'mine';
