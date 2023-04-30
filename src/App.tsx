@@ -16,9 +16,10 @@ import { CustomText } from './components/CustomText';
 import { useCustomerOrdersLogic } from './hooks/useCustomerOrdersLogic';
 import { hasEnoughResourcesToImproveMine } from './utils';
 import { PageCity } from './components/PageCity';
+import { Menu } from './components/Menu';
 
 export const App = () => {
-  const [page, setPage] = useState<TPage>('city');
+  const [page, setPage] = useState<TPage>('forge');
   const [mineLvl, setMineLvl] = useState(1);
   const [money, setMoney] = useState(1000);
   const [maxOrdersQty, setMaxOrdersQty] = useState(5);
@@ -362,7 +363,10 @@ export const App = () => {
                     onCreateOrder={onCreateOrder}
                   />
                 </View>
-                <PanelGoods onChangeGoodId={onChangeGoodId} />
+                <PanelGoods
+                  onChangeGoodId={onChangeGoodId}
+                  selectedGoodId={selectedGoodId}
+                />
               </View>
             </View>
 
@@ -395,48 +399,7 @@ export const App = () => {
         {page === 'city' && <PageCity onSetPage={setPage} />}
       </View>
 
-      <View style={styles.bottomMenu}>
-        <Pressable
-          style={styles.menuItem}
-          onPress={() => {
-            setPage('forge');
-          }}
-        >
-          <Text>Forge</Text>
-        </Pressable>
-        <Pressable
-          style={styles.menuItem}
-          onPress={() => {
-            setPage('hero');
-          }}
-        >
-          <Text>Hero</Text>
-        </Pressable>
-        <Pressable
-          style={styles.menuItem}
-          onPress={() => {
-            setPage('mine');
-          }}
-        >
-          <Text>Mine</Text>
-        </Pressable>
-        <Pressable
-          style={styles.menuItem}
-          onPress={() => {
-            setPage('orders');
-          }}
-        >
-          <Text>Orders</Text>
-        </Pressable>
-        <Pressable
-          style={styles.menuItem}
-          onPress={() => {
-            setPage('city');
-          }}
-        >
-          <Text>City</Text>
-        </Pressable>
-      </View>
+      <Menu setPage={setPage} />
     </View>
   );
 };
@@ -491,20 +454,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#967766',
     alignItems: 'center',
     justifyContent: 'space-between',
-  },
-  bottomMenu: {
-    width: '100%',
-    backgroundColor: '#333',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingBottom: 30,
-    flexDirection: 'row',
-    height: '10%',
-  },
-  menuItem: {
-    width: '20%',
-    paddingTop: 20,
-    paddingBottom: 20,
   },
   forgeBlock: {
     flexDirection: 'row',

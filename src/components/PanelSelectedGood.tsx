@@ -6,6 +6,7 @@ import { IStorageGood } from '../types';
 import styled from 'styled-components/native';
 import { CustomImage } from './CustomImage';
 import { SButton } from '../styles';
+import { CustomText } from './CustomText';
 
 interface IProps {
   goodId?: number;
@@ -39,30 +40,31 @@ export const PanelSelectedGood = React.memo(
     return (
       <Panel title={'Order'} height={150}>
         <SSelectedItem>
-          <View style={styles.selectedItemImage}>
+          <SSelectedItemImage>
             {goodId && <CustomImage id={goodId} size={'big'} />}
-          </View>
-          <View style={styles.selectedItemInfo}>
+          </SSelectedItemImage>
+          <SSelectedItemInfo>
             {goodId && good && (
               <>
-                <Text style={styles.selectedItemTitle}>{good.name}</Text>
+                <SText style={styles.selectedItemTitle}>{good.name}</SText>
                 {good.requirements.resources?.length > 0 && (
                   <>
-                    <Text style={styles.selectedItemTitle}>Required:</Text>
-                    {good.requirements.resources.map((requirement) => {
-                      return (
-                        <View
-                          style={styles.selectedItemRequired}
-                          key={requirement.id}
-                        >
-                          <CustomImage id={requirement.id} size={'small'} />
-                          <SQty>{requirement.qty}</SQty>
-                        </View>
-                      );
-                    })}
+                    <SText style={styles.selectedItemTitle}>Required:</SText>
+                    <SResources>
+                      {good.requirements.resources.map((requirement) => {
+                        return (
+                          <View
+                            style={styles.selectedItemRequired}
+                            key={requirement.id}
+                          >
+                            <CustomImage id={requirement.id} size={'small'} />
+                            <SQty>{requirement.qty}</SQty>
+                          </View>
+                        );
+                      })}
+                    </SResources>
                   </>
                 )}
-                <SSeparator />
 
                 <SButton
                   onPress={() => {
@@ -74,7 +76,7 @@ export const PanelSelectedGood = React.memo(
                 </SButton>
               </>
             )}
-          </View>
+          </SSelectedItemInfo>
         </SSelectedItem>
       </Panel>
     );
@@ -86,20 +88,18 @@ const SSelectedItem = styled.View`
   width: 100%;
 `;
 
+const SSelectedItemImage = styled.View`
+  width: 40px;
+  height: 40px;
+  background-color: #71635b;
+  margin-right: 10px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+`;
+
 const styles = StyleSheet.create({
-  selectedItemImage: {
-    width: 40,
-    height: 40,
-    backgroundColor: '#71635B',
-    marginRight: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  selectedItemInfo: {
-    flex: 1,
-  },
   selectedItemTitle: {
-    color: 'white',
     paddingBottom: 5,
   },
   selectedItemRequired: {
@@ -115,6 +115,20 @@ const SSeparator = styled.View`
   padding: 5px;
 `;
 
-const SQty = styled.Text`
+const SQty = styled(CustomText)`
   color: white;
+`;
+
+const SText = styled(CustomText)``;
+
+const SResources = styled.View`
+  gap: 10px;
+  flex-direction: row;
+  align-items: center;
+  padding-bottom: 10px;
+`;
+
+const SSelectedItemInfo = styled.View`
+  flex: 1;
+  height: 100%;
 `;

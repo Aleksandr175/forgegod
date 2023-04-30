@@ -40,6 +40,9 @@ export const styles = StyleSheet.create({
     borderColor: 'black',
     position: 'relative',
   },
+  storageGridItemSelected: {
+    borderColor: '#F49300',
+  },
   storageGridItemQty: {
     position: 'absolute',
     right: 3,
