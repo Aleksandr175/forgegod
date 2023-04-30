@@ -2,10 +2,7 @@ import { ICustomerOrder, IGoodInfo, IStorageGood } from '../types';
 import { useEffect, useRef, useState } from 'react';
 import { dictionary } from '../dictionary';
 import { nanoid } from 'nanoid';
-import {
-  hasEnoughResourcesForCustomerOrder,
-  randomIntFromInterval,
-} from '../utils';
+import { hasEnoughResources, randomIntFromInterval } from '../utils';
 
 interface IProps {
   storage: IStorageGood[];
@@ -45,7 +42,7 @@ export const useCustomerOrdersLogic = ({
     );
 
     if (customerOrder) {
-      if (hasEnoughResourcesForCustomerOrder(storage, customerOrder)) {
+      if (hasEnoughResources(storage, customerOrder.goods)) {
         // remove resources for order
         customerOrder.goods.forEach((good) => {
           removeFromStorage(good.id, good.qty);

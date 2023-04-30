@@ -254,10 +254,12 @@ export const dictionary: IDictionary = {
       nextLvl: 2,
       requirements: {
         resources: [
-          { id: 2, qty: 20 },
-          { id: 3, qty: 20 },
+          { id: 1, qty: 1 },
+          { id: 2, qty: 1 },
         ],
         upgrades: {},
+        money: 500,
+        orderQty: 0,
       },
       provideResourceIds: [3],
     },
@@ -270,6 +272,8 @@ export const dictionary: IDictionary = {
           { id: 4, qty: 20 },
         ],
         upgrades: {},
+        money: 1000,
+        orderQty: 10,
       },
       provideResourceIds: [3, 4],
     },

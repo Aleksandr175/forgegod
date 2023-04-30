@@ -6,7 +6,7 @@ import { ICustomerOrder, IMine, IStorageGood } from '../types';
 import { CustomImage } from './CustomImage';
 import { SButton, styles as stylesCommon } from '../styles';
 import { CustomText } from './CustomText';
-import { hasEnoughResourcesForCustomerOrder } from '../utils';
+import { hasEnoughResources, resourceQtyInStorage } from '../utils';
 
 interface IProps {
   dictionary: IMine[];
@@ -16,10 +16,6 @@ interface IProps {
 }
 
 export const PageOrders = ({ storage, orders, onCompleteOrder }: IProps) => {
-  const resourceInStorage = (goodId: number) => {
-    return storage.find((good) => good.id === goodId)?.qty || 0;
-  };
-
   return (
     <SPageOrders>
       <Panel title={'Customer Orders'}>
@@ -53,7 +49,8 @@ export const PageOrders = ({ storage, orders, onCompleteOrder }: IProps) => {
                         <>
                           <CustomImage id={good.id} size={'big'} />
                           <SQty>
-                            {resourceInStorage(good.id)} / {good.qty}
+                            {resourceQtyInStorage(good.id, storage)} /{' '}
+                            {good.qty}
                           </SQty>
                         </>
                       );
@@ -68,9 +65,7 @@ export const PageOrders = ({ storage, orders, onCompleteOrder }: IProps) => {
                       onPress={() => {
                         onCompleteOrder(item.id);
                       }}
-                      disabled={
-                        !hasEnoughResourcesForCustomerOrder(storage, item)
-                      }
+                      disabled={!hasEnoughResources(storage, item.goods)}
                     >
                       <CustomText>Complete</CustomText>
                     </SButton>

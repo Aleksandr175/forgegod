@@ -14,9 +14,10 @@ import { PageOrders } from './components/PageOrders';
 import 'react-native-get-random-values';
 import { CustomText } from './components/CustomText';
 import { useCustomerOrdersLogic } from './hooks/useCustomerOrdersLogic';
+import { hasEnoughResourcesToImproveMine } from './utils';
 
 export const App = () => {
-  const [page, setPage] = useState('orders');
+  const [page, setPage] = useState('mine');
   const [mineLvl, setMineLvl] = useState(1);
   const [money, setMoney] = useState(1000);
   const [maxOrdersQty, setMaxOrdersQty] = useState(5);
@@ -33,7 +34,7 @@ export const App = () => {
     },
     {
       id: 2,
-      qty: 10,
+      qty: 20,
     },
     {
       id: 3,
@@ -302,6 +303,30 @@ export const App = () => {
     }
   };
 
+  const onImproveMine = () => {
+    const mineInfo = dictionary.mine.find(
+      (mine) => mine.nextLvl === mineLvl + 1,
+    );
+
+    if (mineInfo) {
+      if (hasEnoughResourcesToImproveMine(mineInfo, storage, money)) {
+        improveMine();
+
+        mineInfo.requirements.resources.forEach((resource) => {
+          removeFromStorage(resource.id, resource.qty);
+        });
+
+        addMoney(-mineInfo.requirements.money);
+      }
+    }
+  };
+
+  const improveMine = () => {
+    setMineLvl((prevState) => {
+      return prevState + 1;
+    });
+  };
+
   // TODO: refactor code, separate to hooks
 
   if (!loaded) {
@@ -347,8 +372,11 @@ export const App = () => {
         {page === 'mine' && (
           <PageMine
             dictionary={dictionary.mine}
-            lvl={mineLvl}
+            mineLvl={mineLvl}
             onBuyGood={onBuyGood}
+            onImproveMine={onImproveMine}
+            storage={storage}
+            money={money}
           />
         )}
 

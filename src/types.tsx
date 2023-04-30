@@ -24,6 +24,8 @@ export interface IMine {
     upgrades?: {
       minerLvl?: number;
     };
+    money: number;
+    orderQty?: number;
   };
   provideResourceIds: number[];
 }
