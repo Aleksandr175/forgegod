@@ -262,6 +262,20 @@ export const dictionary: IDictionary = {
         orderQty: 0,
       },
       provideResourceIds: [3],
+      expedition: {
+        cost: 100,
+        duration: 10,
+        canBeFoundGoods: [
+          {
+            id: 100,
+            qty: 1,
+          },
+          {
+            id: 101,
+            qty: 1,
+          },
+        ],
+      },
     },
     {
       nextLvl: 3,
@@ -276,6 +290,20 @@ export const dictionary: IDictionary = {
         orderQty: 10,
       },
       provideResourceIds: [3, 4],
+      expedition: {
+        cost: 100,
+        duration: 15,
+        canBeFoundGoods: [
+          {
+            id: 150,
+            qty: 2,
+          },
+          {
+            id: 101,
+            qty: 1,
+          },
+        ],
+      },
     },
   ],
 };

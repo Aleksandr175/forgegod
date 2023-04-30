@@ -15,7 +15,7 @@ interface IProps {
   onSetPage: (page: TPage) => void;
 }
 
-export const PageCity = ({ onSetPage }: IProps) => {
+export const PageCity = React.memo(({ onSetPage }: IProps) => {
   return (
     <SPageCity>
       <SCityImageWrapper>
@@ -35,7 +35,7 @@ export const PageCity = ({ onSetPage }: IProps) => {
       </SCityImageWrapper>
     </SPageCity>
   );
-};
+});
 
 const SPageCity = styled.View`
   width: 100%;

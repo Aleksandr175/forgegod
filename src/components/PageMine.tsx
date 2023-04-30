@@ -18,6 +18,8 @@ interface IProps {
   onImproveMine: () => void;
   money: number;
   storage: IStorageGood[];
+  isExpeditionInProcess: boolean;
+  sendExpedition: (mine: IMine) => void;
 }
 
 export const PageMine = ({
@@ -27,9 +29,13 @@ export const PageMine = ({
   onImproveMine,
   money,
   storage,
+  isExpeditionInProcess,
+  sendExpedition,
 }: IProps) => {
   const currentMineLvlInfo =
     dictionary.find((mine) => mine.nextLvl === mineLvl + 1) || null;
+
+  const expeditionCost = currentMineLvlInfo?.expedition?.cost || 0;
 
   return (
     <SPageMine>
@@ -42,58 +48,100 @@ export const PageMine = ({
       </SMineInfo>
 
       <SPanelWrapper>
-        <Panel title={'Improve Mine'}>
-          {currentMineLvlInfo &&
-            currentMineLvlInfo.requirements.resources?.length > 0 && (
-              <>
-                <SText>Required:</SText>
-                <SResources>
-                  {currentMineLvlInfo.requirements.resources.map(
-                    (requirement) => {
+        <SColumnLeft>
+          <Panel title={'Improve Mine'}>
+            {currentMineLvlInfo &&
+              currentMineLvlInfo.requirements.resources?.length > 0 && (
+                <>
+                  <SText>Required:</SText>
+                  <SResources>
+                    {currentMineLvlInfo.requirements.resources.map(
+                      (requirement) => {
+                        return (
+                          <SResourceRequired key={requirement.id}>
+                            <CustomImage id={requirement.id} size={'small'} />
+                            <SQty>
+                              {resourceQtyInStorage(requirement.id, storage)} /{' '}
+                              {requirement.qty}
+                            </SQty>
+                          </SResourceRequired>
+                        );
+                      },
+                    )}
+
+                    <SResourceRequired>
+                      <SImage source={require('../images/gold.png')} />
+                      <SQty>{currentMineLvlInfo.requirements.money}</SQty>
+                    </SResourceRequired>
+                  </SResources>
+
+                  <SText>It will provide you:</SText>
+                  <SResources>
+                    {currentMineLvlInfo.provideResourceIds.map((id) => {
                       return (
-                        <SResourceRequired key={requirement.id}>
-                          <CustomImage id={requirement.id} size={'small'} />
-                          <SQty>
-                            {resourceQtyInStorage(requirement.id, storage)} /{' '}
-                            {requirement.qty}
-                          </SQty>
+                        <SResourceRequired key={id}>
+                          <CustomImage id={id} size={'small'} />
                         </SResourceRequired>
                       );
-                    },
-                  )}
+                    })}
+                  </SResources>
 
-                  <SResourceRequired>
-                    <SImage source={require('../images/gold.png')} />
-                    <SQty>{currentMineLvlInfo.requirements.money}</SQty>
-                  </SResourceRequired>
-                </SResources>
+                  <SButton
+                    onPress={onImproveMine}
+                    disabled={
+                      !hasEnoughResourcesToImproveMine(
+                        currentMineLvlInfo,
+                        storage,
+                        money,
+                      )
+                    }
+                  >
+                    <CustomText>Improve</CustomText>
+                  </SButton>
+                </>
+              )}
+          </Panel>
+        </SColumnLeft>
+        <SColumnRight>
+          <Panel title={'Expedition'}>
+            {currentMineLvlInfo &&
+              currentMineLvlInfo.expedition.canBeFoundGoods?.length > 0 && (
+                <>
+                  <SText>Required:</SText>
+                  <SResources>
+                    <SResourceRequired>
+                      <SImage source={require('../images/gold.png')} />
+                      <SQty>{expeditionCost}</SQty>
+                    </SResourceRequired>
+                  </SResources>
 
-                <SText>It will provide you:</SText>
-                <SResources>
-                  {currentMineLvlInfo.provideResourceIds.map((id) => {
-                    return (
-                      <SResourceRequired key={id}>
-                        <CustomImage id={id} size={'small'} />
-                      </SResourceRequired>
-                    );
-                  })}
-                </SResources>
+                  <SText>You can find:</SText>
+                  <SResources>
+                    {currentMineLvlInfo.expedition.canBeFoundGoods.map(
+                      (good) => {
+                        return (
+                          <SResourceRequired key={good.id}>
+                            <CustomImage id={good.id} size={'small'} />
+                          </SResourceRequired>
+                        );
+                      },
+                    )}
+                  </SResources>
 
-                <SButton
-                  onPress={onImproveMine}
-                  disabled={
-                    !hasEnoughResourcesToImproveMine(
-                      currentMineLvlInfo,
-                      storage,
-                      money,
-                    )
-                  }
-                >
-                  <CustomText>Improve</CustomText>
-                </SButton>
-              </>
-            )}
-        </Panel>
+                  <SButton
+                    onPress={() => {
+                      sendExpedition(currentMineLvlInfo);
+                    }}
+                    disabled={isExpeditionInProcess || money < expeditionCost}
+                  >
+                    <CustomText>
+                      {isExpeditionInProcess ? 'In Process' : 'Send'}
+                    </CustomText>
+                  </SButton>
+                </>
+              )}
+          </Panel>
+        </SColumnRight>
       </SPanelWrapper>
 
       <PanelShop mineLvl={mineLvl || 1} onBuyGood={onBuyGood}></PanelShop>
@@ -103,6 +151,14 @@ export const PageMine = ({
 
 const SPanelWrapper = styled.View`
   height: 150px;
+  flex-direction: row;
+`;
+
+const SColumnLeft = styled.View`
+  width: 50%;
+`;
+const SColumnRight = styled.View`
+  width: 50%;
 `;
 
 const SPageMine = styled.View`

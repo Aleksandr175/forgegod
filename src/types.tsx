@@ -28,6 +28,11 @@ export interface IMine {
     orderQty?: number;
   };
   provideResourceIds: number[];
+  expedition: {
+    cost: number;
+    duration: number;
+    canBeFoundGoods: IStorageGood[];
+  };
 }
 
 export type TTypeGood = 'resource' | 'good';
@@ -71,3 +76,9 @@ export interface IGoodInfo {
 }
 
 export type TPage = 'forge' | 'orders' | 'city' | 'hero' | 'mine';
+
+export interface IExpeditionInfoInProcess {
+  duration: number;
+  mineLvl: number;
+  canBeFoundGoods: IStorageGood[];
+}

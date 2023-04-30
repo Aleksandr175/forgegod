@@ -3,7 +3,14 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { PanelSelectedGood } from './components/PanelSelectedGood';
 import { PanelGoods } from './components/PanelGoods';
 import { PanelStorage } from './components/PanelStorage';
-import { IOrder, IStorageGood, IWorker, TPage } from './types';
+import {
+  IExpeditionInfoInProcess,
+  IMine,
+  IOrder,
+  IStorageGood,
+  IWorker,
+  TPage,
+} from './types';
 import { PanelOrders } from './components/PanelOrders';
 import { dictionary } from './dictionary';
 import { StatusBar } from 'expo-status-bar';
@@ -19,10 +26,12 @@ import { PageCity } from './components/PageCity';
 import { Menu } from './components/Menu';
 
 export const App = () => {
-  const [page, setPage] = useState<TPage>('forge');
+  const [page, setPage] = useState<TPage>('mine');
   const [mineLvl, setMineLvl] = useState(1);
   const [money, setMoney] = useState(1000);
   const [maxOrdersQty, setMaxOrdersQty] = useState(5);
+  const [expeditionInfo, setExpeditionInfo] =
+    useState<IExpeditionInfoInProcess>({} as IExpeditionInfoInProcess);
 
   const [loaded] = useFonts({
     LGGothic: require('./fonts/LGGothic.ttf'),
@@ -151,6 +160,7 @@ export const App = () => {
   ]);
 
   const timer = useRef();
+  const isExpeditionInProcess = useRef(false);
 
   useEffect(() => {
     // @ts-ignore
@@ -229,6 +239,31 @@ export const App = () => {
   const handleTimer = () => {
     updateOrders();
     updateCustomerOrders();
+
+    if (isExpeditionInProcess.current) {
+      updateExpedition();
+    }
+  };
+
+  const updateExpedition = () => {
+    setExpeditionInfo((prevState) => {
+      const newExpeditionInfo = { ...prevState };
+      newExpeditionInfo.duration -= 1;
+
+      if (newExpeditionInfo.duration === 0) {
+        isExpeditionInProcess.current = false;
+
+        getGoodsFromExpedition(newExpeditionInfo);
+      }
+
+      return newExpeditionInfo;
+    });
+  };
+
+  const getGoodsFromExpedition = (expedition: IExpeditionInfoInProcess) => {
+    expedition.canBeFoundGoods.map((good) => {
+      addToStorage(good.id, good.qty);
+    });
   };
 
   const createOrder = (id: number, qty: number) => {
@@ -329,6 +364,20 @@ export const App = () => {
     });
   };
 
+  const sendExpedition = (mine: IMine) => {
+    if (money >= mine.expedition.cost) {
+      addMoney(-mine.expedition.cost);
+
+      isExpeditionInProcess.current = true;
+
+      setExpeditionInfo({
+        duration: mine.expedition.duration,
+        mineLvl: mine.nextLvl,
+        canBeFoundGoods: mine.expedition.canBeFoundGoods,
+      });
+    }
+  };
+
   // TODO: refactor code, separate to hooks
 
   if (!loaded) {
@@ -382,6 +431,8 @@ export const App = () => {
             onImproveMine={onImproveMine}
             storage={storage}
             money={money}
+            isExpeditionInProcess={isExpeditionInProcess.current}
+            sendExpedition={sendExpedition}
           />
         )}
 

@@ -7,7 +7,7 @@ interface IProps {
   setPage: (page: TPage) => void;
 }
 
-export const Menu = ({ setPage }: IProps) => {
+export const Menu = React.memo(({ setPage }: IProps) => {
   return (
     <SMenu>
       <SMenuItem
@@ -47,7 +47,7 @@ export const Menu = ({ setPage }: IProps) => {
       </SMenuItem>
     </SMenu>
   );
-};
+});
 
 const SMenu = styled.View`
   width: 100%;
