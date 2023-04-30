@@ -1,16 +1,9 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Panel } from './components/Panel';
 import { PanelSelectedGood } from './components/PanelSelectedGood';
 import { PanelGoods } from './components/PanelGoods';
 import { PanelStorage } from './components/PanelStorage';
-import {
-  ICustomerOrder,
-  IGoodInfo,
-  IOrder,
-  IStorageGood,
-  IWorker,
-} from './types';
+import { IOrder, IStorageGood, IWorker } from './types';
 import { PanelOrders } from './components/PanelOrders';
 import { dictionary } from './dictionary';
 import { StatusBar } from 'expo-status-bar';
@@ -18,8 +11,9 @@ import styled from 'styled-components/native';
 import { PageMine } from './components/PageMine';
 import { useFonts } from 'expo-font';
 import { PageOrders } from './components/PageOrders';
-import { nanoid } from 'nanoid';
+import 'react-native-get-random-values';
 import { CustomText } from './components/CustomText';
+import { useCustomerOrdersLogic } from './hooks/useCustomerOrdersLogic';
 
 export const App = () => {
   const [page, setPage] = useState('orders');
@@ -102,13 +96,6 @@ export const App = () => {
   const orderId = useRef(1);
 
   const [orders, setOrders] = useState<IOrder[]>([]);
-  const [customerOrders, setCustomerOrders] = useState<ICustomerOrder[]>([]);
-
-  const customerOrdersRef = useRef(customerOrders);
-
-  useEffect(() => {
-    customerOrdersRef.current = customerOrders;
-  }, [customerOrders]);
 
   useEffect(() => {
     createOrder(2, 10);
@@ -117,16 +104,6 @@ export const App = () => {
     createOrder(3, 1);
     createOrder(3, 1);
     createOrder(3, 1);
-
-    createCustomerOrder(
-      [
-        { id: 3, qty: 2 },
-        { id: 30, qty: 1 },
-      ],
-      100,
-      200,
-    );
-    createCustomerOrder([{ id: 3, qty: 5 }], 200, 100);
   }, []);
 
   useEffect(() => {
@@ -171,7 +148,6 @@ export const App = () => {
   ]);
 
   const timer = useRef();
-  const dayTimer = useRef();
 
   useEffect(() => {
     // @ts-ignore
@@ -181,21 +157,6 @@ export const App = () => {
       clearInterval(timer.current);
     };
   }, []);
-
-  useEffect(() => {
-    // @ts-ignore
-    dayTimer.current = setInterval(handleDayTimer, 10000);
-
-    return () => {
-      clearInterval(dayTimer.current);
-    };
-  }, []);
-
-  const handleDayTimer = () => {
-    if (customerOrdersRef.current.length < 5) {
-      generateCustomerOrders();
-    }
-  };
 
   const updateOrders = () => {
     setOrders((prevOrders) => {
@@ -227,57 +188,44 @@ export const App = () => {
     });
   };
 
-  const updateCustomerOrders = () => {
-    setCustomerOrders((prevOrders) => {
-      let newOrders = [...prevOrders];
-
-      newOrders = newOrders
-        .map((order) => {
-          return {
-            ...order,
-            timeLeft: order.timeLeft - 1,
-          };
-        })
-        .filter((order) => order.timeLeft > 0);
-
-      return newOrders;
+  const addMoney = (amount: number) => {
+    setMoney((prevState) => {
+      return prevState + amount;
     });
   };
+
+  const removeFromStorage = (goodId: number, qty: number) => {
+    setStorage((prevStorage) => {
+      let newStorage = [...prevStorage];
+      const index = newStorage.findIndex(
+        (storageItem) => storageItem.id === goodId,
+      );
+
+      if (index > -1) {
+        // update qty
+        newStorage[index].qty -= qty;
+
+        if (newStorage[index].qty < 0) {
+          newStorage[index].qty = 0;
+        }
+      } else {
+        // add new storage item
+        newStorage.push({
+          id: goodId,
+          qty: qty,
+        });
+      }
+
+      return newStorage;
+    });
+  };
+
+  const { updateCustomerOrders, completeCustomerOrder, customerOrders } =
+    useCustomerOrdersLogic({ storage, removeFromStorage, addMoney });
 
   const handleTimer = () => {
     updateOrders();
     updateCustomerOrders();
-  };
-
-  const generateCustomerOrders = () => {
-    const possibleGoods = dictionary.goods.filter((item) => {
-      // TODO: add some conditions, check upgrades
-      return item.type === 'good';
-    });
-
-    const qtyTypeOfGoods = randomIntFromInterval(1, 2);
-    const goods = [];
-    let timeLeft = 0;
-    let cost = 0;
-
-    for (let i = 0; i < qtyTypeOfGoods; i++) {
-      const randomGoodIndex = randomIntFromInterval(
-        0,
-        possibleGoods.length - 1,
-      );
-      const qty = randomIntFromInterval(1, 3);
-      const good = possibleGoods[randomGoodIndex];
-
-      goods.push({
-        id: possibleGoods[randomGoodIndex].id,
-        qty,
-      });
-
-      timeLeft += good.time * qty;
-      cost += good.cost * qty;
-    }
-
-    createCustomerOrder(goods, timeLeft, cost);
   };
 
   const createOrder = (id: number, qty: number) => {
@@ -316,31 +264,6 @@ export const App = () => {
     }
   };
 
-  const randomIntFromInterval = (min: number, max: number) => {
-    // min and max included
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  };
-
-  const createCustomerOrder = (
-    goods: IGoodInfo[],
-    timeLeft: number,
-    cost: number,
-  ) => {
-    setCustomerOrders((prevOrders) => {
-      return [
-        ...prevOrders,
-        {
-          goods,
-          timeLeft,
-          timeTotal: timeLeft,
-          cost,
-          id: nanoid(),
-          customerId: randomIntFromInterval(1, 4),
-        },
-      ];
-    });
-  };
-
   const addToStorage = (goodId: number, qty: number) => {
     setStorage((prevStorage) => {
       let newStorage = [...prevStorage];
@@ -351,32 +274,6 @@ export const App = () => {
       if (index > -1) {
         // update qty
         newStorage[index].qty += qty;
-      } else {
-        // add new storage item
-        newStorage.push({
-          id: goodId,
-          qty: qty,
-        });
-      }
-
-      return newStorage;
-    });
-  };
-
-  const removeFromStorage = (goodId: number, qty: number) => {
-    setStorage((prevStorage) => {
-      let newStorage = [...prevStorage];
-      const index = newStorage.findIndex(
-        (storageItem) => storageItem.id === goodId,
-      );
-
-      if (index > -1) {
-        // update qty
-        newStorage[index].qty -= qty;
-
-        if (newStorage[index].qty < 0) {
-          newStorage[index].qty = 0;
-        }
       } else {
         // add new storage item
         newStorage.push({
@@ -402,59 +299,6 @@ export const App = () => {
       });
 
       addToStorage(goodId, qty);
-    }
-  };
-
-  const completeCustomerOrder = (customerOrderId: string) => {
-    const customerOrder = customerOrders.find(
-      (order) => order.id === customerOrderId,
-    );
-
-    if (customerOrder) {
-      if (hasEnoughResourcesForCustomerOrder(storage, customerOrder)) {
-        // remove resources for order
-        customerOrder.goods.forEach((good) => {
-          removeFromStorage(good.id, good.qty);
-        });
-
-        // add money from order
-        setMoney((prevState) => {
-          return prevState + customerOrder.cost;
-        });
-
-        removeCustomerOrder(customerOrderId);
-      }
-    }
-  };
-
-  const removeCustomerOrder = (customerOrderId: string) => {
-    setCustomerOrders((prevState) => {
-      return prevState.filter((order) => order.id !== customerOrderId);
-    });
-  };
-
-  const hasEnoughResourcesForCustomerOrder = (
-    resources: IStorageGood[],
-    customerOrder: ICustomerOrder,
-  ) => {
-    if (customerOrder) {
-      // Convert the resources array into an object
-      let resourceObj = {};
-      for (let resource of storage) {
-        resourceObj[resource.id] = resource.qty;
-      }
-
-      // Check if you have enough resources for the order
-      for (let good of customerOrder.goods) {
-        if (
-          !resourceObj.hasOwnProperty(good.id) ||
-          resourceObj[good.id] < good.qty
-        ) {
-          return false;
-        }
-      }
-
-      return true;
     }
   };
 
@@ -564,7 +408,7 @@ const SImage = styled.Image`
 `;
 
 const SSomePoint = styled.View`
-  width: 80px;
+  width: 100px;
 `;
 
 const SHeader = styled.Text`

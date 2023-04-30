@@ -6,6 +6,7 @@ import { ICustomerOrder, IMine, IStorageGood } from '../types';
 import { CustomImage } from './CustomImage';
 import { SButton, styles as stylesCommon } from '../styles';
 import { CustomText } from './CustomText';
+import { hasEnoughResourcesForCustomerOrder } from '../utils';
 
 interface IProps {
   dictionary: IMine[];
@@ -67,6 +68,9 @@ export const PageOrders = ({ storage, orders, onCompleteOrder }: IProps) => {
                       onPress={() => {
                         onCompleteOrder(item.id);
                       }}
+                      disabled={
+                        !hasEnoughResourcesForCustomerOrder(storage, item)
+                      }
                     >
                       <CustomText>Complete</CustomText>
                     </SButton>
