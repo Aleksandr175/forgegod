@@ -25,7 +25,7 @@ export const App = () => {
   const [page, setPage] = useState('orders');
   const [mineLvl, setMineLvl] = useState(1);
   const [money, setMoney] = useState(1000);
-  const [maxOrders, setMaxOrders] = useState(5);
+  const [maxOrdersQty, setMaxOrdersQty] = useState(5);
 
   const [loaded] = useFonts({
     LGGothic: require('./fonts/LGGothic.ttf'),
@@ -104,16 +104,15 @@ export const App = () => {
   const [orders, setOrders] = useState<IOrder[]>([]);
   const [customerOrders, setCustomerOrders] = useState<ICustomerOrder[]>([]);
 
+  const customerOrdersRef = useRef(customerOrders);
+
+  useEffect(() => {
+    customerOrdersRef.current = customerOrders;
+  }, [customerOrders]);
+
   useEffect(() => {
     createOrder(2, 10);
     createOrder(3, 2);
-    createOrder(3, 1);
-    createOrder(3, 1);
-    createOrder(3, 1);
-    createOrder(3, 1);
-    createOrder(3, 1);
-    createOrder(3, 1);
-    createOrder(3, 1);
     createOrder(3, 1);
     createOrder(3, 1);
     createOrder(3, 1);
@@ -172,6 +171,7 @@ export const App = () => {
   ]);
 
   const timer = useRef();
+  const dayTimer = useRef();
 
   useEffect(() => {
     // @ts-ignore
@@ -182,7 +182,22 @@ export const App = () => {
     };
   }, []);
 
-  const handleTimer = () => {
+  useEffect(() => {
+    // @ts-ignore
+    dayTimer.current = setInterval(handleDayTimer, 10000);
+
+    return () => {
+      clearInterval(dayTimer.current);
+    };
+  }, []);
+
+  const handleDayTimer = () => {
+    if (customerOrdersRef.current.length < 5) {
+      generateCustomerOrders();
+    }
+  };
+
+  const updateOrders = () => {
     setOrders((prevOrders) => {
       let newOrders = [...prevOrders];
 
@@ -210,7 +225,9 @@ export const App = () => {
 
       return newOrders;
     });
+  };
 
+  const updateCustomerOrders = () => {
     setCustomerOrders((prevOrders) => {
       let newOrders = [...prevOrders];
 
@@ -227,10 +244,46 @@ export const App = () => {
     });
   };
 
+  const handleTimer = () => {
+    updateOrders();
+    updateCustomerOrders();
+  };
+
+  const generateCustomerOrders = () => {
+    const possibleGoods = dictionary.goods.filter((item) => {
+      // TODO: add some conditions, check upgrades
+      return item.type === 'good';
+    });
+
+    const qtyTypeOfGoods = randomIntFromInterval(1, 2);
+    const goods = [];
+    let timeLeft = 0;
+    let cost = 0;
+
+    for (let i = 0; i < qtyTypeOfGoods; i++) {
+      const randomGoodIndex = randomIntFromInterval(
+        0,
+        possibleGoods.length - 1,
+      );
+      const qty = randomIntFromInterval(1, 3);
+      const good = possibleGoods[randomGoodIndex];
+
+      goods.push({
+        id: possibleGoods[randomGoodIndex].id,
+        qty,
+      });
+
+      timeLeft += good.time * qty;
+      cost += good.cost * qty;
+    }
+
+    createCustomerOrder(goods, timeLeft, cost);
+  };
+
   const createOrder = (id: number, qty: number) => {
     const item = dictionary.goods.find((good) => good.id === id);
 
-    if (item) {
+    if (item && orders.length < maxOrdersQty) {
       setOrders((prevOrders) => {
         orderId.current += 1;
 
@@ -429,7 +482,7 @@ export const App = () => {
           <>
             <View style={styles.forgeBlock}>
               <View style={styles.columnLeft}>
-                <PanelOrders orders={orders} maxOrders={maxOrders} />
+                <PanelOrders orders={orders} maxOrdersQty={maxOrdersQty} />
               </View>
               <View style={styles.columnRight}>
                 <View style={styles.orderBlock}>

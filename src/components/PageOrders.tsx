@@ -52,12 +52,13 @@ export const PageOrders = ({ storage, orders, onCompleteOrder }: IProps) => {
                         <>
                           <CustomImage id={good.id} size={'big'} />
                           <SQty>
-                            {good.qty} / {resourceInStorage(good.id)}
+                            {resourceInStorage(good.id)} / {good.qty}
                           </SQty>
                         </>
                       );
                     })}
 
+                    <SCostIcon source={require('../images/gold.png')} />
                     <SCost>{item.cost}</SCost>
                   </SResource>
 
@@ -87,16 +88,12 @@ export const PageOrders = ({ storage, orders, onCompleteOrder }: IProps) => {
   );
 };
 
-const SPanelWrapper = styled.View`
-  height: 150px;
-`;
-
 const SPageOrders = styled.View`
   width: 100%;
   height: 100%;
 `;
 
-const SNoOrders = styled.Text`
+const SNoOrders = styled(CustomText)`
   color: white;
 `;
 
@@ -126,12 +123,17 @@ const SResource = styled.View`
   flex: 1;
 `;
 
-const SCost = styled.Text`
-  color: yellow;
+const SCostIcon = styled.Image`
   margin-left: 10px;
+  height: 16px;
+  width: 16px;
+`;
+const SCost = styled(CustomText)`
+  margin-left: -8px;
+  color: yellow;
 `;
 
-const SQty = styled.Text`
+const SQty = styled(CustomText)`
   color: white;
 `;
 
