@@ -24,14 +24,17 @@ import { useCustomerOrdersLogic } from './hooks/useCustomerOrdersLogic';
 import { hasEnoughResourcesToImproveMine } from './utils';
 import { PageCity } from './components/PageCity';
 import { Menu } from './components/Menu';
+import { PageMapCity } from './components/PageMapCity';
 
 export const App = () => {
-  const [page, setPage] = useState<TPage>('mine');
+  const [page, setPage] = useState<TPage>('city');
   const [mineLvl, setMineLvl] = useState(1);
   const [money, setMoney] = useState(1000);
   const [maxOrdersQty, setMaxOrdersQty] = useState(5);
   const [expeditionInfo, setExpeditionInfo] =
     useState<IExpeditionInfoInProcess>({} as IExpeditionInfoInProcess);
+
+  const [liberatedCityIds, setLiberatedCityIds] = useState([]);
 
   const [loaded] = useFonts({
     LGGothic: require('./fonts/LGGothic.ttf'),
@@ -448,6 +451,15 @@ export const App = () => {
         )}
 
         {page === 'city' && <PageCity onSetPage={setPage} />}
+        {page === 'city-1' && (
+          <PageMapCity
+            cityId={1}
+            onSetPage={setPage}
+            dictionary={dictionary.cities}
+            storage={storage}
+            liberatedCityIds={liberatedCityIds}
+          />
+        )}
       </View>
 
       <Menu setPage={setPage} />

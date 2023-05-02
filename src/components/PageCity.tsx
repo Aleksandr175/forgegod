@@ -1,15 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Panel } from './Panel';
-import { IMine, IStorageGood, TPage } from '../types';
-import { CustomImage } from './CustomImage';
-import { PanelShop } from './PanelShop';
+import { TPage } from '../types';
 import { CustomText } from './CustomText';
-import { SButton } from '../styles';
-import {
-  hasEnoughResourcesToImproveMine,
-  resourceQtyInStorage,
-} from '../utils';
+import { SArrowNextCity, SArrowWrapper, SButton } from '../styles';
 
 interface IProps {
   onSetPage: (page: TPage) => void;
@@ -33,6 +26,10 @@ export const PageCity = React.memo(({ onSetPage }: IProps) => {
           <SText>Market</SText>
         </SMarketBlock>
       </SCityImageWrapper>
+
+      <SArrowWrapper onPress={() => onSetPage('city-1')}>
+        <SArrowNextCity>{'>'}</SArrowNextCity>
+      </SArrowWrapper>
     </SPageCity>
   );
 });

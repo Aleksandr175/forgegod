@@ -5,7 +5,13 @@ import { IMine, IStorageGood } from '../types';
 import { CustomImage } from './CustomImage';
 import { PanelShop } from './PanelShop';
 import { CustomText } from './CustomText';
-import { SButton } from '../styles';
+import {
+  SButton,
+  SQty,
+  SResourceRequired,
+  SResources,
+  SResourcesText,
+} from '../styles';
 import {
   hasEnoughResourcesToImproveMine,
   resourceQtyInStorage,
@@ -53,7 +59,7 @@ export const PageMine = ({
             {currentMineLvlInfo &&
               currentMineLvlInfo.requirements.resources?.length > 0 && (
                 <>
-                  <SText>Required:</SText>
+                  <SResourcesText>Required:</SResourcesText>
                   <SResources>
                     {currentMineLvlInfo.requirements.resources.map(
                       (requirement) => {
@@ -75,7 +81,7 @@ export const PageMine = ({
                     </SResourceRequired>
                   </SResources>
 
-                  <SText>It will provide you:</SText>
+                  <SResourcesText>It will provide you:</SResourcesText>
                   <SResources>
                     {currentMineLvlInfo.provideResourceIds.map((id) => {
                       return (
@@ -107,7 +113,7 @@ export const PageMine = ({
             {currentMineLvlInfo &&
               currentMineLvlInfo.expedition.canBeFoundGoods?.length > 0 && (
                 <>
-                  <SText>Required:</SText>
+                  <SResourcesText>Required:</SResourcesText>
                   <SResources>
                     <SResourceRequired>
                       <SImage source={require('../images/gold.png')} />
@@ -115,7 +121,7 @@ export const PageMine = ({
                     </SResourceRequired>
                   </SResources>
 
-                  <SText>You can find:</SText>
+                  <SResourcesText>You can find:</SResourcesText>
                   <SResources>
                     {currentMineLvlInfo.expedition.canBeFoundGoods.map(
                       (good) => {
@@ -168,23 +174,6 @@ const SPageMine = styled.View`
 `;
 
 const SMineInfo = styled.View`
-  align-items: center;
-`;
-
-const SText = styled(CustomText)`
-  padding-bottom: 5px;
-`;
-
-const SQty = styled(CustomText)``;
-
-const SResourceRequired = styled.View`
-  flex-direction: row;
-  padding-bottom: 5px;
-`;
-
-const SResources = styled.View`
-  gap: 10px;
-  flex-direction: row;
   align-items: center;
 `;
 

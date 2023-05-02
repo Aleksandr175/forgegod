@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 import { TSize } from './types';
+import { CustomText } from './components/CustomText';
 
 export const styles = StyleSheet.create({
   iconSmall: {
@@ -73,4 +74,40 @@ export const SButton = styled.Pressable<{ disabled?: boolean }>`
       opacity: .5;
       `
       : ''};
+`;
+
+export const SResourcesText = styled(CustomText)`
+  padding-bottom: 5px;
+`;
+
+export const SQty = styled(CustomText)``;
+
+export const SResourceRequired = styled.View`
+  flex-direction: row;
+  padding-bottom: 5px;
+`;
+
+export const SResources = styled.View`
+  gap: 10px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const SArrowNextCity = styled(CustomText)`
+  font-size: 40px;
+  position: relative;
+  left: 2px;
+  top: -1px;
+`;
+
+export const SArrowWrapper = styled.Pressable`
+  top: 10px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  border-radius: 50px;
+  background: #614d41;
+  align-items: center;
+  justify-content: center;
 `;

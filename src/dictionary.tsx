@@ -306,4 +306,34 @@ export const dictionary: IDictionary = {
       },
     },
   ],
+  cities: [
+    {
+      id: 1,
+      resources: [
+        {
+          id: 1,
+          qty: 1,
+        },
+        {
+          id: 2,
+          qty: 3,
+        },
+      ],
+      experience: 1000,
+    },
+    {
+      id: 2,
+      resources: [
+        {
+          id: 1,
+          qty: 1,
+        },
+        {
+          id: 2,
+          qty: 3,
+        },
+      ],
+      experience: 3000,
+    },
+  ],
 };

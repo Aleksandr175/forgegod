@@ -1,6 +1,7 @@
 export interface IDictionary {
   goods: IGood[];
   mine: IMine[];
+  cities: ICity[];
 }
 
 export interface IGood {
@@ -15,6 +16,12 @@ export interface IGood {
       minerLvl?: number;
     };
   };
+}
+
+export interface ICity {
+  id: number;
+  resources: IGoodInfo[];
+  experience: number;
 }
 
 export interface IMine {
@@ -75,7 +82,16 @@ export interface IGoodInfo {
   qty: number;
 }
 
-export type TPage = 'forge' | 'orders' | 'city' | 'hero' | 'mine';
+export type TPage =
+  | 'forge'
+  | 'orders'
+  | 'city'
+  | 'hero'
+  | 'mine'
+  | 'city-1'
+  | 'city-2'
+  | 'city-3'
+  | string;
 
 export interface IExpeditionInfoInProcess {
   duration: number;
