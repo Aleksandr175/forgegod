@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { FlatList } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { Panel } from './Panel';
 import { ICustomerOrder, IMine, IStorageGood } from '../types';
 import { CustomImage } from './CustomImage';
@@ -46,13 +46,13 @@ export const PageOrders = ({ storage, orders, onCompleteOrder }: IProps) => {
                   <SResource>
                     {item.goods.map((good) => {
                       return (
-                        <>
+                        <View key={good.id}>
                           <CustomImage id={good.id} size={'big'} />
                           <SQty>
                             {resourceQtyInStorage(good.id, storage)} /{' '}
                             {good.qty}
                           </SQty>
-                        </>
+                        </View>
                       );
                     })}
 

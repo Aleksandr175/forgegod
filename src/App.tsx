@@ -464,6 +464,7 @@ export const App = () => {
         )}
 
         {page === 'city' && <PageCity onSetPage={setPage} />}
+
         {page.includes('city-') && (
           <PageMapCity
             cityId={Number(page.split('-')[1])}

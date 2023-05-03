@@ -35,7 +35,7 @@ export const PageMapCity = React.memo(
   }: IProps) => {
     const city = dictionary.find((c) => c.id === cityId);
     const nextCity = 'city-' + Number(cityId + 1);
-    console.log(city, nextCity);
+
     if (!city) {
       return null;
     }

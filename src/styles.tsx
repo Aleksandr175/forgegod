@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     height: '100%',
   },
   storageGridList: {
-    height: 140,
+    height: '100%',
   },
   storageGridGoodsList: {
     height: '100%',
