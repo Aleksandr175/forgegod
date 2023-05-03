@@ -25,6 +25,7 @@ import { hasEnoughResourcesToImproveMine } from './utils';
 import { PageCity } from './components/PageCity';
 import { Menu } from './components/Menu';
 import { PageMapCity } from './components/PageMapCity';
+import { useLiberateCityLogic } from './hooks/useLiberateCityLogic';
 
 export const App = () => {
   const [page, setPage] = useState<TPage>('city');
@@ -34,11 +35,11 @@ export const App = () => {
   const [expeditionInfo, setExpeditionInfo] =
     useState<IExpeditionInfoInProcess>({} as IExpeditionInfoInProcess);
 
-  const [liberatedCityIds, setLiberatedCityIds] = useState([]);
-
   const [loaded] = useFonts({
     LGGothic: require('./fonts/LGGothic.ttf'),
   });
+
+  const [experience, setExperience] = useState(0);
 
   const [selectedGoodId, setSelectedGoodId] = useState<number>(2);
   const [storage, setStorage] = useState<IStorageGood[]>([
@@ -107,6 +108,12 @@ export const App = () => {
       qty: 1,
     },
   ]);
+
+  const addExperience = (expQty: number) => {
+    setExperience((prevState) => {
+      return prevState + expQty;
+    });
+  };
 
   const orderId = useRef(1);
 
@@ -238,6 +245,12 @@ export const App = () => {
 
   const { updateCustomerOrders, completeCustomerOrder, customerOrders } =
     useCustomerOrdersLogic({ storage, removeFromStorage, addMoney });
+
+  const { liberatedCityIds, liberateCity } = useLiberateCityLogic({
+    storage,
+    removeFromStorage,
+    addExperience,
+  });
 
   const handleTimer = () => {
     updateOrders();
@@ -392,7 +405,7 @@ export const App = () => {
       <StatusBar style="auto" />
 
       <SHeaderBlock>
-        <SSomePoint></SSomePoint>
+        <SSomePoint>{experience}</SSomePoint>
         <SHeader>Forge God</SHeader>
         <SMoneyWrapper>
           <SImage source={require('./images/gold.png')} />
@@ -451,13 +464,14 @@ export const App = () => {
         )}
 
         {page === 'city' && <PageCity onSetPage={setPage} />}
-        {page === 'city-1' && (
+        {page.includes('city-') && (
           <PageMapCity
-            cityId={1}
+            cityId={Number(page.split('-')[1])}
             onSetPage={setPage}
-            dictionary={dictionary.cities}
+            dictionary={dictionary.liberateCities}
             storage={storage}
             liberatedCityIds={liberatedCityIds}
+            liberateCity={liberateCity}
           />
         )}
       </View>

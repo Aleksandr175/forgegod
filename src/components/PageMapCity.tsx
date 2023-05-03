@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { ICity, IStorageGood, TPage } from '../types';
+import { ILiberateCity, IStorageGood, TPage } from '../types';
 import { CustomText } from './CustomText';
 import {
   SArrowNextCity,
@@ -17,28 +17,43 @@ import { resourceQtyInStorage } from '../utils';
 
 interface IProps {
   onSetPage: (page: TPage) => void;
-  dictionary: ICity[];
+  dictionary: ILiberateCity[];
   cityId: number;
   storage: IStorageGood[];
   liberatedCityIds: number[];
+  liberateCity: (liberateInfo: ILiberateCity) => void;
 }
 
 export const PageMapCity = React.memo(
-  ({ onSetPage, dictionary, cityId, storage, liberatedCityIds }: IProps) => {
+  ({
+    onSetPage,
+    dictionary,
+    cityId,
+    storage,
+    liberatedCityIds,
+    liberateCity,
+  }: IProps) => {
     const city = dictionary.find((c) => c.id === cityId);
     const nextCity = 'city-' + Number(cityId + 1);
-
+    console.log(city, nextCity);
     if (!city) {
       return null;
     }
 
     return (
       <SPageCity>
+        <CustomText>{city.name}</CustomText>
         <SCityImageWrapper>
           {cityId === 1 && (
             <SCityImage
               style={{ width: '240px', height: '240px' }}
               source={require(`../images/cities/1.png`)}
+            />
+          )}
+          {cityId === 2 && (
+            <SCityImage
+              style={{ width: '260px', height: '326px' }}
+              source={require(`../images/cities/2.png`)}
             />
           )}
         </SCityImageWrapper>
@@ -68,8 +83,15 @@ export const PageMapCity = React.memo(
                 </SResourceRequired>
               </SResources>
 
-              <SButton>
-                <CustomText>Liberate the City</CustomText>
+              <SButton
+                onPress={() => liberateCity(city)}
+                disabled={liberatedCityIds.includes(city.id)}
+              >
+                <CustomText>
+                  {liberatedCityIds.includes(city.id)
+                    ? 'Liberated'
+                    : 'Liberate the City'}
+                </CustomText>
               </SButton>
             </>
           )}

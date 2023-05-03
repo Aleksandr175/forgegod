@@ -1,7 +1,7 @@
 export interface IDictionary {
   goods: IGood[];
   mine: IMine[];
-  cities: ICity[];
+  liberateCities: ILiberateCity[];
 }
 
 export interface IGood {
@@ -18,8 +18,9 @@ export interface IGood {
   };
 }
 
-export interface ICity {
+export interface ILiberateCity {
   id: number;
+  name: string;
   resources: IGoodInfo[];
   experience: number;
 }

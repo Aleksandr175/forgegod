@@ -306,9 +306,10 @@ export const dictionary: IDictionary = {
       },
     },
   ],
-  cities: [
+  liberateCities: [
     {
       id: 1,
+      name: 'Arkturis',
       resources: [
         {
           id: 1,
@@ -323,6 +324,7 @@ export const dictionary: IDictionary = {
     },
     {
       id: 2,
+      name: 'Mythradon',
       resources: [
         {
           id: 1,
