@@ -10,12 +10,13 @@ import { CustomText } from './CustomText';
 
 interface IProps {
   goodId?: number;
+  canOrder?: boolean;
   onCreateOrder: (id: number, qty: number) => void;
   storage: IStorageGood[];
 }
 
 export const PanelSelectedGood = React.memo(
-  ({ goodId, onCreateOrder, storage }: IProps) => {
+  ({ goodId, onCreateOrder, storage, canOrder }: IProps) => {
     const good = dictionary.goods.find((item) => item.id === goodId);
     const [qty, setQty] = useState(1);
 
@@ -70,7 +71,7 @@ export const PanelSelectedGood = React.memo(
                   onPress={() => {
                     onCreateOrder(goodId, qty);
                   }}
-                  disabled={!isAvailableToOrder()}
+                  disabled={!isAvailableToOrder() || !canOrder}
                 >
                   <Text style={styles.buttonText}>Order</Text>
                 </SButton>

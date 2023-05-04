@@ -244,7 +244,12 @@ export const App = () => {
   };
 
   const { updateCustomerOrders, completeCustomerOrder, customerOrders } =
-    useCustomerOrdersLogic({ storage, removeFromStorage, addMoney });
+    useCustomerOrdersLogic({
+      storage,
+      removeFromStorage,
+      addMoney,
+      addExperience,
+    });
 
   const { liberatedCityIds, liberateCity } = useLiberateCityLogic({
     storage,
@@ -341,7 +346,7 @@ export const App = () => {
   };
 
   const onChangeGoodId = useCallback((id: number) => setSelectedGoodId(id), []);
-  const onCreateOrder = useCallback(createOrder, []);
+  const onCreateOrder = useCallback(createOrder, [orders.length]);
 
   const onBuyGood = (goodId: number, qty: number) => {
     const item = dictionary.goods.find((good) => good.id === goodId)!;
@@ -423,6 +428,7 @@ export const App = () => {
               <View style={styles.columnRight}>
                 <View style={styles.orderBlock}>
                   <PanelSelectedGood
+                    canOrder={orders.length < maxOrdersQty}
                     storage={storage}
                     goodId={selectedGoodId}
                     onCreateOrder={onCreateOrder}

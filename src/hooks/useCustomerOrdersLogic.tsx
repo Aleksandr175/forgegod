@@ -8,12 +8,14 @@ interface IProps {
   storage: IStorageGood[];
   removeFromStorage: (goodId: number, qty: number) => void;
   addMoney: (amount: number) => void;
+  addExperience: (amount: number) => void;
 }
 
 export const useCustomerOrdersLogic = ({
   storage,
   removeFromStorage,
   addMoney,
+  addExperience,
 }: IProps) => {
   const [customerOrders, setCustomerOrders] = useState<ICustomerOrder[]>([]);
 
@@ -50,6 +52,7 @@ export const useCustomerOrdersLogic = ({
 
         // add money from order
         addMoney(customerOrder.cost);
+        addExperience(customerOrder.cost / 10);
 
         removeCustomerOrder(customerOrderId);
       }
