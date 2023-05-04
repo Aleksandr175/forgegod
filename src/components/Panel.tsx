@@ -62,4 +62,5 @@ const styles = StyleSheet.create({
 const STitle = styled(CustomText)`
   font-size: 14px;
   color: white;
+  padding: 3px 0;
 `;

@@ -28,7 +28,7 @@ import { PageMapCity } from './components/PageMapCity';
 import { useLiberateCityLogic } from './hooks/useLiberateCityLogic';
 
 export const App = () => {
-  const [page, setPage] = useState<TPage>('city');
+  const [page, setPage] = useState<TPage>('forge');
   const [mineLvl, setMineLvl] = useState(1);
   const [money, setMoney] = useState(1000);
   const [maxOrdersQty, setMaxOrdersQty] = useState(5);
@@ -40,6 +40,8 @@ export const App = () => {
   });
 
   const [experience, setExperience] = useState(0);
+  const [lvl, setLvl] = useState(1);
+  const [availableSkillPoints, setAvailableSkillPoints] = useState(0);
 
   const [selectedGoodId, setSelectedGoodId] = useState<number>(2);
   const [storage, setStorage] = useState<IStorageGood[]>([
@@ -410,7 +412,9 @@ export const App = () => {
       <StatusBar style="auto" />
 
       <SHeaderBlock>
-        <SSomePoint>{experience}</SSomePoint>
+        <SSomePoint>
+          <CustomText>{experience}</CustomText>
+        </SSomePoint>
         <SHeader>Forge God</SHeader>
         <SMoneyWrapper>
           <SImage source={require('./images/gold.png')} />
