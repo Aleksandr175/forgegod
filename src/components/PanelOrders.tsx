@@ -5,6 +5,7 @@ import { IOrder } from '../types';
 import { CustomImage } from './CustomImage';
 import { styles as stylesCommon } from '../styles';
 import { FlatList } from 'react-native';
+import { ProgressBar } from './ProgressBar';
 
 interface IProps {
   orders: IOrder[];
@@ -42,14 +43,11 @@ export const PanelOrders = ({ orders, maxOrdersQty }: IProps) => {
                 <SQty>{item.qty}</SQty>
               </SResource>
 
-              <SProgressWrapper>
-                <SProgress
-                  progressWidth={
-                    ((item.timePerItem - item.timeLeft) / item.timePerItem) *
-                    100
-                  }
-                ></SProgress>
-              </SProgressWrapper>
+              <ProgressBar
+                percent={
+                  ((item.timePerItem - item.timeLeft) / item.timePerItem) * 100
+                }
+              ></ProgressBar>
             </SOrderDetails>
           </SOrderInProcessWrapper>
         )}
@@ -68,20 +66,6 @@ const SResource = styled.View`
 
 const SQty = styled.Text``;
 
-const SProgress = styled.View<{ progressWidth?: number }>`
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  background-color: #f49300;
-  width: ${(props) => props.progressWidth}px;
-`;
-const SProgressWrapper = styled.View`
-  position: relative;
-  height: 5px;
-  background-color: #71635b;
-  width: 100px;
-`;
 const SWorkerImage = styled.View`
   background-color: #71635b;
   width: 48px;

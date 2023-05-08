@@ -7,6 +7,7 @@ import { CustomImage } from './CustomImage';
 import { SButton, styles as stylesCommon } from '../styles';
 import { CustomText } from './CustomText';
 import { hasEnoughResources, resourceQtyInStorage } from '../utils';
+import { ProgressBar } from './ProgressBar';
 
 interface IProps {
   dictionary: IMine[];
@@ -72,11 +73,9 @@ export const PageOrders = ({ storage, orders, onCompleteOrder }: IProps) => {
                   </SButtonWrapper>
                 </SOrderDetailsHeader>
 
-                <SProgressWrapper>
-                  <SProgress
-                    progressWidth={(item.timeLeft / item.timeTotal) * 100}
-                  ></SProgress>
-                </SProgressWrapper>
+                <ProgressBar
+                  percent={(item.timeLeft / item.timeTotal) * 100}
+                ></ProgressBar>
               </SOrderDetails>
             </SOrderInProcessWrapper>
           )}
@@ -140,20 +139,6 @@ const SOrderDetails = styled.View`
   flex: 1;
 `;
 
-const SProgress = styled.View<{ progressWidth?: number }>`
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  background-color: #f49300;
-  width: ${(props) => props.progressWidth}%;
-`;
-const SProgressWrapper = styled.View`
-  position: relative;
-  height: 5px;
-  background-color: #71635b;
-  width: 100%;
-`;
 const SWorkerImage = styled.View`
   background-color: #71635b;
   width: 48px;

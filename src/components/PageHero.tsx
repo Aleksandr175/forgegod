@@ -3,6 +3,7 @@ import { Panel } from './Panel';
 import styled from 'styled-components/native';
 import { CustomImage } from './CustomImage';
 import { CustomText } from './CustomText';
+import { ProgressBar } from './ProgressBar';
 
 interface IProps {
   money: number;
@@ -37,9 +38,7 @@ export const PageHero = ({
               </SResource>
             </SOrderDetailsHeader>
 
-            <SProgressWrapper>
-              <SProgress progressWidth={(exp / expNextLvl) * 100}></SProgress>
-            </SProgressWrapper>
+            <ProgressBar percent={(exp / expNextLvl) * 100}></ProgressBar>
 
             <CustomText>
               Available Skill Points: {availableSkillPoints}
@@ -82,20 +81,6 @@ const SOrderDetails = styled.View`
   flex: 1;
 `;
 
-const SProgress = styled.View<{ progressWidth?: number }>`
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  background-color: #f49300;
-  width: ${(props) => props.progressWidth}%;
-`;
-const SProgressWrapper = styled.View`
-  position: relative;
-  height: 5px;
-  background-color: #71635b;
-  width: 100%;
-`;
 const SWorkerImage = styled.View`
   background-color: #71635b;
   width: 48px;
