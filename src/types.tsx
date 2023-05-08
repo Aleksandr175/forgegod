@@ -2,6 +2,27 @@ export interface IDictionary {
   goods: IGood[];
   mine: IMine[];
   liberateCities: ILiberateCity[];
+  heroLvls: IHeroLvl[];
+  skills: ISkill[];
+}
+
+export interface IHeroLvl {
+  id: number;
+  experience: number;
+}
+
+export interface ISkill {
+  id: number;
+  name: string;
+  levels: ISkillLvl[];
+}
+
+export interface ISkillLvl {
+  id: number;
+  description: string;
+  requirements: {
+    money: number;
+  };
 }
 
 export interface IGood {

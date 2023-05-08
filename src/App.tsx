@@ -26,9 +26,10 @@ import { PageCity } from './components/PageCity';
 import { Menu } from './components/Menu';
 import { PageMapCity } from './components/PageMapCity';
 import { useLiberateCityLogic } from './hooks/useLiberateCityLogic';
+import { PageHero } from './components/PageHero';
 
 export const App = () => {
-  const [page, setPage] = useState<TPage>('forge');
+  const [page, setPage] = useState<TPage>('hero');
   const [mineLvl, setMineLvl] = useState(1);
   const [money, setMoney] = useState(1000);
   const [maxOrdersQty, setMaxOrdersQty] = useState(5);
@@ -39,8 +40,12 @@ export const App = () => {
     LGGothic: require('./fonts/LGGothic.ttf'),
   });
 
-  const [experience, setExperience] = useState(0);
+  const [experience, setExperience] = useState(100);
   const [lvl, setLvl] = useState(1);
+  const [expNextLvl, setExpNextLvl] = useState(
+    dictionary.heroLvls[lvl - 1].experience,
+  );
+
   const [availableSkillPoints, setAvailableSkillPoints] = useState(0);
 
   const [selectedGoodId, setSelectedGoodId] = useState<number>(2);
@@ -474,6 +479,16 @@ export const App = () => {
         )}
 
         {page === 'city' && <PageCity onSetPage={setPage} />}
+
+        {page === 'hero' && (
+          <PageHero
+            money={money}
+            exp={experience}
+            lvl={lvl}
+            expNextLvl={expNextLvl}
+            availableSkillPoints={availableSkillPoints}
+          />
+        )}
 
         {page.includes('city-') && (
           <PageMapCity

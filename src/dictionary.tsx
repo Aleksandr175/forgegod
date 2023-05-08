@@ -421,4 +421,183 @@ export const dictionary: IDictionary = {
       experience: 3000,
     },
   ],
+  heroLvls: [
+    {
+      id: 1,
+      experience: 1000,
+    },
+    {
+      id: 2,
+      experience: 2000,
+    },
+    {
+      id: 3,
+      experience: 3000,
+    },
+    {
+      id: 4,
+      experience: 5000,
+    },
+    {
+      id: 5,
+      experience: 8000,
+    },
+  ],
+  skills: [
+    {
+      id: 1,
+      name: 'Economist',
+      levels: [
+        {
+          id: 1,
+          description: 'Increase amount of money from orders by 5%',
+          requirements: {
+            money: 500,
+          },
+        },
+        {
+          id: 2,
+          description: 'Increase amount of money from orders by 10%',
+          requirements: {
+            money: 1000,
+          },
+        },
+        {
+          id: 3,
+          description: 'Increase amount of money from orders by 15%',
+          requirements: {
+            money: 3000,
+          },
+        },
+      ],
+    },
+    {
+      id: 2,
+      name: 'Salesman',
+      levels: [
+        {
+          id: 1,
+          description: 'Increase size of order by 1',
+          requirements: {
+            money: 500,
+          },
+        },
+        {
+          id: 2,
+          description: 'Increase size of order by 2',
+          requirements: {
+            money: 1000,
+          },
+        },
+        {
+          id: 3,
+          description: 'Increase size of order by 3',
+          requirements: {
+            money: 3000,
+          },
+        },
+      ],
+    },
+    {
+      id: 3,
+      name: 'Gunsmith',
+      levels: [
+        {
+          id: 1,
+          description: 'You can create swords, axes and knives',
+          requirements: {
+            money: 500,
+          },
+        },
+        {
+          id: 2,
+          description: 'You can create bows, hammers and scythes',
+          requirements: {
+            money: 1000,
+          },
+        },
+        {
+          id: 3,
+          description: 'You can create scepters and wands',
+          requirements: {
+            money: 3000,
+          },
+        },
+      ],
+    },
+    {
+      id: 4,
+      name: 'Armor Master',
+      levels: [
+        {
+          id: 1,
+          description: 'You can create shields',
+          requirements: {
+            money: 500,
+          },
+        },
+        {
+          id: 2,
+          description: 'You can create bracers',
+          requirements: {
+            money: 1000,
+          },
+        },
+      ],
+    },
+    {
+      id: 5,
+      name: 'Manager',
+      levels: [
+        {
+          id: 1,
+          description: 'You can have 4 orders in progress',
+          requirements: {
+            money: 500,
+          },
+        },
+        {
+          id: 2,
+          description: 'You can have 5 orders in progress',
+          requirements: {
+            money: 1000,
+          },
+        },
+        {
+          id: 3,
+          description: 'You can have 7 orders in progress',
+          requirements: {
+            money: 3000,
+          },
+        },
+      ],
+    },
+    {
+      id: 6,
+      name: 'Exploiter',
+      levels: [
+        {
+          id: 1,
+          description: 'You can hire 2 worker',
+          requirements: {
+            money: 500,
+          },
+        },
+        {
+          id: 2,
+          description: 'You can hire 3 worker',
+          requirements: {
+            money: 1000,
+          },
+        },
+        {
+          id: 3,
+          description: 'You can hire 4 worker',
+          requirements: {
+            money: 3000,
+          },
+        },
+      ],
+    },
+  ],
 };
