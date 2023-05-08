@@ -25,6 +25,9 @@ export const styles = StyleSheet.create({
   storageGridGoodsList: {
     height: '100%',
   },
+  gridListFullHeight: {
+    height: '100%',
+  },
   orderGridList: {
     height: 360,
   },

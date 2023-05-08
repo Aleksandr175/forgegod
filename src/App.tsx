@@ -7,6 +7,7 @@ import {
   IExpeditionInfoInProcess,
   IMine,
   IOrder,
+  ISkillLvl,
   IStorageGood,
   IWorker,
   TPage,
@@ -31,7 +32,7 @@ import { PageHero } from './components/PageHero';
 export const App = () => {
   const [page, setPage] = useState<TPage>('hero');
   const [mineLvl, setMineLvl] = useState(1);
-  const [money, setMoney] = useState(1000);
+  const [money, setMoney] = useState(5000);
   const [maxOrdersQty, setMaxOrdersQty] = useState(5);
   const [expeditionInfo, setExpeditionInfo] =
     useState<IExpeditionInfoInProcess>({} as IExpeditionInfoInProcess);
@@ -41,12 +42,13 @@ export const App = () => {
   });
 
   const [experience, setExperience] = useState(100);
+  const [learnedSkillIds, setLearnedSkillIds] = useState([1, 4]);
   const [lvl, setLvl] = useState(1);
   const [expNextLvl, setExpNextLvl] = useState(
     dictionary.heroLvls[lvl - 1].experience,
   );
 
-  const [availableSkillPoints, setAvailableSkillPoints] = useState(0);
+  const [availableSkillPoints, setAvailableSkillPoints] = useState(2);
 
   const [selectedGoodId, setSelectedGoodId] = useState<number>(2);
   const [storage, setStorage] = useState<IStorageGood[]>([
@@ -406,6 +408,29 @@ export const App = () => {
     }
   };
 
+  const learnSkill = (skill?: ISkillLvl) => {
+    if (
+      skill &&
+      !learnedSkillIds.includes(skill.skillId) &&
+      availableSkillPoints
+    ) {
+      // learn new skill
+      setLearnedSkillIds((prevState) => {
+        return [...prevState, skill.skillId];
+      });
+
+      addMoney(-skill.requirements.money);
+      setAvailableSkillPoints((prevState) => {
+        return prevState - 1;
+      });
+    }
+  };
+
+  useEffect(() => {
+    // TODO: calculate all params
+    console.log('recalculate abilities');
+  }, [learnedSkillIds]);
+
   // TODO: refactor code, separate to hooks
 
   if (!loaded) {
@@ -487,6 +512,8 @@ export const App = () => {
             lvl={lvl}
             expNextLvl={expNextLvl}
             availableSkillPoints={availableSkillPoints}
+            learnedSkillIds={learnedSkillIds}
+            onLearnSkill={learnSkill}
           />
         )}
 

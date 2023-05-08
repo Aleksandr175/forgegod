@@ -18,7 +18,8 @@ export interface ISkill {
 }
 
 export interface ISkillLvl {
-  id: number;
+  level: number;
+  skillId: number;
   description: string;
   requirements: {
     money: number;

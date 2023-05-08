@@ -171,6 +171,7 @@ const SPageMine = styled.View`
   padding-top: 10px;
   width: 100%;
   height: 100%;
+  background-color: #51607d;
 `;
 
 const SMineInfo = styled.View`

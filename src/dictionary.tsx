@@ -449,21 +449,24 @@ export const dictionary: IDictionary = {
       name: 'Economist',
       levels: [
         {
-          id: 1,
+          level: 1,
+          skillId: 1,
           description: 'Increase amount of money from orders by 5%',
           requirements: {
             money: 500,
           },
         },
         {
-          id: 2,
+          level: 2,
+          skillId: 2,
           description: 'Increase amount of money from orders by 10%',
           requirements: {
             money: 1000,
           },
         },
         {
-          id: 3,
+          level: 3,
+          skillId: 3,
           description: 'Increase amount of money from orders by 15%',
           requirements: {
             money: 3000,
@@ -476,21 +479,24 @@ export const dictionary: IDictionary = {
       name: 'Salesman',
       levels: [
         {
-          id: 1,
+          level: 1,
+          skillId: 4,
           description: 'Increase size of order by 1',
           requirements: {
             money: 500,
           },
         },
         {
-          id: 2,
+          level: 2,
+          skillId: 5,
           description: 'Increase size of order by 2',
           requirements: {
             money: 1000,
           },
         },
         {
-          id: 3,
+          level: 3,
+          skillId: 6,
           description: 'Increase size of order by 3',
           requirements: {
             money: 3000,
@@ -503,21 +509,24 @@ export const dictionary: IDictionary = {
       name: 'Gunsmith',
       levels: [
         {
-          id: 1,
+          level: 1,
+          skillId: 7,
           description: 'You can create swords, axes and knives',
           requirements: {
             money: 500,
           },
         },
         {
-          id: 2,
+          level: 2,
+          skillId: 8,
           description: 'You can create bows, hammers and scythes',
           requirements: {
             money: 1000,
           },
         },
         {
-          id: 3,
+          level: 3,
+          skillId: 9,
           description: 'You can create scepters and wands',
           requirements: {
             money: 3000,
@@ -530,14 +539,16 @@ export const dictionary: IDictionary = {
       name: 'Armor Master',
       levels: [
         {
-          id: 1,
+          level: 1,
+          skillId: 10,
           description: 'You can create shields',
           requirements: {
             money: 500,
           },
         },
         {
-          id: 2,
+          level: 2,
+          skillId: 11,
           description: 'You can create bracers',
           requirements: {
             money: 1000,
@@ -550,21 +561,24 @@ export const dictionary: IDictionary = {
       name: 'Manager',
       levels: [
         {
-          id: 1,
+          level: 1,
+          skillId: 12,
           description: 'You can have 4 orders in progress',
           requirements: {
             money: 500,
           },
         },
         {
-          id: 2,
+          level: 2,
+          skillId: 13,
           description: 'You can have 5 orders in progress',
           requirements: {
             money: 1000,
           },
         },
         {
-          id: 3,
+          level: 3,
+          skillId: 14,
           description: 'You can have 7 orders in progress',
           requirements: {
             money: 3000,
@@ -577,24 +591,27 @@ export const dictionary: IDictionary = {
       name: 'Exploiter',
       levels: [
         {
-          id: 1,
+          level: 1,
+          skillId: 15,
           description: 'You can hire 2 worker',
           requirements: {
-            money: 500,
+            money: 1500,
           },
         },
         {
-          id: 2,
+          level: 2,
+          skillId: 16,
           description: 'You can hire 3 worker',
           requirements: {
-            money: 1000,
+            money: 3000,
           },
         },
         {
-          id: 3,
+          level: 3,
+          skillId: 17,
           description: 'You can hire 4 worker',
           requirements: {
-            money: 3000,
+            money: 5000,
           },
         },
       ],
