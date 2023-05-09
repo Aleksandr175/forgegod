@@ -14,12 +14,22 @@ interface IProps {
   storage: IStorageGood[];
   orders: ICustomerOrder[];
   onCompleteOrder: (id: string) => void;
+  maxCustomerOrdersQty: number;
 }
 
-export const PageOrders = ({ storage, orders, onCompleteOrder }: IProps) => {
+export const PageOrders = ({
+  storage,
+  orders,
+  onCompleteOrder,
+  maxCustomerOrdersQty,
+}: IProps) => {
   return (
     <SPageOrders>
-      <Panel title={'Customer Orders'}>
+      <Panel
+        title={
+          'Customer Orders ' + orders.length + ' / ' + maxCustomerOrdersQty
+        }
+      >
         {orders.length === 0 && (
           <SNoOrders>
             No current orders from customers. We need to wait for new customers.

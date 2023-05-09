@@ -145,7 +145,6 @@ export const App = () => {
       .map((order) => order.workerId);
     const ordersWithoutWorker = orders.filter((order) => !order.workerId);
 
-
     const restedWorkerIds = workers
       .filter(
         (worker) => !workerIds.includes(worker.id) && worker.id <= workersQty,
@@ -445,9 +444,6 @@ export const App = () => {
   };
 
   useEffect(() => {
-    // TODO: calculate all params
-    console.log('recalculate abilities');
-
     //Economist
     if (
       learnedSkillIds.includes(1) ||
@@ -597,6 +593,7 @@ export const App = () => {
             dictionary={dictionary.mine}
             storage={storage}
             orders={customerOrders}
+            maxCustomerOrdersQty={maxCustomerOrdersQty}
             onCompleteOrder={(orderId: string) => {
               completeCustomerOrder(orderId);
             }}
