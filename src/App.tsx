@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { PanelSelectedGood } from './components/PanelSelectedGood';
 import { PanelGoods } from './components/PanelGoods';
@@ -31,7 +31,7 @@ import { PageHero } from './components/PageHero';
 import { PageEditor } from './components/PageEditor';
 
 export const App = () => {
-  const [page, setPage] = useState<TPage>('editor');
+  const [page, setPage] = useState<TPage>('hero');
   const [mineLvl, setMineLvl] = useState(1);
   const [money, setMoney] = useState(5000);
   const [maxOrdersQty, setMaxOrdersQty] = useState(5);
@@ -50,6 +50,8 @@ export const App = () => {
   );
 
   const [availableSkillPoints, setAvailableSkillPoints] = useState(2);
+  const [economistBonus, setEconomistBonus] = useState(0);
+  const [maxCustomerOrdersQty, setMaxCustomerOrdersQty] = useState(3);
 
   const [selectedGoodId, setSelectedGoodId] = useState<number>(2);
   const [storage, setStorage] = useState<IStorageGood[]>([
@@ -133,10 +135,9 @@ export const App = () => {
     createOrder(2, 10);
     createOrder(3, 2);
     createOrder(3, 1);
-    createOrder(3, 1);
-    createOrder(3, 1);
-    createOrder(3, 1);
   }, []);
+
+  const [workersQty, setWorkersQty] = useState<number>(1);
 
   useEffect(() => {
     const workerIds = orders
@@ -144,8 +145,11 @@ export const App = () => {
       .map((order) => order.workerId);
     const ordersWithoutWorker = orders.filter((order) => !order.workerId);
 
+
     const restedWorkerIds = workers
-      .filter((worker) => !workerIds.includes(worker.id))
+      .filter(
+        (worker) => !workerIds.includes(worker.id) && worker.id <= workersQty,
+      )
       .map((worker) => worker.id);
 
     if (ordersWithoutWorker.length && restedWorkerIds) {
@@ -159,8 +163,9 @@ export const App = () => {
         });
       });
     }
-  }, [orders.length]);
+  }, [orders.length, workersQty]);
 
+  // workersQty checks id of workers!
   const [workers, setWorkers] = useState<IWorker[]>([
     {
       id: 1,
@@ -175,6 +180,16 @@ export const App = () => {
     {
       id: 3,
       name: 'Worker2',
+      orderId: null,
+    },
+    {
+      id: 4,
+      name: 'Worker3',
+      orderId: null,
+    },
+    {
+      id: 5,
+      name: 'Worker4',
       orderId: null,
     },
   ]);
@@ -259,6 +274,8 @@ export const App = () => {
       removeFromStorage,
       addMoney,
       addExperience,
+      maxCustomerOrdersQty,
+      economistBonus,
     });
 
   const { liberatedCityIds, liberateCity } = useLiberateCityLogic({
@@ -430,6 +447,88 @@ export const App = () => {
   useEffect(() => {
     // TODO: calculate all params
     console.log('recalculate abilities');
+
+    //Economist
+    if (
+      learnedSkillIds.includes(1) ||
+      learnedSkillIds.includes(2) ||
+      learnedSkillIds.includes(3)
+    ) {
+      if (learnedSkillIds.includes(1)) {
+        setEconomistBonus(5);
+      }
+      if (learnedSkillIds.includes(2)) {
+        setEconomistBonus(10);
+      }
+      if (learnedSkillIds.includes(3)) {
+        setEconomistBonus(15);
+      }
+    }
+
+    //Salesman
+    if (
+      learnedSkillIds.includes(4) ||
+      learnedSkillIds.includes(5) ||
+      learnedSkillIds.includes(6)
+    ) {
+      if (learnedSkillIds.includes(4)) {
+        setMaxCustomerOrdersQty(4);
+      }
+      if (learnedSkillIds.includes(5)) {
+        setMaxCustomerOrdersQty(5);
+      }
+      if (learnedSkillIds.includes(6)) {
+        setMaxCustomerOrdersQty(6);
+      }
+    }
+
+    //Gunsmith
+    if (
+      learnedSkillIds.includes(7) ||
+      learnedSkillIds.includes(8) ||
+      learnedSkillIds.includes(9)
+    ) {
+      // How to analyze which goods we can create?
+    }
+
+    //Armor Master
+    if (learnedSkillIds.includes(10) || learnedSkillIds.includes(11)) {
+      // How to analyze which goods we can create?
+    }
+
+    //Manager
+    if (
+      learnedSkillIds.includes(12) ||
+      learnedSkillIds.includes(13) ||
+      learnedSkillIds.includes(14)
+    ) {
+      if (learnedSkillIds.includes(12)) {
+        setMaxOrdersQty(4);
+      }
+      if (learnedSkillIds.includes(13)) {
+        setMaxOrdersQty(5);
+      }
+      if (learnedSkillIds.includes(14)) {
+        setMaxOrdersQty(7);
+      }
+    }
+
+    //Exploiter
+    if (
+      learnedSkillIds.includes(15) ||
+      learnedSkillIds.includes(16) ||
+      learnedSkillIds.includes(17)
+    ) {
+      if (learnedSkillIds.includes(15)) {
+        setWorkersQty(2);
+      }
+      if (learnedSkillIds.includes(16)) {
+        setWorkersQty(3);
+      }
+      if (learnedSkillIds.includes(17)) {
+        setWorkersQty(5);
+      }
+    }
   }, [learnedSkillIds]);
 
   // TODO: refactor code, separate to hooks

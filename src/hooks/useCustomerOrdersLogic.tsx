@@ -9,6 +9,8 @@ interface IProps {
   removeFromStorage: (goodId: number, qty: number) => void;
   addMoney: (amount: number) => void;
   addExperience: (amount: number) => void;
+  maxCustomerOrdersQty: number;
+  economistBonus: number;
 }
 
 export const useCustomerOrdersLogic = ({
@@ -16,6 +18,8 @@ export const useCustomerOrdersLogic = ({
   removeFromStorage,
   addMoney,
   addExperience,
+  maxCustomerOrdersQty,
+  economistBonus,
 }: IProps) => {
   const [customerOrders, setCustomerOrders] = useState<ICustomerOrder[]>([]);
 
@@ -51,7 +55,9 @@ export const useCustomerOrdersLogic = ({
         });
 
         // add money from order
-        addMoney(customerOrder.cost);
+        addMoney(
+          customerOrder.cost + (economistBonus / 100) * customerOrder.cost,
+        );
         addExperience(customerOrder.cost / 10);
 
         removeCustomerOrder(customerOrderId);
@@ -143,7 +149,7 @@ export const useCustomerOrdersLogic = ({
   }, []);
 
   const handleDayTimer = () => {
-    if (customerOrdersRef.current.length < 5) {
+    if (customerOrdersRef.current.length < maxCustomerOrdersQty) {
       generateCustomerOrders();
     }
   };

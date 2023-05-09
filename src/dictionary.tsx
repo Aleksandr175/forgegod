@@ -481,7 +481,7 @@ export const dictionary: IDictionary = {
         {
           level: 1,
           skillId: 4,
-          description: 'Increase size of order by 1',
+          description: 'Increase max number of available customer orders by 1',
           requirements: {
             money: 500,
           },
@@ -489,7 +489,7 @@ export const dictionary: IDictionary = {
         {
           level: 2,
           skillId: 5,
-          description: 'Increase size of order by 2',
+          description: 'Increase max number of available customer orders by 2',
           requirements: {
             money: 1000,
           },
@@ -497,7 +497,7 @@ export const dictionary: IDictionary = {
         {
           level: 3,
           skillId: 6,
-          description: 'Increase size of order by 3',
+          description: 'Increase max number of available customer orders by 3',
           requirements: {
             money: 3000,
           },
