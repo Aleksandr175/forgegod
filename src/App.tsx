@@ -28,9 +28,10 @@ import { Menu } from './components/Menu';
 import { PageMapCity } from './components/PageMapCity';
 import { useLiberateCityLogic } from './hooks/useLiberateCityLogic';
 import { PageHero } from './components/PageHero';
+import { PageEditor } from './components/PageEditor';
 
 export const App = () => {
-  const [page, setPage] = useState<TPage>('hero');
+  const [page, setPage] = useState<TPage>('editor');
   const [mineLvl, setMineLvl] = useState(1);
   const [money, setMoney] = useState(5000);
   const [maxOrdersQty, setMaxOrdersQty] = useState(5);
@@ -527,6 +528,8 @@ export const App = () => {
             liberateCity={liberateCity}
           />
         )}
+
+        {page === 'editor' && <PageEditor dictionary={dictionary} />}
       </View>
 
       <Menu setPage={setPage} />
