@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { IDictionary, IGood } from '../types';
+import { IDictionary, IGood, IGoodInfo } from '../types';
 import { CustomImage } from './CustomImage';
 import { CustomText } from './CustomText';
 import { SQty, SResources, styles as stylesCommon } from '../styles';
-import { FlatList, TextInput, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 
 interface IProps {
   dictionary: IDictionary;
@@ -14,8 +14,7 @@ export const PageEditor = ({ dictionary }: IProps) => {
   const [data, setData] = useState(dictionary.goods);
   const [selectedGood, setSelectedGood] = useState(data[0]);
 
-  console.log(data);
-  console.log(selectedGood);
+  console.log(JSON.stringify(data));
 
   const updateItem = (item: IGood, field: string, value: number | string) => {
     setData((prevData) => {
@@ -31,6 +30,53 @@ export const PageEditor = ({ dictionary }: IProps) => {
 
       return newData;
     });
+  };
+
+  const updateItemRequiredResources = (requiredResources: IGoodInfo[]) => {
+    setData((prevData) => {
+      let newData = [...prevData];
+
+      newData = newData.map((item) => {
+        if (item.id === selectedGood.id) {
+          item.requirements.resources = [...requiredResources];
+        }
+
+        return item;
+      });
+
+      return newData;
+    });
+  };
+
+  const getRequirementQty = (goodId: number) => {
+    return (
+      selectedGood.requirements.resources.find((good) => good.id === goodId)
+        ?.qty || 0
+    );
+  };
+
+  const getTimeForResource = (resourceId: number) => {
+    return dictionary.goods.find((good) => good.id === resourceId)?.time || 0;
+  };
+
+  const getCostOfResource = (resourceId: number) => {
+    return dictionary.goods.find((good) => good.id === resourceId)?.cost || 0;
+  };
+
+  const getRequiredResourcesCost = () => {
+    return selectedGood.requirements.resources.reduce(
+      (partialSum, resource) =>
+        partialSum + resource.qty * getCostOfResource(resource.id),
+      0,
+    );
+  };
+
+  const getRequiredResourcesTime = () => {
+    return selectedGood.requirements.resources.reduce(
+      (partialSum, resource) =>
+        partialSum + resource.qty * getTimeForResource(resource.id),
+      0,
+    );
   };
 
   return (
@@ -128,6 +174,65 @@ export const PageEditor = ({ dictionary }: IProps) => {
                   value={String(selectedGood.time)}
                 />
               </CustomText>
+
+              <CustomText>
+                Resources cost: {getRequiredResourcesCost()}
+              </CustomText>
+              <CustomText>
+                Resources time: {getRequiredResourcesTime()}
+              </CustomText>
+            </View>
+
+            <View>
+              <CustomText>Requirements:</CustomText>
+
+              {dictionary.goods.map((good) => {
+                return (
+                  <SRequirement key={good.id}>
+                    <CustomImage id={good.id} size={'small'} />
+                    <STextInput
+                      onChangeText={(value) => {
+                        setSelectedGood((prevState) => {
+                          let requirementResources = [
+                            ...selectedGood.requirements.resources,
+                          ];
+
+                          let hasUpdated = false;
+
+                          requirementResources = requirementResources.map(
+                            (requirementResource) => {
+                              if (requirementResource.id === good.id) {
+                                requirementResource.qty = Number(value);
+                                hasUpdated = true;
+                              }
+
+                              return requirementResource;
+                            },
+                          );
+
+                          if (!hasUpdated) {
+                            requirementResources.push({
+                              id: good.id,
+                              qty: Number(value),
+                            });
+                          }
+
+                          updateItemRequiredResources(requirementResources);
+
+                          return {
+                            ...prevState,
+                            requirements: {
+                              upgrades: prevState.requirements.upgrades,
+                              resources: requirementResources,
+                            },
+                          };
+                        });
+                      }}
+                      value={String(getRequirementQty(good.id))}
+                    ></STextInput>
+                  </SRequirement>
+                );
+              })}
             </View>
           </View>
         )}
@@ -165,4 +270,8 @@ const SGoodWrapper = styled.Pressable`
 
 const STextInput = styled.TextInput`
   background: white;
+`;
+
+const SRequirement = styled.View`
+  flex-direction: row;
 `;
