@@ -378,7 +378,7 @@ export const dictionary: IDictionary = {
         duration: 15,
         canBeFoundGoods: [
           {
-            id: 150,
+            id: 100,
             qty: 2,
           },
           {

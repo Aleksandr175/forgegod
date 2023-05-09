@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     width: '100%',
-    height: '100%',
+    height: '100px',
   },
   storageGridList: {
     height: '100%',

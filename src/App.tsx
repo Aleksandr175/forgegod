@@ -31,7 +31,7 @@ import { PageHero } from './components/PageHero';
 import { PageEditor } from './components/PageEditor';
 
 export const App = () => {
-  const [page, setPage] = useState<TPage>('hero');
+  const [page, setPage] = useState<TPage>('forge');
   const [mineLvl, setMineLvl] = useState(1);
   const [money, setMoney] = useState(5000);
   const [maxOrdersQty, setMaxOrdersQty] = useState(5);
@@ -571,7 +571,9 @@ export const App = () => {
               </View>
             </View>
 
-            <PanelStorage storage={storage} />
+            <SPanelStorageWrapper>
+              <PanelStorage storage={storage} />
+            </SPanelStorageWrapper>
           </>
         )}
 
@@ -678,7 +680,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#614D41',
   },
   appContent: {
-    height: '80%',
+    flex: 1,
     width: '100%',
     backgroundColor: '#967766',
     alignItems: 'center',
@@ -687,11 +689,11 @@ const styles = StyleSheet.create({
   forgeBlock: {
     flexDirection: 'row',
     width: '100%',
-    height: '75%',
+    flex: 1,
     alignItems: 'stretch',
   },
   storageBlock: {
-    height: '25%',
+    height: '100px',
     width: '100%',
   },
   columnLeft: {
@@ -702,3 +704,7 @@ const styles = StyleSheet.create({
   },
   orderBlock: {},
 });
+
+const SPanelStorageWrapper = styled.View`
+  width: 100%;
+`;
