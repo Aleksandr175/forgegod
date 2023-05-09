@@ -616,5 +616,19 @@ export const dictionary: IDictionary = {
         },
       ],
     },
+    {
+      id: 7,
+      name: 'Enchanting Master',
+      levels: [
+        {
+          level: 1,
+          skillId: 18,
+          description: 'You can enchant things',
+          requirements: {
+            money: 6500,
+          },
+        },
+      ],
+    },
   ],
 };
