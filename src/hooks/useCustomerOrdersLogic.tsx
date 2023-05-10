@@ -11,6 +11,7 @@ interface IProps {
   addExperience: (amount: number) => void;
   maxCustomerOrdersQty: number;
   economistBonus: number;
+  skillIds: number[];
 }
 
 export const useCustomerOrdersLogic = ({
@@ -20,6 +21,7 @@ export const useCustomerOrdersLogic = ({
   addExperience,
   maxCustomerOrdersQty,
   economistBonus,
+  skillIds,
 }: IProps) => {
   const [customerOrders, setCustomerOrders] = useState<ICustomerOrder[]>([]);
 
@@ -68,7 +70,15 @@ export const useCustomerOrdersLogic = ({
   const generateCustomerOrders = () => {
     const possibleGoods = dictionary.goods.filter((item) => {
       // TODO: add some conditions, check upgrades
-      return item.type === 'good';
+      let haveSkills = true;
+      item.requirements.upgrades.skillIds?.forEach((skillId) => {
+        if (!skillIds.includes(skillId)) {
+          haveSkills = false;
+        }
+      });
+
+      // add some conditions, check upgrades
+      return item.type === 'good' && haveSkills;
     });
 
     const qtyTypeOfGoods = randomIntFromInterval(1, 2);

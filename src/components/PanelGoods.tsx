@@ -8,13 +8,21 @@ import { CustomImage } from './CustomImage';
 interface IProps {
   onChangeGoodId: (goodId: number) => void;
   selectedGoodId: number | null;
+  skillIds: number[];
 }
 
 export const PanelGoods = React.memo(
-  ({ onChangeGoodId, selectedGoodId }: IProps) => {
+  ({ onChangeGoodId, selectedGoodId, skillIds }: IProps) => {
     const goods = dictionary.goods.filter((item) => {
+      let haveSkills = true;
+      item.requirements.upgrades.skillIds?.forEach((skillId) => {
+        if (!skillIds.includes(skillId)) {
+          haveSkills = false;
+        }
+      });
+
       // add some conditions, check upgrades
-      return item.type === 'good';
+      return item.type === 'good' && haveSkills;
     });
 
     return (

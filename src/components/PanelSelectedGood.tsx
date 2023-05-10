@@ -30,9 +30,17 @@ export const PanelSelectedGood = React.memo(
     return (
       <Panel title={'Order'} height={150}>
         <SSelectedItem>
-          <SSelectedItemImage>
-            {goodId && <CustomImage id={goodId} size={'big'} />}
-          </SSelectedItemImage>
+          {goodId && (
+            <View>
+              <SSelectedItemImage>
+                <CustomImage id={goodId} size={'big'} />
+              </SSelectedItemImage>
+              <View style={{ flexDirection: 'row' }}>
+                <SImage source={require('../images/gold.png')} />
+                <CustomText>{good?.cost}</CustomText>
+              </View>
+            </View>
+          )}
           <SSelectedItemInfo>
             {goodId && good && (
               <>
@@ -108,13 +116,19 @@ const SQty = styled(CustomText)`
 const SText = styled(CustomText)``;
 
 const SResources = styled.View`
-  gap: 10px;
+  gap: 0 10px;
   flex-direction: row;
   align-items: center;
   padding-bottom: 10px;
+  flex-wrap: wrap;
 `;
 
 const SSelectedItemInfo = styled.View`
   flex: 1;
   height: 100%;
+`;
+
+const SImage = styled.Image`
+  height: 16px;
+  width: 16px;
 `;

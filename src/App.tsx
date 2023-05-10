@@ -275,6 +275,7 @@ export const App = () => {
       addExperience,
       maxCustomerOrdersQty,
       economistBonus,
+      skillIds: learnedSkillIds,
     });
 
   const { liberatedCityIds, liberateCity } = useLiberateCityLogic({
@@ -565,6 +566,7 @@ export const App = () => {
                 <PanelGoods
                   onChangeGoodId={onChangeGoodId}
                   selectedGoodId={selectedGoodId}
+                  skillIds={learnedSkillIds}
                 />
               </View>
             </View>

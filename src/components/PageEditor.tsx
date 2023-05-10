@@ -4,7 +4,7 @@ import { IDictionary, IGood, IGoodInfo } from '../types';
 import { CustomImage } from './CustomImage';
 import { CustomText } from './CustomText';
 import { SQty, SResources, styles as stylesCommon } from '../styles';
-import { FlatList, View } from 'react-native';
+import { FlatList, ScrollView, View } from 'react-native';
 
 interface IProps {
   dictionary: IDictionary;
@@ -33,12 +33,18 @@ export const PageEditor = ({ dictionary }: IProps) => {
   };
 
   const updateItemRequiredResources = (requiredResources: IGoodInfo[]) => {
+    let processedRequiredResources = [...requiredResources].filter(
+      (resource) => {
+        return resource.qty > 0;
+      },
+    );
+
     setData((prevData) => {
       let newData = [...prevData];
 
       newData = newData.map((item) => {
         if (item.id === selectedGood.id) {
-          item.requirements.resources = [...requiredResources];
+          item.requirements.resources = [...processedRequiredResources];
         }
 
         return item;
@@ -118,9 +124,12 @@ export const PageEditor = ({ dictionary }: IProps) => {
           numColumns={1}
           renderItem={({ item }) => {
             return (
-              <SGoodWrapper onPress={() => setSelectedGood(item)}>
+              <SGoodWrapper
+                onPress={() => setSelectedGood(item)}
+                selected={selectedGood.id === item.id}
+              >
                 <View>
-                  <CustomImage id={item.id} size={'small'} />
+                  <CustomImage id={item.id} size={'big'} />
                   <CustomText>
                     ID: {item.id}, {item.name}
                   </CustomText>
@@ -148,151 +157,153 @@ export const PageEditor = ({ dictionary }: IProps) => {
         />
       </SColumnDictionary>
       <SColumnGoods>
-        {selectedGood && (
-          <View>
+        <ScrollView>
+          {selectedGood && (
             <View>
-              <CustomImage id={selectedGood.id} size={'small'} />
-              <CustomText>
-                ID:
-                {selectedGood.id},
-                <STextInput
-                  onChangeText={(value) => {
-                    setSelectedGood((prevState) => {
-                      return { ...prevState, name: value };
-                    });
-
-                    setData((prevData) => {
-                      let newData = [...prevData];
-
-                      newData = newData.map((item) => {
-                        if (item.id === selectedGood.id) {
-                          item.name = value;
-                        }
-
-                        return item;
+              <View>
+                <CustomImage id={selectedGood.id} size={'big'} />
+                <CustomText>
+                  ID:
+                  {selectedGood.id},
+                  <STextInput
+                    onChangeText={(value) => {
+                      setSelectedGood((prevState) => {
+                        return { ...prevState, name: value };
                       });
 
-                      return newData;
-                    });
-                  }}
-                  value={selectedGood.name}
-                />
-              </CustomText>
-            </View>
-            <View>
-              <CustomText>
-                Cost:{' '}
-                <STextInput
-                  onChangeText={(value) => {
-                    setSelectedGood((prevState) => {
-                      return { ...prevState, cost: Number(value) };
-                    });
+                      setData((prevData) => {
+                        let newData = [...prevData];
 
-                    updateItem(selectedGood, 'cost', Number(value));
-                  }}
-                  value={String(selectedGood.cost)}
-                />
-                , Time:{' '}
-                <STextInput
-                  onChangeText={(value) => {
-                    setSelectedGood((prevState) => {
-                      return { ...prevState, time: Number(value) };
-                    });
-
-                    updateItem(selectedGood, 'time', Number(value));
-                  }}
-                  value={String(selectedGood.time)}
-                />
-              </CustomText>
-
-              <CustomText>
-                Resources cost: {getRequiredResourcesCost()}
-              </CustomText>
-              <CustomText>
-                Resources time: {getRequiredResourcesTime()}
-              </CustomText>
-            </View>
-
-            <View>
-              <CustomText>Requirements:</CustomText>
-
-              {dictionary.goods.map((good) => {
-                return (
-                  <SRequirement key={good.id}>
-                    <CustomImage id={good.id} size={'small'} />
-                    <STextInput
-                      onChangeText={(value) => {
-                        setSelectedGood((prevState) => {
-                          let requirementResources = [
-                            ...selectedGood.requirements.resources,
-                          ];
-
-                          let hasUpdated = false;
-
-                          requirementResources = requirementResources.map(
-                            (requirementResource) => {
-                              if (requirementResource.id === good.id) {
-                                requirementResource.qty = Number(value);
-                                hasUpdated = true;
-                              }
-
-                              return requirementResource;
-                            },
-                          );
-
-                          if (!hasUpdated) {
-                            requirementResources.push({
-                              id: good.id,
-                              qty: Number(value),
-                            });
+                        newData = newData.map((item) => {
+                          if (item.id === selectedGood.id) {
+                            item.name = value;
                           }
 
-                          updateItemRequiredResources(requirementResources);
-
-                          return {
-                            ...prevState,
-                            requirements: {
-                              upgrades: prevState.requirements.upgrades,
-                              resources: requirementResources,
-                            },
-                          };
+                          return item;
                         });
-                      }}
-                      value={String(getRequirementQty(good.id))}
-                    ></STextInput>
-                  </SRequirement>
-                );
-              })}
+
+                        return newData;
+                      });
+                    }}
+                    value={selectedGood.name}
+                  />
+                </CustomText>
+              </View>
+              <View>
+                <CustomText>
+                  Cost:{' '}
+                  <STextInput
+                    onChangeText={(value) => {
+                      setSelectedGood((prevState) => {
+                        return { ...prevState, cost: Number(value) };
+                      });
+
+                      updateItem(selectedGood, 'cost', Number(value));
+                    }}
+                    value={String(selectedGood.cost)}
+                  />
+                  , Time:{' '}
+                  <STextInput
+                    onChangeText={(value) => {
+                      setSelectedGood((prevState) => {
+                        return { ...prevState, time: Number(value) };
+                      });
+
+                      updateItem(selectedGood, 'time', Number(value));
+                    }}
+                    value={String(selectedGood.time)}
+                  />
+                </CustomText>
+
+                <CustomText>
+                  Resources cost: {getRequiredResourcesCost()}
+                </CustomText>
+                <CustomText>
+                  Resources time: {getRequiredResourcesTime()}
+                </CustomText>
+              </View>
+
+              <View>
+                <CustomText>Requirements:</CustomText>
+
+                {dictionary.goods.map((good) => {
+                  return (
+                    <SRequirement key={good.id}>
+                      <CustomImage id={good.id} size={'small'} />
+                      <STextInput
+                        onChangeText={(value) => {
+                          setSelectedGood((prevState) => {
+                            let requirementResources = [
+                              ...selectedGood.requirements.resources,
+                            ];
+
+                            let hasUpdated = false;
+
+                            requirementResources = requirementResources.map(
+                              (requirementResource) => {
+                                if (requirementResource.id === good.id) {
+                                  requirementResource.qty = Number(value);
+                                  hasUpdated = true;
+                                }
+
+                                return requirementResource;
+                              },
+                            );
+
+                            if (!hasUpdated) {
+                              requirementResources.push({
+                                id: good.id,
+                                qty: Number(value),
+                              });
+                            }
+
+                            updateItemRequiredResources(requirementResources);
+
+                            return {
+                              ...prevState,
+                              requirements: {
+                                upgrades: prevState.requirements.upgrades,
+                                resources: requirementResources,
+                              },
+                            };
+                          });
+                        }}
+                        value={String(getRequirementQty(good.id))}
+                      ></STextInput>
+                    </SRequirement>
+                  );
+                })}
+              </View>
+
+              <View>
+                <CustomText>Skills:</CustomText>
+
+                {dictionary.skills.map((skill) => {
+                  return (
+                    <SSkillRequirement key={skill.id}>
+                      <CustomText>{skill.name}</CustomText>
+
+                      {skill.levels.map((skillLvl) => {
+                        return (
+                          <SSkill
+                            onPress={() => setRequiredSkill(skillLvl.skillId)}
+                            selected={(
+                              selectedGood.requirements.upgrades.skillIds || []
+                            ).includes(skillLvl.skillId)}
+                          >
+                            <CustomText>
+                              {skillLvl.skillId}. {skillLvl.description}
+                            </CustomText>
+                          </SSkill>
+                        );
+                      })}
+                    </SSkillRequirement>
+                  );
+                })}
+              </View>
             </View>
-
-            <View>
-              <CustomText>Skills:</CustomText>
-
-              {dictionary.skills.map((skill) => {
-                return (
-                  <SSkillRequirement key={skill.id}>
-                    <CustomText>{skill.name}</CustomText>
-
-                    {skill.levels.map((skillLvl) => {
-                      return (
-                        <SSkill
-                          onPress={() => setRequiredSkill(skillLvl.skillId)}
-                          selected={(
-                            selectedGood.requirements.upgrades.skillIds || []
-                          ).includes(skillLvl.skillId)}
-                        >
-                          <CustomText>
-                            {skillLvl.skillId}. {skillLvl.description}
-                          </CustomText>
-                        </SSkill>
-                      );
-                    })}
-                  </SSkillRequirement>
-                );
-              })}
-            </View>
-          </View>
-        )}
+          )}
+        </ScrollView>
       </SColumnGoods>
     </SPageEditor>
   );
@@ -307,9 +318,11 @@ const SPageEditor = styled.View`
 const SColumnGoods = styled.View`
   width: 50%;
   padding: 10px;
+  height: 800px;
 `;
 const SColumnDictionary = styled.View`
   width: 50%;
+  height: 800px;
   padding: 10px;
 `;
 
@@ -321,8 +334,10 @@ const SResource = styled.View`
   flex: 1;
 `;
 
-const SGoodWrapper = styled.Pressable`
-  padding-bottom: 10px;
+const SGoodWrapper = styled.Pressable<{ selected?: boolean }>`
+  padding-bottom: 30px;
+
+  ${({ selected }) => (selected ? 'background: green' : '')}
 `;
 
 const STextInput = styled.TextInput`
