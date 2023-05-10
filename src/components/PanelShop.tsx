@@ -1,8 +1,7 @@
-import { FlatList, Pressable, Text, View } from 'react-native';
+import { FlatList } from 'react-native';
 import { Panel } from './Panel';
 import React from 'react';
-import { IStorageGood } from '../types';
-import { styles as stylesCommon } from '../styles';
+import { SGridItem, SGridWrapper, styles as stylesCommon } from '../styles';
 import { CustomImage } from './CustomImage';
 import { dictionary } from '../dictionary';
 
@@ -22,21 +21,19 @@ export const PanelShop = React.memo(({ mineLvl, onBuyGood }: IProps) => {
 
   return (
     <Panel title={'Shop'}>
-      <View style={stylesCommon.storageGrid}>
+      <SGridWrapper>
         <FlatList
           style={stylesCommon.storageGridList}
           data={resources}
           numColumns={6}
           renderItem={({ item }) => (
-            <Pressable onPress={() => onBuyGood(item.id, 1)}>
-              <View style={stylesCommon.storageGridItem}>
-                <CustomImage id={item.id} size={'big'} />
-              </View>
-            </Pressable>
+            <SGridItem onPress={() => onBuyGood(item.id, 1)}>
+              <CustomImage id={item.id} size={'big'} />
+            </SGridItem>
           )}
           keyExtractor={(item) => String(item.id)}
         />
-      </View>
+      </SGridWrapper>
     </Panel>
   );
 });

@@ -114,3 +114,25 @@ export const SArrowWrapper = styled.Pressable`
   align-items: center;
   justify-content: center;
 `;
+
+export const SGridWrapper = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100px;
+  flex: 1;
+`;
+
+export const SGridItem = styled.Pressable`
+  margin-right: 5px;
+  margin-bottom: 5px;
+  background-color: #71635b;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
+  position: relative;
+`;
