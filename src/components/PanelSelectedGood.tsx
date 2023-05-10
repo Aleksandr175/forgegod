@@ -7,10 +7,11 @@ import styled from 'styled-components/native';
 import { CustomImage } from './CustomImage';
 import { SButton } from '../styles';
 import { CustomText } from './CustomText';
+import { hasEnoughResources } from '../utils';
 
 interface IProps {
   goodId?: number;
-  canOrder?: boolean;
+  canOrder: boolean;
   onCreateOrder: (id: number, qty: number) => void;
   storage: IStorageGood[];
 }
@@ -21,21 +22,9 @@ export const PanelSelectedGood = React.memo(
     const [qty, setQty] = useState(1);
 
     const isAvailableToOrder = (): boolean => {
-      let canOrder = true;
-
-      good?.requirements.resources.forEach((requiredResource) => {
-        const itemInStorage = storage.find(
-          (item) => item.id === requiredResource.id,
-        );
-
-        if (itemInStorage) {
-          if (itemInStorage.qty < requiredResource.qty) {
-            canOrder = false;
-          }
-        }
-      });
-
-      return canOrder;
+      return (
+        hasEnoughResources(storage, good!.requirements.resources) && canOrder
+      );
     };
 
     return (
@@ -71,7 +60,7 @@ export const PanelSelectedGood = React.memo(
                   onPress={() => {
                     onCreateOrder(goodId, qty);
                   }}
-                  disabled={!isAvailableToOrder() || !canOrder}
+                  disabled={!isAvailableToOrder()}
                 >
                   <Text style={styles.buttonText}>Order</Text>
                 </SButton>
