@@ -34,8 +34,9 @@ export interface IGood {
   type: TTypeGood;
   requirements: {
     resources: IGoodInfo[];
-    upgrades?: {
+    upgrades: {
       minerLvl?: number;
+      skillIds?: number[];
     };
   };
 }
@@ -115,6 +116,7 @@ export type TPage =
   | 'city-1'
   | 'city-2'
   | 'city-3'
+  | 'editor'
   | string;
 
 export interface IExpeditionInfoInProcess {

@@ -48,6 +48,36 @@ export const PageEditor = ({ dictionary }: IProps) => {
     });
   };
 
+  const setRequiredSkill = (skillId: number) => {
+    setData((prevData) => {
+      let newData = [...prevData];
+
+      newData = newData.map((item) => {
+        if (item.id === selectedGood.id) {
+          if (!item.requirements.upgrades?.skillIds) {
+            item.requirements.upgrades.skillIds = [];
+          }
+
+          const index = item.requirements.upgrades.skillIds.findIndex(
+            (id) => id === skillId,
+          );
+
+          if (index > -1) {
+            item.requirements.upgrades.skillIds.splice(index, 1);
+          } else {
+            item.requirements.upgrades.skillIds.push(skillId);
+          }
+        }
+
+        return item;
+      });
+
+      return newData;
+    });
+  };
+
+  const isSkillSelected = (skillId: number) => {};
+
   const getRequirementQty = (goodId: number) => {
     return (
       selectedGood.requirements.resources.find((good) => good.id === goodId)
@@ -234,6 +264,33 @@ export const PageEditor = ({ dictionary }: IProps) => {
                 );
               })}
             </View>
+
+            <View>
+              <CustomText>Skills:</CustomText>
+
+              {dictionary.skills.map((skill) => {
+                return (
+                  <SSkillRequirement key={skill.id}>
+                    <CustomText>{skill.name}</CustomText>
+
+                    {skill.levels.map((skillLvl) => {
+                      return (
+                        <SSkill
+                          onPress={() => setRequiredSkill(skillLvl.skillId)}
+                          selected={(
+                            selectedGood.requirements.upgrades.skillIds || []
+                          ).includes(skillLvl.skillId)}
+                        >
+                          <CustomText>
+                            {skillLvl.skillId}. {skillLvl.description}
+                          </CustomText>
+                        </SSkill>
+                      );
+                    })}
+                  </SSkillRequirement>
+                );
+              })}
+            </View>
           </View>
         )}
       </SColumnGoods>
@@ -274,4 +331,12 @@ const STextInput = styled.TextInput`
 
 const SRequirement = styled.View`
   flex-direction: row;
+`;
+
+const SSkillRequirement = styled.View`
+  padding-bottom: 10px;
+`;
+
+const SSkill = styled.Pressable<{ selected?: boolean }>`
+  ${({ selected }) => (selected ? 'background: green' : '')}
 `;
