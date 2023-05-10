@@ -2,9 +2,8 @@ import { FlatList, Pressable, View } from 'react-native';
 import { Panel } from './Panel';
 import React from 'react';
 import { dictionary } from '../dictionary';
-import { styles, styles as stylesCommon } from '../styles';
+import { SGridWrapper, styles, styles as stylesCommon } from '../styles';
 import { CustomImage } from './CustomImage';
-import styled from 'styled-components/native';
 
 interface IProps {
   onChangeGoodId: (goodId: number) => void;
@@ -20,7 +19,7 @@ export const PanelGoods = React.memo(
 
     return (
       <Panel title={'Goods'}>
-        <SStorageGrid>
+        <SGridWrapper>
           <FlatList
             style={stylesCommon.storageGridGoodsList}
             data={goods}
@@ -43,15 +42,8 @@ export const PanelGoods = React.memo(
             )}
             keyExtractor={(item) => String(item.id)}
           />
-        </SStorageGrid>
+        </SGridWrapper>
       </Panel>
     );
   },
 );
-
-const SStorageGrid = styled.View`
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  height: 100%;
-`;

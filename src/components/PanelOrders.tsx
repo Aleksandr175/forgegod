@@ -6,6 +6,7 @@ import { CustomImage } from './CustomImage';
 import { styles as stylesCommon } from '../styles';
 import { FlatList } from 'react-native';
 import { ProgressBar } from './ProgressBar';
+import { CustomText } from './CustomText';
 
 interface IProps {
   orders: IOrder[];
@@ -16,9 +17,9 @@ export const PanelOrders = ({ orders, maxOrdersQty }: IProps) => {
   return (
     <Panel title={'In Process ' + orders.length + '/' + maxOrdersQty}>
       {orders.length === 0 && (
-        <SNoOrders>
+        <CustomText>
           No current orders. You can order something in the right panel
-        </SNoOrders>
+        </CustomText>
       )}
       <FlatList
         style={stylesCommon.orderGridList}
@@ -79,10 +80,8 @@ const SOrderInProcessWrapper = styled.View`
   margin-bottom: 5px;
 `;
 
-const SOrderDetails = styled.View``;
-
-const SNoOrders = styled.Text`
-  color: white;
+const SOrderDetails = styled.View`
+  flex: 1;
 `;
 
 const SWorkerEmpty = styled.View`

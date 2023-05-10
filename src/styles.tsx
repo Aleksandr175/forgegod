@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
     height: '100%',
   },
   orderGridList: {
-    height: 360,
+    height: 1, // how does it work ?
   },
   storageGridItem: {
     marginRight: 5,
