@@ -83,7 +83,7 @@ export const PageMine = ({
 
                 <SResourcesText>It will provide you:</SResourcesText>
                 <SResources>
-                  {nextLvlMineInfo.provideResourceIds.map((id) => {
+                  {nextLvlMineInfo.newProvidedResourceIds.map((id) => {
                     return (
                       <SResourceRequired key={id}>
                         <CustomImage id={id} size={'small'} />
@@ -161,7 +161,6 @@ export const PageMine = ({
 };
 
 const SPanelWrapper = styled.View`
-  height: 150px;
   flex-direction: row;
 `;
 

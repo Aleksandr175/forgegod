@@ -13,7 +13,7 @@ interface IProps {
 
 export const PanelShop = React.memo(
   ({ onBuyGood, currentMineLvlInfo }: IProps) => {
-    const availableResourceIds = currentMineLvlInfo.provideResourceIds;
+    const availableResourceIds = currentMineLvlInfo.providedResourceIds;
 
     const resources = dictionary.goods.filter((item) => {
       // add some conditions, check upgrades

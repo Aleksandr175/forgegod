@@ -341,7 +341,8 @@ export const dictionary: IDictionary = {
         money: 500,
         orderQty: 0,
       },
-      provideResourceIds: [6],
+      newProvidedResourceIds: [6],
+      providedResourceIds: [6],
       expedition: {
         cost: 100,
         duration: 10,
@@ -369,7 +370,8 @@ export const dictionary: IDictionary = {
         money: 1000,
         orderQty: 10,
       },
-      provideResourceIds: [6, 10],
+      newProvidedResourceIds: [10],
+      providedResourceIds: [6, 10],
       expedition: {
         cost: 100,
         duration: 15,

@@ -83,7 +83,9 @@ export const SResourcesText = styled(CustomText)`
   padding-bottom: 5px;
 `;
 
-export const SQty = styled(CustomText)``;
+export const SQty = styled(CustomText)`
+  padding-left: 5px;
+`;
 
 export const SResourceRequired = styled.View`
   flex-direction: row;
@@ -91,7 +93,7 @@ export const SResourceRequired = styled.View`
 `;
 
 export const SResources = styled.View`
-  gap: 10px;
+  gap: 0 10px;
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;

@@ -65,7 +65,9 @@ const SResource = styled.View`
   padding-bottom: 5px;
 `;
 
-const SQty = styled.Text``;
+const SQty = styled(CustomText)`
+  padding-left: 5px;
+`;
 
 const SWorkerImage = styled.View`
   background-color: #71635b;

@@ -101,12 +101,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const SSeparator = styled.View`
-  padding: 5px;
-`;
-
 const SQty = styled(CustomText)`
-  color: white;
+  padding-left: 5px;
 `;
 
 const SText = styled(CustomText)``;

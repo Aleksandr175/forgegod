@@ -142,7 +142,7 @@ const SCost = styled(CustomText)`
 `;
 
 const SQty = styled(CustomText)`
-  color: white;
+  padding-left: 5px;
 `;
 
 const SOrderDetails = styled.View`

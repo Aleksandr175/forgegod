@@ -57,7 +57,8 @@ export interface IMine {
     money: number;
     orderQty?: number;
   };
-  provideResourceIds: number[];
+  newProvidedResourceIds: number[];
+  providedResourceIds: number[];
   expedition: {
     cost: number;
     duration: number;
