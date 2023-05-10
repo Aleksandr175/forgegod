@@ -334,17 +334,14 @@ export const dictionary: IDictionary = {
   goods: GOODS,
   mine: [
     {
-      nextLvl: 2,
+      lvl: 1,
       requirements: {
-        resources: [
-          { id: 1, qty: 1 },
-          { id: 2, qty: 1 },
-        ],
+        resources: [],
         upgrades: {},
         money: 500,
         orderQty: 0,
       },
-      provideResourceIds: [3],
+      provideResourceIds: [6],
       expedition: {
         cost: 100,
         duration: 10,
@@ -361,7 +358,7 @@ export const dictionary: IDictionary = {
       },
     },
     {
-      nextLvl: 3,
+      lvl: 2,
       requirements: {
         resources: [
           { id: 2, qty: 20 },
@@ -372,7 +369,7 @@ export const dictionary: IDictionary = {
         money: 1000,
         orderQty: 10,
       },
-      provideResourceIds: [3, 4],
+      provideResourceIds: [6, 10],
       expedition: {
         cost: 100,
         duration: 15,

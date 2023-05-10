@@ -48,7 +48,7 @@ export interface ILiberateCity {
 }
 
 export interface IMine {
-  nextLvl: number;
+  lvl: number;
   requirements: {
     resources: IGoodInfo[];
     upgrades?: {

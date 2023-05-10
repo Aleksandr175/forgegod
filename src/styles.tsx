@@ -94,6 +94,7 @@ export const SResources = styled.View`
   gap: 10px;
   flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
 `;
 
 export const SArrowNextCity = styled(CustomText)`

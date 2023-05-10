@@ -388,9 +388,7 @@ export const App = () => {
   };
 
   const onImproveMine = () => {
-    const mineInfo = dictionary.mine.find(
-      (mine) => mine.nextLvl === mineLvl + 1,
-    );
+    const mineInfo = dictionary.mine.find((mine) => mine.lvl === mineLvl + 1);
 
     if (mineInfo) {
       if (hasEnoughResourcesToImproveMine(mineInfo, storage, money)) {

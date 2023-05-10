@@ -38,8 +38,10 @@ export const PageMine = ({
   isExpeditionInProcess,
   sendExpedition,
 }: IProps) => {
-  const currentMineLvlInfo =
-    dictionary.find((mine) => mine.nextLvl === mineLvl + 1) || null;
+  const currentMineLvlInfo = dictionary.find((mine) => mine.lvl === mineLvl)!;
+
+  const nextLvlMineInfo =
+    dictionary.find((mine) => mine.lvl === mineLvl + 1) || null;
 
   const expeditionCost = currentMineLvlInfo?.expedition?.cost || 0;
 
@@ -56,56 +58,56 @@ export const PageMine = ({
       <SPanelWrapper>
         <SColumnLeft>
           <Panel title={'Improve Mine'}>
-            {currentMineLvlInfo &&
-              currentMineLvlInfo.requirements.resources?.length > 0 && (
-                <>
-                  <SResourcesText>Required:</SResourcesText>
-                  <SResources>
-                    {currentMineLvlInfo.requirements.resources.map(
-                      (requirement) => {
-                        return (
-                          <SResourceRequired key={requirement.id}>
-                            <CustomImage id={requirement.id} size={'small'} />
-                            <SQty>
-                              {resourceQtyInStorage(requirement.id, storage)} /{' '}
-                              {requirement.qty}
-                            </SQty>
-                          </SResourceRequired>
-                        );
-                      },
-                    )}
+            {nextLvlMineInfo &&
+            nextLvlMineInfo.requirements.resources?.length > 0 ? (
+              <>
+                <SResourcesText>Required:</SResourcesText>
+                <SResources>
+                  {nextLvlMineInfo.requirements.resources.map((requirement) => {
+                    return (
+                      <SResourceRequired key={requirement.id}>
+                        <CustomImage id={requirement.id} size={'small'} />
+                        <SQty>
+                          {resourceQtyInStorage(requirement.id, storage)} /{' '}
+                          {requirement.qty}
+                        </SQty>
+                      </SResourceRequired>
+                    );
+                  })}
 
-                    <SResourceRequired>
-                      <SImage source={require('../images/gold.png')} />
-                      <SQty>{currentMineLvlInfo.requirements.money}</SQty>
-                    </SResourceRequired>
-                  </SResources>
+                  <SResourceRequired>
+                    <SImage source={require('../images/gold.png')} />
+                    <SQty>{nextLvlMineInfo.requirements.money}</SQty>
+                  </SResourceRequired>
+                </SResources>
 
-                  <SResourcesText>It will provide you:</SResourcesText>
-                  <SResources>
-                    {currentMineLvlInfo.provideResourceIds.map((id) => {
-                      return (
-                        <SResourceRequired key={id}>
-                          <CustomImage id={id} size={'small'} />
-                        </SResourceRequired>
-                      );
-                    })}
-                  </SResources>
+                <SResourcesText>It will provide you:</SResourcesText>
+                <SResources>
+                  {nextLvlMineInfo.provideResourceIds.map((id) => {
+                    return (
+                      <SResourceRequired key={id}>
+                        <CustomImage id={id} size={'small'} />
+                      </SResourceRequired>
+                    );
+                  })}
+                </SResources>
 
-                  <SButton
-                    onPress={onImproveMine}
-                    disabled={
-                      !hasEnoughResourcesToImproveMine(
-                        currentMineLvlInfo,
-                        storage,
-                        money,
-                      )
-                    }
-                  >
-                    <CustomText>Improve</CustomText>
-                  </SButton>
-                </>
-              )}
+                <SButton
+                  onPress={onImproveMine}
+                  disabled={
+                    !hasEnoughResourcesToImproveMine(
+                      nextLvlMineInfo,
+                      storage,
+                      money,
+                    )
+                  }
+                >
+                  <CustomText>Improve</CustomText>
+                </SButton>
+              </>
+            ) : (
+              <CustomText>The Mine has been fully upgraded</CustomText>
+            )}
           </Panel>
         </SColumnLeft>
         <SColumnRight>
@@ -150,7 +152,10 @@ export const PageMine = ({
         </SColumnRight>
       </SPanelWrapper>
 
-      <PanelShop mineLvl={mineLvl || 1} onBuyGood={onBuyGood}></PanelShop>
+      <PanelShop
+        onBuyGood={onBuyGood}
+        currentMineLvlInfo={currentMineLvlInfo}
+      ></PanelShop>
     </SPageMine>
   );
 };
