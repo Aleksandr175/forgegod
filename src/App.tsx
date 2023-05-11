@@ -653,7 +653,11 @@ export const App = () => {
         {page === 'editor' && <PageEditor dictionary={dictionary} />}
       </View>
 
-      <Menu setPage={setPage} />
+      <Menu
+        setPage={setPage}
+        availableSkillPoints={availableSkillPoints}
+        customerOrdersQty={customerOrders.length}
+      />
     </View>
   );
 };

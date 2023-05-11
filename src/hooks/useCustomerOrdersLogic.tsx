@@ -60,7 +60,8 @@ export const useCustomerOrdersLogic = ({
         addMoney(
           customerOrder.cost + (economistBonus / 100) * customerOrder.cost,
         );
-        addExperience(customerOrder.cost / 10);
+
+        addExperience(customerOrder.cost / 5);
 
         removeCustomerOrder(customerOrderId);
       }
