@@ -2,7 +2,7 @@ import { FlatList, Text, View } from 'react-native';
 import { Panel } from './Panel';
 import React from 'react';
 import { IStorageGood } from '../types';
-import { styles as stylesCommon } from '../styles';
+import { SStorageGrid, styles as stylesCommon } from '../styles';
 import { CustomImage } from './CustomImage';
 
 interface IProps {
@@ -14,7 +14,7 @@ export const PanelStorage = React.memo(({ storage }: IProps) => {
 
   return (
     <Panel title={'Storage'}>
-      <View style={stylesCommon.storageGrid}>
+      <SStorageGrid>
         <FlatList
           style={stylesCommon.storageGridList}
           data={availableItems}
@@ -27,7 +27,7 @@ export const PanelStorage = React.memo(({ storage }: IProps) => {
           )}
           keyExtractor={(item) => String(item.id)}
         />
-      </View>
+      </SStorageGrid>
     </Panel>
   );
 });

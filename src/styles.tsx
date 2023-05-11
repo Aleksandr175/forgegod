@@ -13,12 +13,6 @@ export const styles = StyleSheet.create({
     height: 32,
   },
 
-  storageGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    width: '100%',
-    height: '100px',
-  },
   storageGridList: {
     height: '100%',
   },
@@ -116,6 +110,13 @@ export const SArrowWrapper = styled.Pressable`
   background: #614d41;
   align-items: center;
   justify-content: center;
+`;
+
+export const SStorageGrid = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100px;
 `;
 
 export const SGridWrapper = styled.View`

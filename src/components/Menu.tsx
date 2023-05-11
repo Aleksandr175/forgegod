@@ -25,12 +25,11 @@ export const Menu = React.memo(
             setPage('hero');
           }}
         >
-          <SText>
-            Hero
-            {availableSkillPoints > 0 && (
-              <SMark important={true}>{availableSkillPoints}</SMark>
-            )}
-          </SText>
+          <SText>Hero</SText>
+
+          {availableSkillPoints > 0 && (
+            <SMark important={true}>{availableSkillPoints}</SMark>
+          )}
         </SMenuItem>
         <SMenuItem
           onPress={() => {
@@ -44,10 +43,9 @@ export const Menu = React.memo(
             setPage('orders');
           }}
         >
-          <SText>
-            Orders
-            {customerOrdersQty > 0 && <SMark>{customerOrdersQty}</SMark>}
-          </SText>
+          <SText>Orders</SText>
+
+          {customerOrdersQty > 0 && <SMark>{customerOrdersQty}</SMark>}
         </SMenuItem>
         <SMenuItem
           onPress={() => {
@@ -76,6 +74,7 @@ const SMenuItem = styled.Pressable`
   padding-top: 20px;
   padding-bottom: 20px;
   align-items: center;
+  position: relative;
 `;
 
 const SText = styled(CustomText)`
@@ -87,8 +86,10 @@ const SMark = styled(CustomText)<{ important?: boolean }>`
   width: 15px;
   height: 15px;
   text-align: center;
-  border-radius: 10px;
-  top: -10px;
+  border-radius: 5px;
+  top: 10px;
+  right: 0;
+  overflow: hidden;
 
   background: #f49300;
 
