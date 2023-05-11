@@ -44,12 +44,12 @@ export const App = () => {
 
   const [experience, setExperience] = useState(100);
   const [learnedSkillIds, setLearnedSkillIds] = useState([1, 4]);
-  const [lvl, setLvl] = useState(1);
+  const [lvl, setLvl] = useState(0);
   const [expNextLvl, setExpNextLvl] = useState(
-    dictionary.heroLvls[lvl - 1].experience,
+    dictionary.heroLvls[lvl - 1]?.experience || 0,
   );
 
-  const [availableSkillPoints, setAvailableSkillPoints] = useState(2);
+  const [availableSkillPoints, setAvailableSkillPoints] = useState(0);
   const [economistBonus, setEconomistBonus] = useState(0);
   const [maxCustomerOrdersQty, setMaxCustomerOrdersQty] = useState(3);
 
@@ -126,6 +126,29 @@ export const App = () => {
       return prevState + expQty;
     });
   };
+
+  useEffect(() => {
+    const appropriateLvlIndex = dictionary.heroLvls.findIndex(
+      (expLvl, index) => experience < expLvl.experience,
+    );
+
+    if (appropriateLvlIndex > -1) {
+      const changeLvl = appropriateLvlIndex + 1 - lvl;
+      const newLvl = lvl + changeLvl;
+
+      setLvl(() => {
+        return newLvl;
+      });
+
+      setAvailableSkillPoints((prevState) => {
+        return prevState + changeLvl;
+      });
+
+      setExpNextLvl((prevState) => {
+        return dictionary.heroLvls[newLvl - 1]?.experience || 0;
+      });
+    }
+  }, [experience]);
 
   const orderId = useRef(1);
 

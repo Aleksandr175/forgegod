@@ -670,26 +670,50 @@ export const dictionary: IDictionary = {
       experience: 3000,
     },
   ],
+  /*experienceLevels: [
+    50, 300, 1000, 1800, 3000, 5000, 8500, 12000, 16000, 21500, 27000, 34000,
+    42000, 50000, 60000, 74000, 91000, 110000, 130000, 160000,
+  ],*/
   heroLvls: [
     {
       id: 1,
-      experience: 1000,
+      experience: 50,
     },
     {
       id: 2,
-      experience: 2000,
+      experience: 300,
     },
     {
       id: 3,
-      experience: 3000,
+      experience: 1000,
     },
     {
       id: 4,
-      experience: 5000,
+      experience: 1800,
     },
     {
       id: 5,
-      experience: 8000,
+      experience: 3000,
+    },
+    {
+      id: 6,
+      experience: 5000,
+    },
+    {
+      id: 7,
+      experience: 8500,
+    },
+    {
+      id: 8,
+      experience: 12000,
+    },
+    {
+      id: 9,
+      experience: 16000,
+    },
+    {
+      id: 10,
+      experience: 21000,
     },
   ],
   skills: [
