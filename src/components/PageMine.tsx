@@ -55,9 +55,9 @@ export const PageMine = ({
         </SMineDetails>
       </SMineInfo>
 
-      <SPanelWrapper>
+      <SColumnsWrapper>
         <SColumnLeft>
-          <Panel title={'Improve Mine'}>
+          <Panel title={'Improve Mine'} height={180}>
             {nextLvlMineInfo &&
             nextLvlMineInfo.requirements.resources?.length > 0 ? (
               <>
@@ -111,7 +111,7 @@ export const PageMine = ({
           </Panel>
         </SColumnLeft>
         <SColumnRight>
-          <Panel title={'Expedition'}>
+          <Panel title={'Expedition'} height={180}>
             {currentMineLvlInfo &&
               currentMineLvlInfo.expedition.canBeFoundGoods?.length > 0 && (
                 <>
@@ -150,18 +150,26 @@ export const PageMine = ({
               )}
           </Panel>
         </SColumnRight>
-      </SPanelWrapper>
+      </SColumnsWrapper>
 
-      <PanelShop
-        onBuyGood={onBuyGood}
-        currentMineLvlInfo={currentMineLvlInfo}
-      ></PanelShop>
+      <SPanelWrapper>
+        <PanelShop
+          onBuyGood={onBuyGood}
+          currentMineLvlInfo={currentMineLvlInfo}
+        ></PanelShop>
+      </SPanelWrapper>
     </SPageMine>
   );
 };
 
+const SColumnsWrapper = styled.View`
+  flex-direction: row;
+`;
 const SPanelWrapper = styled.View`
   flex-direction: row;
+  width: 100%;
+  flex: 1;
+  align-items: stretch;
 `;
 
 const SColumnLeft = styled.View`

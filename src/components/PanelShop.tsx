@@ -1,7 +1,11 @@
 import { FlatList } from 'react-native';
 import { Panel } from './Panel';
 import React from 'react';
-import { SGridItem, SGridWrapper, styles as stylesCommon } from '../styles';
+import {
+  SGridItem,
+  SStorageGrid,
+  styles as stylesCommon,
+} from '../styles';
 import { CustomImage } from './CustomImage';
 import { dictionary } from '../dictionary';
 import { IMine } from '../types';
@@ -22,7 +26,7 @@ export const PanelShop = React.memo(
 
     return (
       <Panel title={'Shop'}>
-        <SGridWrapper>
+        <SStorageGrid>
           <FlatList
             style={stylesCommon.storageGridList}
             data={resources}
@@ -34,7 +38,7 @@ export const PanelShop = React.memo(
             )}
             keyExtractor={(item) => String(item.id)}
           />
-        </SGridWrapper>
+        </SStorageGrid>
       </Panel>
     );
   },

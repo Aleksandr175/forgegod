@@ -116,7 +116,7 @@ export const SStorageGrid = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  height: 100px;
+  height: 100%;
 `;
 
 export const SGridWrapper = styled.View`

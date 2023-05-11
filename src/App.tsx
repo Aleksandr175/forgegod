@@ -123,7 +123,7 @@ export const App = () => {
 
   const addExperience = (expQty: number) => {
     setExperience((prevState) => {
-      return prevState + expQty;
+      return Math.floor(prevState + expQty);
     });
   };
 
@@ -260,7 +260,7 @@ export const App = () => {
 
   const addMoney = (amount: number) => {
     setMoney((prevState) => {
-      return prevState + amount;
+      return Math.floor(prevState + amount);
     });
   };
 
