@@ -371,6 +371,14 @@ export const dictionary: IDictionary = {
       },
     },
     {
+      id: 5,
+      name: 'Wood',
+      time: 1,
+      cost: 2,
+      type: 'good',
+      requirements: { resources: [], upgrades: {} },
+    },
+    {
       id: 6,
       name: 'Row Bronze Ore',
       time: 2,
@@ -434,6 +442,230 @@ export const dictionary: IDictionary = {
     },
     {
       id: 13,
+      name: 'Bronze Ingot',
+      time: 10,
+      cost: 25,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 11, qty: 1 },
+          { id: 10, qty: 1 },
+        ],
+        upgrades: {},
+      },
+    },
+    {
+      id: 14,
+      name: 'Toxic Ingot',
+      time: 10,
+      cost: 25,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 11, qty: 1 },
+          { id: 10, qty: 1 },
+        ],
+        upgrades: {},
+      },
+    },
+    {
+      id: 15,
+      name: 'Bronze Ingot',
+      time: 10,
+      cost: 25,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 11, qty: 1 },
+          { id: 10, qty: 1 },
+        ],
+        upgrades: {},
+      },
+    },
+    {
+      id: 16,
+      name: 'Bronze Ingot',
+      time: 10,
+      cost: 25,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 11, qty: 1 },
+          { id: 10, qty: 1 },
+        ],
+        upgrades: {},
+      },
+    },
+    {
+      id: 17,
+      name: 'Bronze Ingot',
+      time: 10,
+      cost: 25,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 11, qty: 1 },
+          { id: 10, qty: 1 },
+        ],
+        upgrades: {},
+      },
+    },
+    {
+      id: 18,
+      name: 'Bronze Ingot',
+      time: 10,
+      cost: 25,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 11, qty: 1 },
+          { id: 10, qty: 1 },
+        ],
+        upgrades: {},
+      },
+    },
+    {
+      id: 19,
+      name: 'Bronze Ingot',
+      time: 10,
+      cost: 25,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 11, qty: 1 },
+          { id: 10, qty: 1 },
+        ],
+        upgrades: {},
+      },
+    },
+    {
+      id: 20,
+      name: 'Bronze Ingot',
+      time: 10,
+      cost: 25,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 11, qty: 1 },
+          { id: 10, qty: 1 },
+        ],
+        upgrades: {},
+      },
+    },
+    {
+      id: 21,
+      name: 'Bronze Ingot',
+      time: 10,
+      cost: 25,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 11, qty: 1 },
+          { id: 10, qty: 1 },
+        ],
+        upgrades: {},
+      },
+    },
+    {
+      id: 22,
+      name: 'Bronze Ingot',
+      time: 10,
+      cost: 25,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 11, qty: 1 },
+          { id: 10, qty: 1 },
+        ],
+        upgrades: {},
+      },
+    },
+    {
+      id: 23,
+      name: 'Bronze Ingot',
+      time: 10,
+      cost: 25,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 11, qty: 1 },
+          { id: 10, qty: 1 },
+        ],
+        upgrades: {},
+      },
+    },
+    {
+      id: 24,
+      name: 'Bronze Ingot',
+      time: 10,
+      cost: 25,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 11, qty: 1 },
+          { id: 10, qty: 1 },
+        ],
+        upgrades: {},
+      },
+    },
+    {
+      id: 25,
+      name: 'Bronze Ingot',
+      time: 10,
+      cost: 25,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 11, qty: 1 },
+          { id: 10, qty: 1 },
+        ],
+        upgrades: {},
+      },
+    },
+    {
+      id: 26,
+      name: 'Bronze Ingot',
+      time: 10,
+      cost: 25,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 11, qty: 1 },
+          { id: 10, qty: 1 },
+        ],
+        upgrades: {},
+      },
+    },
+    {
+      id: 27,
+      name: 'Bronze Ingot',
+      time: 10,
+      cost: 25,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 11, qty: 1 },
+          { id: 10, qty: 1 },
+        ],
+        upgrades: {},
+      },
+    },
+    {
+      id: 28,
+      name: 'Bronze Ingot',
+      time: 10,
+      cost: 25,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 11, qty: 1 },
+          { id: 10, qty: 1 },
+        ],
+        upgrades: {},
+      },
+    },
+    {
+      id: 29,
       name: 'Bronze Ingot',
       time: 10,
       cost: 25,
@@ -580,6 +812,126 @@ export const dictionary: IDictionary = {
         upgrades: { skillIds: [9] },
       },
     },
+    {
+      id: 41,
+      name: 'Wooden Sword',
+      time: 3,
+      cost: 7,
+      type: 'good',
+      requirements: {
+        resources: [{ id: 5, qty: 3 }],
+        upgrades: { skillIds: [] },
+      },
+    },
+    {
+      id: 42,
+      name: 'Wooden Axe',
+      time: 4,
+      cost: 10,
+      type: 'good',
+      requirements: {
+        resources: [{ id: 5, qty: 4 }],
+        upgrades: { skillIds: [7] },
+      },
+    },
+    {
+      id: 43,
+      name: 'Wooden Bow',
+      time: 9,
+      cost: 16,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 5, qty: 4 },
+          { id: 2, qty: 1 },
+        ],
+        upgrades: { skillIds: [8] },
+      },
+    },
+    {
+      id: 44,
+      name: 'Wooden Hammer',
+      time: 10,
+      cost: 18,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 5, qty: 3 },
+          { id: 1, qty: 2 },
+        ],
+        upgrades: { skillIds: [8] },
+      },
+    },
+    {
+      id: 46,
+      name: 'Wooden Shield',
+      time: 6,
+      cost: 15,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 1, qty: 2 },
+          { id: 5, qty: 2 },
+        ],
+        upgrades: { skillIds: [10] },
+      },
+    },
+    {
+      id: 200,
+      name: 'Toxic Crystal',
+      time: 10,
+      cost: 25,
+      type: 'crystal',
+      requirements: { resources: [], upgrades: {} },
+    },
+    {
+      id: 201,
+      name: 'Fire Crystal',
+      time: 10,
+      cost: 25,
+      type: 'crystal',
+      requirements: { resources: [], upgrades: {} },
+    },
+    {
+      id: 202,
+      name: 'Silver Crystal',
+      time: 10,
+      cost: 25,
+      type: 'crystal',
+      requirements: { resources: [], upgrades: {} },
+    },
+    {
+      id: 203,
+      name: 'Gold Crystal',
+      time: 10,
+      cost: 25,
+      type: 'crystal',
+      requirements: { resources: [], upgrades: {} },
+    },
+    {
+      id: 204,
+      name: 'Dragon Crystal',
+      time: 10,
+      cost: 25,
+      type: 'crystal',
+      requirements: { resources: [], upgrades: {} },
+    },
+    {
+      id: 210,
+      name: 'Cobalt Crystal',
+      time: 10,
+      cost: 25,
+      type: 'crystal',
+      requirements: { resources: [], upgrades: {} },
+    },
+    {
+      id: 211,
+      name: 'Silver Skull',
+      time: 10,
+      cost: 25,
+      type: 'crystal',
+      requirements: { resources: [], upgrades: {} },
+    },
   ],
   // goods2: GOODS,
   mine: [
@@ -598,11 +950,11 @@ export const dictionary: IDictionary = {
         duration: 10,
         canBeFoundGoods: [
           {
-            id: 100,
+            id: 200,
             qty: 1,
           },
           {
-            id: 101,
+            id: 201,
             qty: 1,
           },
         ],
@@ -627,11 +979,11 @@ export const dictionary: IDictionary = {
         duration: 15,
         canBeFoundGoods: [
           {
-            id: 100,
+            id: 200,
             qty: 2,
           },
           {
-            id: 101,
+            id: 201,
             qty: 1,
           },
         ],

@@ -21,6 +21,7 @@ export const PanelOrders = ({ orders, maxOrdersQty }: IProps) => {
           No current orders. You can order something in the right panel
         </CustomText>
       )}
+
       <FlatList
         style={stylesCommon.orderGridList}
         data={orders}

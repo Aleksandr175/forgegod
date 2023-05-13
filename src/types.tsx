@@ -67,7 +67,7 @@ export interface IMine {
   };
 }
 
-export type TTypeGood = 'resource' | 'good';
+export type TTypeGood = 'resource' | 'good' | 'crystal';
 
 export interface IStorageGood {
   id: number;

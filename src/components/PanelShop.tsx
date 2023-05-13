@@ -1,11 +1,7 @@
 import { FlatList } from 'react-native';
 import { Panel } from './Panel';
 import React from 'react';
-import {
-  SGridItem,
-  SStorageGrid,
-  styles as stylesCommon,
-} from '../styles';
+import { SGridItem, SStorageGrid, styles as stylesCommon } from '../styles';
 import { CustomImage } from './CustomImage';
 import { dictionary } from '../dictionary';
 import { IMine } from '../types';
