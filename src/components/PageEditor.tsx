@@ -87,7 +87,7 @@ export const PageEditor = ({ dictionary }: IProps) => {
   const getRequirementQty = (goodId: number) => {
     return (
       selectedGood.requirements.resources.find((good) => good.id === goodId)
-        ?.qty || 0
+        ?.qty || ''
     );
   };
 
@@ -121,7 +121,7 @@ export const PageEditor = ({ dictionary }: IProps) => {
         <FlatList
           style={stylesCommon.gridListFullHeight}
           data={data}
-          numColumns={1}
+          numColumns={5}
           renderItem={({ item }) => {
             return (
               <SGoodWrapper
@@ -226,53 +226,59 @@ export const PageEditor = ({ dictionary }: IProps) => {
               <View>
                 <CustomText>Requirements:</CustomText>
 
-                {dictionary.goods.map((good) => {
-                  return (
-                    <SRequirement key={good.id}>
-                      <CustomImage id={good.id} size={'small'} />
-                      <STextInput
-                        onChangeText={(value) => {
-                          setSelectedGood((prevState) => {
-                            let requirementResources = [
-                              ...selectedGood.requirements.resources,
-                            ];
+                <FlatList
+                  style={stylesCommon.gridListFullHeight}
+                  data={dictionary.goods}
+                  numColumns={3}
+                  renderItem={({ item }) => {
+                    return (
+                      <SRequirement key={item.id}>
+                        <CustomImage id={item.id} size={'big'} />
+                        <STextInput
+                          onChangeText={(value) => {
+                            setSelectedGood((prevState) => {
+                              let requirementResources = [
+                                ...selectedGood.requirements.resources,
+                              ];
 
-                            let hasUpdated = false;
+                              let hasUpdated = false;
 
-                            requirementResources = requirementResources.map(
-                              (requirementResource) => {
-                                if (requirementResource.id === good.id) {
-                                  requirementResource.qty = Number(value);
-                                  hasUpdated = true;
-                                }
+                              requirementResources = requirementResources.map(
+                                (requirementResource) => {
+                                  if (requirementResource.id === item.id) {
+                                    requirementResource.qty = Number(value);
+                                    hasUpdated = true;
+                                  }
 
-                                return requirementResource;
-                              },
-                            );
+                                  return requirementResource;
+                                },
+                              );
 
-                            if (!hasUpdated) {
-                              requirementResources.push({
-                                id: good.id,
-                                qty: Number(value),
-                              });
-                            }
+                              if (!hasUpdated) {
+                                requirementResources.push({
+                                  id: item.id,
+                                  qty: Number(value),
+                                });
+                              }
 
-                            updateItemRequiredResources(requirementResources);
+                              updateItemRequiredResources(requirementResources);
 
-                            return {
-                              ...prevState,
-                              requirements: {
-                                upgrades: prevState.requirements.upgrades,
-                                resources: requirementResources,
-                              },
-                            };
-                          });
-                        }}
-                        value={String(getRequirementQty(good.id))}
-                      ></STextInput>
-                    </SRequirement>
-                  );
-                })}
+                              return {
+                                ...prevState,
+                                requirements: {
+                                  upgrades: prevState.requirements.upgrades,
+                                  resources: requirementResources,
+                                },
+                              };
+                            });
+                          }}
+                          value={String(getRequirementQty(item.id))}
+                        ></STextInput>
+                      </SRequirement>
+                    );
+                  }}
+                  keyExtractor={(item) => String(item.id)}
+                />
               </View>
 
               <View>
@@ -336,6 +342,7 @@ const SResource = styled.View`
 
 const SGoodWrapper = styled.Pressable<{ selected?: boolean }>`
   padding-bottom: 30px;
+  padding-right: 20px;
 
   ${({ selected }) => (selected ? 'background: green' : '')}
 `;
@@ -346,6 +353,7 @@ const STextInput = styled.TextInput`
 
 const SRequirement = styled.View`
   flex-direction: row;
+  padding-right: 10px;
 `;
 
 const SSkillRequirement = styled.View`

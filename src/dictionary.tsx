@@ -455,74 +455,12 @@ export const dictionary: IDictionary = {
       },
     },
     {
-      id: 14,
-      name: 'Toxic Ingot',
-      time: 10,
-      cost: 25,
-      type: 'good',
-      requirements: {
-        resources: [
-          { id: 11, qty: 1 },
-          { id: 10, qty: 1 },
-        ],
-        upgrades: {},
-      },
-    },
-    {
-      id: 15,
-      name: 'Bronze Ingot',
-      time: 10,
-      cost: 25,
-      type: 'good',
-      requirements: {
-        resources: [
-          { id: 11, qty: 1 },
-          { id: 10, qty: 1 },
-        ],
-        upgrades: {},
-      },
-    },
-    {
-      id: 16,
-      name: 'Bronze Ingot',
-      time: 10,
-      cost: 25,
-      type: 'good',
-      requirements: {
-        resources: [
-          { id: 11, qty: 1 },
-          { id: 10, qty: 1 },
-        ],
-        upgrades: {},
-      },
-    },
-    {
-      id: 17,
-      name: 'Bronze Ingot',
-      time: 10,
-      cost: 25,
-      type: 'good',
-      requirements: {
-        resources: [
-          { id: 11, qty: 1 },
-          { id: 10, qty: 1 },
-        ],
-        upgrades: {},
-      },
-    },
-    {
       id: 18,
       name: 'Bronze Ingot',
       time: 10,
       cost: 25,
       type: 'good',
-      requirements: {
-        resources: [
-          { id: 11, qty: 1 },
-          { id: 10, qty: 1 },
-        ],
-        upgrades: {},
-      },
+      requirements: { resources: [], upgrades: {} },
     },
     {
       id: 19,
@@ -530,13 +468,7 @@ export const dictionary: IDictionary = {
       time: 10,
       cost: 25,
       type: 'good',
-      requirements: {
-        resources: [
-          { id: 11, qty: 1 },
-          { id: 10, qty: 1 },
-        ],
-        upgrades: {},
-      },
+      requirements: { resources: [{ id: 18, qty: 2 }], upgrades: {} },
     },
     {
       id: 20,
@@ -544,13 +476,7 @@ export const dictionary: IDictionary = {
       time: 10,
       cost: 25,
       type: 'good',
-      requirements: {
-        resources: [
-          { id: 11, qty: 1 },
-          { id: 10, qty: 1 },
-        ],
-        upgrades: {},
-      },
+      requirements: { resources: [{ id: 19, qty: 2 }], upgrades: {} },
     },
     {
       id: 21,
@@ -560,8 +486,8 @@ export const dictionary: IDictionary = {
       type: 'good',
       requirements: {
         resources: [
-          { id: 11, qty: 1 },
-          { id: 10, qty: 1 },
+          { id: 20, qty: 1 },
+          { id: 19, qty: 2 },
         ],
         upgrades: {},
       },
@@ -572,13 +498,7 @@ export const dictionary: IDictionary = {
       time: 10,
       cost: 25,
       type: 'good',
-      requirements: {
-        resources: [
-          { id: 11, qty: 1 },
-          { id: 10, qty: 1 },
-        ],
-        upgrades: {},
-      },
+      requirements: { resources: [], upgrades: {} },
     },
     {
       id: 23,
@@ -586,13 +506,7 @@ export const dictionary: IDictionary = {
       time: 10,
       cost: 25,
       type: 'good',
-      requirements: {
-        resources: [
-          { id: 11, qty: 1 },
-          { id: 10, qty: 1 },
-        ],
-        upgrades: {},
-      },
+      requirements: { resources: [{ id: 22, qty: 2 }], upgrades: {} },
     },
     {
       id: 24,
@@ -600,13 +514,7 @@ export const dictionary: IDictionary = {
       time: 10,
       cost: 25,
       type: 'good',
-      requirements: {
-        resources: [
-          { id: 11, qty: 1 },
-          { id: 10, qty: 1 },
-        ],
-        upgrades: {},
-      },
+      requirements: { resources: [{ id: 23, qty: 2 }], upgrades: {} },
     },
     {
       id: 25,
@@ -616,8 +524,8 @@ export const dictionary: IDictionary = {
       type: 'good',
       requirements: {
         resources: [
-          { id: 11, qty: 1 },
-          { id: 10, qty: 1 },
+          { id: 24, qty: 1 },
+          { id: 23, qty: 2 },
         ],
         upgrades: {},
       },
@@ -628,13 +536,7 @@ export const dictionary: IDictionary = {
       time: 10,
       cost: 25,
       type: 'good',
-      requirements: {
-        resources: [
-          { id: 11, qty: 1 },
-          { id: 10, qty: 1 },
-        ],
-        upgrades: {},
-      },
+      requirements: { resources: [], upgrades: {} },
     },
     {
       id: 27,
@@ -642,13 +544,7 @@ export const dictionary: IDictionary = {
       time: 10,
       cost: 25,
       type: 'good',
-      requirements: {
-        resources: [
-          { id: 11, qty: 1 },
-          { id: 10, qty: 1 },
-        ],
-        upgrades: {},
-      },
+      requirements: { resources: [{ id: 26, qty: 2 }], upgrades: {} },
     },
     {
       id: 28,
@@ -656,13 +552,7 @@ export const dictionary: IDictionary = {
       time: 10,
       cost: 25,
       type: 'good',
-      requirements: {
-        resources: [
-          { id: 11, qty: 1 },
-          { id: 10, qty: 1 },
-        ],
-        upgrades: {},
-      },
+      requirements: { resources: [{ id: 27, qty: 2 }], upgrades: {} },
     },
     {
       id: 29,
@@ -672,8 +562,8 @@ export const dictionary: IDictionary = {
       type: 'good',
       requirements: {
         resources: [
-          { id: 11, qty: 1 },
-          { id: 10, qty: 1 },
+          { id: 28, qty: 1 },
+          { id: 27, qty: 2 },
         ],
         upgrades: {},
       },
@@ -880,7 +770,7 @@ export const dictionary: IDictionary = {
       id: 200,
       name: 'Toxic Crystal',
       time: 10,
-      cost: 25,
+      cost: 100,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
     },
@@ -888,7 +778,7 @@ export const dictionary: IDictionary = {
       id: 201,
       name: 'Fire Crystal',
       time: 10,
-      cost: 25,
+      cost: 100,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
     },
@@ -896,7 +786,7 @@ export const dictionary: IDictionary = {
       id: 202,
       name: 'Silver Crystal',
       time: 10,
-      cost: 25,
+      cost: 100,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
     },
@@ -904,7 +794,7 @@ export const dictionary: IDictionary = {
       id: 203,
       name: 'Gold Crystal',
       time: 10,
-      cost: 25,
+      cost: 100,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
     },
@@ -912,7 +802,7 @@ export const dictionary: IDictionary = {
       id: 204,
       name: 'Dragon Crystal',
       time: 10,
-      cost: 25,
+      cost: 150,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
     },
@@ -920,7 +810,7 @@ export const dictionary: IDictionary = {
       id: 210,
       name: 'Cobalt Crystal',
       time: 10,
-      cost: 25,
+      cost: 50,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
     },
@@ -928,7 +818,7 @@ export const dictionary: IDictionary = {
       id: 211,
       name: 'Silver Skull',
       time: 10,
-      cost: 25,
+      cost: 50,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
     },
