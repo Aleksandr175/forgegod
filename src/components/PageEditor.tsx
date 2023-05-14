@@ -182,6 +182,24 @@ export const PageEditor = ({ dictionary }: IProps) => {
     });
   };
 
+  const addNewMineLvl = () => {
+    setData((prevData) => {
+      let newData = { ...prevData };
+
+      newData.mine.push(
+        JSON.parse(JSON.stringify(newData.mine[newData.mine.length - 1])),
+      );
+
+      newData.mine[newData.mine.length - 1] = {
+        ...newData.mine[newData.mine.length - 1],
+        id: newData.mine[newData.mine.length - 1].id + 1,
+        lvl: newData.mine[newData.mine.length - 1].lvl + 1,
+      };
+
+      return newData;
+    });
+  };
+
   return (
     <SPageEditor>
       <View style={{ flexDirection: 'row' }}>
@@ -408,10 +426,13 @@ export const PageEditor = ({ dictionary }: IProps) => {
         {tab === 'mine' && (
           <>
             <SColumnDictionary>
+              <Pressable onPress={addNewMineLvl}>
+                <CustomText>Add new lvl</CustomText>
+              </Pressable>
               <FlatList
                 style={stylesCommon.gridListFullHeight}
                 data={data.mine}
-                numColumns={3}
+                numColumns={5}
                 renderItem={({ item }) => {
                   return (
                     <SGoodWrapper
@@ -433,6 +454,17 @@ export const PageEditor = ({ dictionary }: IProps) => {
                             <View key={requirement.id}>
                               <CustomImage id={requirement.id} size={'small'} />
                               <SQty>{requirement.qty}</SQty>
+                            </View>
+                          );
+                        })}
+                      </SResources>
+
+                      <CustomText>Provide resources:</CustomText>
+                      <SResources>
+                        {item.providedResourceIds.map((id) => {
+                          return (
+                            <View key={id}>
+                              <CustomImage id={id} size={'small'} />
                             </View>
                           );
                         })}
@@ -497,7 +529,7 @@ export const PageEditor = ({ dictionary }: IProps) => {
                       <FlatList
                         style={stylesCommon.gridListFullHeight}
                         data={dictionary.goods}
-                        numColumns={10}
+                        numColumns={15}
                         renderItem={({ item }) => {
                           return (
                             <SRequirement key={item.id}>
@@ -603,6 +635,85 @@ export const PageEditor = ({ dictionary }: IProps) => {
                         }}
                         keyExtractor={(item) => String(item.id)}
                       />
+                    </View>
+
+                    <View>
+                      <CustomText>
+                        Provides resources from Expeditions:
+                      </CustomText>
+                      <FlatList
+                        style={stylesCommon.gridListFullHeight}
+                        data={dictionary.goods}
+                        numColumns={15}
+                        renderItem={({ item }) => {
+                          return (
+                            <SRequirement key={item.id}>
+                              <SProvidedResource
+                                onPress={() => {
+                                  setSelectedMine((prevState) => {
+                                    const newData = { ...prevState };
+
+                                    if (
+                                      newData.expedition.canBeFoundGoodIds.includes(
+                                        item.id,
+                                      )
+                                    ) {
+                                      newData.expedition.canBeFoundGoodIds.splice(
+                                        newData.expedition.canBeFoundGoodIds.findIndex(
+                                          (id) => id === item.id,
+                                        ),
+                                        1,
+                                      );
+                                    } else {
+                                      newData.expedition.canBeFoundGoodIds.push(
+                                        item.id,
+                                      );
+                                    }
+
+                                    return newData;
+                                  });
+                                }}
+                                selected={selectedMine.expedition.canBeFoundGoodIds.includes(
+                                  item.id,
+                                )}
+                              >
+                                <CustomImage id={item.id} size={'big'} />
+                              </SProvidedResource>
+                            </SRequirement>
+                          );
+                        }}
+                        keyExtractor={(item) => String(item.id)}
+                      />
+                      <CustomText>
+                        Expedition Cost:{' '}
+                        <STextInput
+                          onChangeText={(value) => {
+                            setSelectedMine((prevState) => {
+                              const newData = { ...prevState };
+
+                              newData.expedition.cost = Number(value);
+
+                              return newData;
+                            });
+                          }}
+                          value={String(selectedMine.expedition.cost)}
+                        />
+                      </CustomText>
+                      <CustomText>
+                        Expedition Duration (in sec):{' '}
+                        <STextInput
+                          onChangeText={(value) => {
+                            setSelectedMine((prevState) => {
+                              const newData = { ...prevState };
+
+                              newData.expedition.duration = Number(value);
+
+                              return newData;
+                            });
+                          }}
+                          value={String(selectedMine.expedition.duration)}
+                        />
+                      </CustomText>{' '}
                     </View>
                   </View>
                 )}

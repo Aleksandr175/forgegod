@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 import { CustomText } from './CustomText';
 
 interface IProps {
-  title: string;
+  title: string | ReactNode;
   children: ReactNode;
   height?: number;
 }

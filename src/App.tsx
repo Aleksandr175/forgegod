@@ -33,7 +33,7 @@ import { PageEditor } from './components/PageEditor';
 export const App = () => {
   const [page, setPage] = useState<TPage>('forge');
   const [mineLvl, setMineLvl] = useState(1);
-  const [money, setMoney] = useState(5000);
+  const [money, setMoney] = useState(20000);
   const [maxOrdersQty, setMaxOrdersQty] = useState(5);
   const [expeditionInfo, setExpeditionInfo] =
     useState<IExpeditionInfoInProcess>({} as IExpeditionInfoInProcess);
@@ -54,7 +54,21 @@ export const App = () => {
   const [maxCustomerOrdersQty, setMaxCustomerOrdersQty] = useState(3);
 
   const [selectedGoodId, setSelectedGoodId] = useState<number>(2);
-  const [storage, setStorage] = useState<IStorageGood[]>([
+
+  const getAllResources = () => {
+    const resources: IStorageGood[] = [];
+
+    dictionary.goods.forEach((good) => {
+      resources.push({
+        id: good.id,
+        qty: 1000,
+      });
+    });
+
+    return resources;
+  };
+  const [storage, setStorage] = useState<IStorageGood[]>(
+    () => getAllResources() /*[
     {
       id: 1,
       qty: 20,
@@ -119,7 +133,8 @@ export const App = () => {
       id: 39,
       qty: 1,
     },
-  ]);
+  ]*/,
+  );
 
   const addExperience = (expQty: number) => {
     setExperience((prevState) => {

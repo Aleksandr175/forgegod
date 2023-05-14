@@ -45,6 +45,18 @@ export const PageMine = ({
 
   const expeditionCost = currentMineLvlInfo?.expedition?.cost || 0;
 
+  const getNewResources = () => {
+    const newResourceIds: number[] = [];
+
+    nextLvlMineInfo?.providedResourceIds.forEach((resId) => {
+      if (!currentMineLvlInfo.providedResourceIds.includes(resId)) {
+        newResourceIds.push(resId);
+      }
+    });
+
+    return newResourceIds;
+  };
+
   return (
     <SPageMine>
       <SMineInfo>
@@ -90,7 +102,7 @@ export const PageMine = ({
 
                 <SResourcesText>It will provide you:</SResourcesText>
                 <SResources>
-                  {nextLvlMineInfo.newProvidedResourceIds.map((id) => {
+                  {getNewResources().map((id) => {
                     return (
                       <SResourceRequired key={id}>
                         <CustomImage id={id} size={'small'} />
@@ -120,7 +132,7 @@ export const PageMine = ({
         <SColumnRight>
           <Panel title={'Expedition'} height={180}>
             {currentMineLvlInfo &&
-              currentMineLvlInfo.expedition.canBeFoundGoods?.length > 0 && (
+              currentMineLvlInfo.expedition.canBeFoundGoodIds?.length > 0 && (
                 <>
                   <SResourcesText>Required:</SResourcesText>
                   <SResources>
@@ -132,11 +144,11 @@ export const PageMine = ({
 
                   <SResourcesText>You can find:</SResourcesText>
                   <SResources>
-                    {currentMineLvlInfo.expedition.canBeFoundGoods.map(
-                      (good) => {
+                    {currentMineLvlInfo.expedition.canBeFoundGoodIds.map(
+                      (goodId) => {
                         return (
-                          <SResourceRequired key={good.id}>
-                            <CustomImage id={good.id} size={'small'} />
+                          <SResourceRequired key={goodId}>
+                            <CustomImage id={goodId} size={'small'} />
                           </SResourceRequired>
                         );
                       },

@@ -827,46 +827,66 @@ export const dictionary: IDictionary = {
     {
       id: 1,
       lvl: 1,
+      cost: 300,
+      requirements: { resources: [], orderQty: 0 },
+      providedResourceIds: [5],
+      expedition: { cost: 100, duration: 15, canBeFoundGoodIds: [200] },
+    },
+    {
+      id: 2,
+      lvl: 2,
       cost: 500,
       requirements: {
         resources: [
           { id: 42, qty: 2 },
           { id: 41, qty: 2 },
         ],
-        orderQty: 0,
+        orderQty: 10,
       },
-      newProvidedResourceIds: [6],
-      providedResourceIds: [5],
-      expedition: {
-        cost: 100,
-        duration: 10,
-        canBeFoundGoods: [
-          { id: 200, qty: 1 },
-          { id: 201, qty: 1 },
-        ],
-      },
+      providedResourceIds: [5, 1],
+      expedition: { cost: 100, duration: 15, canBeFoundGoodIds: [200] },
     },
     {
-      id: 2,
-      lvl: 2,
+      id: 3,
+      lvl: 3,
       cost: 1000,
       requirements: {
         resources: [
-          { id: 31, qty: 5 },
+          { id: 31, qty: 3 },
           { id: 42, qty: 2 },
         ],
         orderQty: 10,
       },
-      newProvidedResourceIds: [10],
       providedResourceIds: [5, 1, 2],
-      expedition: {
-        cost: 100,
-        duration: 15,
-        canBeFoundGoods: [
-          { id: 200, qty: 2 },
-          { id: 201, qty: 1 },
+      expedition: { cost: 100, duration: 15, canBeFoundGoodIds: [200] },
+    },
+    {
+      id: 4,
+      lvl: 4,
+      cost: 1500,
+      requirements: {
+        resources: [
+          { id: 31, qty: 3 },
+          { id: 32, qty: 2 },
         ],
+        orderQty: 10,
       },
+      providedResourceIds: [5, 1, 2, 6],
+      expedition: { cost: 100, duration: 15, canBeFoundGoodIds: [200] },
+    },
+    {
+      id: 5,
+      lvl: 5,
+      cost: 2500,
+      requirements: {
+        resources: [
+          { id: 31, qty: 4 },
+          { id: 32, qty: 3 },
+        ],
+        orderQty: 10,
+      },
+      providedResourceIds: [5, 1, 2, 3, 6],
+      expedition: { cost: 120, duration: 20, canBeFoundGoodIds: [200, 201] },
     },
   ],
   liberateCities: [

@@ -56,12 +56,11 @@ export interface IMine {
     resources: IGoodInfo[];
     orderQty?: number;
   };
-  newProvidedResourceIds: number[];
   providedResourceIds: number[];
   expedition: {
     cost: number;
     duration: number;
-    canBeFoundGoods: IStorageGood[];
+    canBeFoundGoodIds: number[];
   };
 }
 
