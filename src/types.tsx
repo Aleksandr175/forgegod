@@ -49,13 +49,11 @@ export interface ILiberateCity {
 }
 
 export interface IMine {
+  id: number;
   lvl: number;
+  cost: number;
   requirements: {
     resources: IGoodInfo[];
-    upgrades?: {
-      minerLvl?: number;
-    };
-    money: number;
     orderQty?: number;
   };
   newProvidedResourceIds: number[];
@@ -124,3 +122,5 @@ export interface IExpeditionInfoInProcess {
   mineLvl: number;
   canBeFoundGoods: IStorageGood[];
 }
+
+export type TTab = 'goods' | 'mine' | 'cities';

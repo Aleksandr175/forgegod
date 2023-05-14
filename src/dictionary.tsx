@@ -826,11 +826,11 @@ export const dictionary: IDictionary = {
   // goods2: GOODS,
   mine: [
     {
+      id: 1,
       lvl: 1,
+      cost: 500,
       requirements: {
         resources: [],
-        upgrades: {},
-        money: 500,
         orderQty: 0,
       },
       newProvidedResourceIds: [6],
@@ -851,15 +851,15 @@ export const dictionary: IDictionary = {
       },
     },
     {
+      id: 2,
       lvl: 2,
+      cost: 1000,
       requirements: {
         resources: [
           { id: 2, qty: 20 },
           { id: 3, qty: 20 },
           { id: 4, qty: 20 },
         ],
-        upgrades: {},
-        money: 1000,
         orderQty: 10,
       },
       newProvidedResourceIds: [10],
