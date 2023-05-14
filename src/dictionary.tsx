@@ -823,30 +823,20 @@ export const dictionary: IDictionary = {
       requirements: { resources: [], upgrades: {} },
     },
   ],
-  // goods2: GOODS,
   mine: [
     {
       id: 1,
       lvl: 1,
       cost: 500,
-      requirements: {
-        resources: [],
-        orderQty: 0,
-      },
+      requirements: { resources: [], orderQty: 0 },
       newProvidedResourceIds: [6],
       providedResourceIds: [6],
       expedition: {
         cost: 100,
         duration: 10,
         canBeFoundGoods: [
-          {
-            id: 200,
-            qty: 1,
-          },
-          {
-            id: 201,
-            qty: 1,
-          },
+          { id: 200, qty: 1 },
+          { id: 201, qty: 1 },
         ],
       },
     },
@@ -868,14 +858,8 @@ export const dictionary: IDictionary = {
         cost: 100,
         duration: 15,
         canBeFoundGoods: [
-          {
-            id: 200,
-            qty: 2,
-          },
-          {
-            id: 201,
-            qty: 1,
-          },
+          { id: 200, qty: 2 },
+          { id: 201, qty: 1 },
         ],
       },
     },
@@ -885,14 +869,8 @@ export const dictionary: IDictionary = {
       id: 1,
       name: 'Arkturis',
       resources: [
-        {
-          id: 1,
-          qty: 1,
-        },
-        {
-          id: 2,
-          qty: 3,
-        },
+        { id: 1, qty: 1 },
+        { id: 2, qty: 3 },
       ],
       experience: 1000,
     },
@@ -900,63 +878,23 @@ export const dictionary: IDictionary = {
       id: 2,
       name: 'Mythradon',
       resources: [
-        {
-          id: 1,
-          qty: 1,
-        },
-        {
-          id: 2,
-          qty: 3,
-        },
+        { id: 1, qty: 1 },
+        { id: 2, qty: 3 },
       ],
       experience: 3000,
     },
   ],
-  /*experienceLevels: [
-    50, 300, 1000, 1800, 3000, 5000, 8500, 12000, 16000, 21500, 27000, 34000,
-    42000, 50000, 60000, 74000, 91000, 110000, 130000, 160000,
-  ],*/
   heroLvls: [
-    {
-      id: 1,
-      experience: 50,
-    },
-    {
-      id: 2,
-      experience: 300,
-    },
-    {
-      id: 3,
-      experience: 1000,
-    },
-    {
-      id: 4,
-      experience: 1800,
-    },
-    {
-      id: 5,
-      experience: 3000,
-    },
-    {
-      id: 6,
-      experience: 5000,
-    },
-    {
-      id: 7,
-      experience: 8500,
-    },
-    {
-      id: 8,
-      experience: 12000,
-    },
-    {
-      id: 9,
-      experience: 16000,
-    },
-    {
-      id: 10,
-      experience: 21000,
-    },
+    { id: 1, experience: 50 },
+    { id: 2, experience: 300 },
+    { id: 3, experience: 1000 },
+    { id: 4, experience: 1800 },
+    { id: 5, experience: 3000 },
+    { id: 6, experience: 5000 },
+    { id: 7, experience: 8500 },
+    { id: 8, experience: 12000 },
+    { id: 9, experience: 16000 },
+    { id: 10, experience: 21000 },
   ],
   skills: [
     {
@@ -967,25 +905,19 @@ export const dictionary: IDictionary = {
           level: 1,
           skillId: 1,
           description: 'Increase amount of money from orders by 5%',
-          requirements: {
-            money: 500,
-          },
+          requirements: { money: 500 },
         },
         {
           level: 2,
           skillId: 2,
           description: 'Increase amount of money from orders by 10%',
-          requirements: {
-            money: 1000,
-          },
+          requirements: { money: 1000 },
         },
         {
           level: 3,
           skillId: 3,
           description: 'Increase amount of money from orders by 15%',
-          requirements: {
-            money: 3000,
-          },
+          requirements: { money: 3000 },
         },
       ],
     },
@@ -997,25 +929,19 @@ export const dictionary: IDictionary = {
           level: 1,
           skillId: 4,
           description: 'Increase max number of available customer orders by 1',
-          requirements: {
-            money: 500,
-          },
+          requirements: { money: 500 },
         },
         {
           level: 2,
           skillId: 5,
           description: 'Increase max number of available customer orders by 2',
-          requirements: {
-            money: 1000,
-          },
+          requirements: { money: 1000 },
         },
         {
           level: 3,
           skillId: 6,
           description: 'Increase max number of available customer orders by 3',
-          requirements: {
-            money: 3000,
-          },
+          requirements: { money: 3000 },
         },
       ],
     },
@@ -1027,25 +953,19 @@ export const dictionary: IDictionary = {
           level: 1,
           skillId: 7,
           description: 'You can create swords, axes',
-          requirements: {
-            money: 500,
-          },
+          requirements: { money: 500 },
         },
         {
           level: 2,
           skillId: 8,
           description: 'You can create bows, hammers and scythes',
-          requirements: {
-            money: 1000,
-          },
+          requirements: { money: 1000 },
         },
         {
           level: 3,
           skillId: 9,
           description: 'You can create scepters and wands',
-          requirements: {
-            money: 3000,
-          },
+          requirements: { money: 3000 },
         },
       ],
     },
@@ -1057,17 +977,13 @@ export const dictionary: IDictionary = {
           level: 1,
           skillId: 10,
           description: 'You can create shields',
-          requirements: {
-            money: 500,
-          },
+          requirements: { money: 500 },
         },
         {
           level: 2,
           skillId: 11,
           description: 'You can create bracers',
-          requirements: {
-            money: 1000,
-          },
+          requirements: { money: 1000 },
         },
       ],
     },
@@ -1079,25 +995,19 @@ export const dictionary: IDictionary = {
           level: 1,
           skillId: 12,
           description: 'You can have 4 orders in progress',
-          requirements: {
-            money: 500,
-          },
+          requirements: { money: 500 },
         },
         {
           level: 2,
           skillId: 13,
           description: 'You can have 5 orders in progress',
-          requirements: {
-            money: 1000,
-          },
+          requirements: { money: 1000 },
         },
         {
           level: 3,
           skillId: 14,
           description: 'You can have 7 orders in progress',
-          requirements: {
-            money: 3000,
-          },
+          requirements: { money: 3000 },
         },
       ],
     },
@@ -1109,25 +1019,19 @@ export const dictionary: IDictionary = {
           level: 1,
           skillId: 15,
           description: 'You can hire 2 worker',
-          requirements: {
-            money: 1500,
-          },
+          requirements: { money: 1500 },
         },
         {
           level: 2,
           skillId: 16,
           description: 'You can hire 3 worker',
-          requirements: {
-            money: 3000,
-          },
+          requirements: { money: 3000 },
         },
         {
           level: 3,
           skillId: 17,
           description: 'You can hire 4 worker',
-          requirements: {
-            money: 5000,
-          },
+          requirements: { money: 5000 },
         },
       ],
     },
@@ -1139,9 +1043,7 @@ export const dictionary: IDictionary = {
           level: 1,
           skillId: 18,
           description: 'You can enchant things',
-          requirements: {
-            money: 6500,
-          },
+          requirements: { money: 6500 },
         },
       ],
     },

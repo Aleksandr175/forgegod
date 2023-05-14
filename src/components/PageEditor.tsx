@@ -56,6 +56,30 @@ export const PageEditor = ({ dictionary }: IProps) => {
     });
   };
 
+  const updateItemRequiredMineResources = (requiredResources: IGoodInfo[]) => {
+    let processedRequiredResources = [...requiredResources].filter(
+      (resource) => {
+        return resource.qty > 0;
+      },
+    );
+
+    setData((prevData) => {
+      let newData = { ...prevData };
+
+      newData.mine = newData.mine.map((item) => {
+        if (item.id === selectedMine.id) {
+          item.requirements.resources = [...processedRequiredResources];
+        }
+
+        console.log(item.requirements.resources);
+
+        return item;
+      });
+
+      return newData;
+    });
+  };
+
   const setRequiredSkill = (skillId: number) => {
     setData((prevData) => {
       let newData = { ...prevData };
@@ -87,6 +111,13 @@ export const PageEditor = ({ dictionary }: IProps) => {
   const getRequirementQty = (goodId: number) => {
     return (
       selectedGood.requirements.resources.find((good) => good.id === goodId)
+        ?.qty || ''
+    );
+  };
+
+  const getRequirementMineQty = (goodId: number) => {
+    return (
+      selectedMine.requirements.resources.find((good) => good.id === goodId)
         ?.qty || ''
     );
   };
@@ -307,8 +338,7 @@ export const PageEditor = ({ dictionary }: IProps) => {
                                     return {
                                       ...prevState,
                                       requirements: {
-                                        upgrades:
-                                          prevState.requirements.upgrades,
+                                        ...prevState.requirements,
                                         resources: requirementResources,
                                       },
                                     };
@@ -373,7 +403,6 @@ export const PageEditor = ({ dictionary }: IProps) => {
                       selected={selectedMine.id === item.id}
                     >
                       <View>
-                        <CustomImage id={item.id} size={'big'} />
                         <CustomText>
                           ID: {item.id}, Lvl: {item.lvl}
                         </CustomText>
@@ -403,7 +432,6 @@ export const PageEditor = ({ dictionary }: IProps) => {
                 {selectedMine && (
                   <View>
                     <View>
-                      <CustomImage id={selectedMine.id} size={'big'} />
                       <CustomText>
                         ID:
                         {selectedMine.id}, Lvl:{' '}
@@ -460,9 +488,9 @@ export const PageEditor = ({ dictionary }: IProps) => {
                               <CustomImage id={item.id} size={'big'} />
                               <STextInput
                                 onChangeText={(value) => {
-                                  setSelectedGood((prevState) => {
+                                  setSelectedMine((prevState) => {
                                     let requirementResources = [
-                                      ...selectedGood.requirements.resources,
+                                      ...selectedMine.requirements.resources,
                                     ];
 
                                     let hasUpdated = false;
@@ -489,21 +517,20 @@ export const PageEditor = ({ dictionary }: IProps) => {
                                       });
                                     }
 
-                                    updateItemRequiredResources(
+                                    updateItemRequiredMineResources(
                                       requirementResources,
                                     );
 
                                     return {
                                       ...prevState,
                                       requirements: {
-                                        upgrades:
-                                          prevState.requirements.upgrades,
+                                        ...prevState.requirements,
                                         resources: requirementResources,
                                       },
                                     };
                                   });
                                 }}
-                                value={String(getRequirementQty(item.id))}
+                                value={String(getRequirementMineQty(item.id))}
                               ></STextInput>
                             </SRequirement>
                           );
