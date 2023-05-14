@@ -57,7 +57,14 @@ export const PageMine = ({
 
       <SColumnsWrapper>
         <SColumnLeft>
-          <Panel title={'Improve Mine'} height={180}>
+          <Panel
+            title={
+              <>
+                Improve Mine {currentMineLvlInfo.lvl} / {dictionary.length}
+              </>
+            }
+            height={180}
+          >
             {nextLvlMineInfo &&
             nextLvlMineInfo.requirements.resources?.length > 0 ? (
               <>
@@ -77,7 +84,7 @@ export const PageMine = ({
 
                   <SResourceRequired>
                     <SImage source={require('../images/gold.png')} />
-                    <SQty>{nextLvlMineInfo.requirements.money}</SQty>
+                    <SQty>{nextLvlMineInfo.cost}</SQty>
                   </SResourceRequired>
                 </SResources>
 

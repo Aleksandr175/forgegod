@@ -422,7 +422,7 @@ export const App = () => {
           removeFromStorage(resource.id, resource.qty);
         });
 
-        addMoney(-mineInfo.requirements.money);
+        addMoney(-mineInfo.cost);
       }
     }
   };

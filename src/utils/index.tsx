@@ -38,7 +38,7 @@ export const hasEnoughResourcesToImproveMine = (
     mineInfo.requirements.resources,
   );
 
-  const hasMoney = money >= mineInfo.requirements.money;
+  const hasMoney = money >= mineInfo.cost;
 
   return hasMoney && hasResources;
 };

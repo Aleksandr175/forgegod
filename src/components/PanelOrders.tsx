@@ -15,7 +15,7 @@ interface IProps {
 
 export const PanelOrders = ({ orders, maxOrdersQty }: IProps) => {
   return (
-    <Panel title={'In Process ' + orders.length + '/' + maxOrdersQty}>
+    <Panel title={'In Process ' + orders.length + ' / ' + maxOrdersQty}>
       {orders.length === 0 && (
         <CustomText>
           No current orders. You can order something in the right panel
