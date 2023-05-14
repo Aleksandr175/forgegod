@@ -166,6 +166,22 @@ export const PageEditor = ({ dictionary }: IProps) => {
     });
   };
 
+  const updateItemProvidedMineResources = (providedResourcesId: number[]) => {
+    setData((prevData) => {
+      let newData = { ...prevData };
+
+      newData.mine = newData.mine.map((item) => {
+        if (item.id === selectedMine.id) {
+          item.providedResourceIds = providedResourcesId;
+        }
+
+        return item;
+      });
+
+      return newData;
+    });
+  };
+
   return (
     <SPageEditor>
       <View style={{ flexDirection: 'row' }}>
@@ -473,6 +489,56 @@ export const PageEditor = ({ dictionary }: IProps) => {
                           value={String(selectedMine.cost)}
                         />
                       </CustomText>
+                    </View>
+
+                    <View>
+                      <CustomText>Provides resources:</CustomText>
+
+                      <FlatList
+                        style={stylesCommon.gridListFullHeight}
+                        data={dictionary.goods}
+                        numColumns={10}
+                        renderItem={({ item }) => {
+                          return (
+                            <SRequirement key={item.id}>
+                              <SProvidedResource
+                                onPress={() => {
+                                  setSelectedMine((prevState) => {
+                                    const newData = { ...prevState };
+
+                                    if (
+                                      newData.providedResourceIds.includes(
+                                        item.id,
+                                      )
+                                    ) {
+                                      newData.providedResourceIds.splice(
+                                        newData.providedResourceIds.findIndex(
+                                          (id) => id === item.id,
+                                        ),
+                                        1,
+                                      );
+                                    } else {
+                                      newData.providedResourceIds.push(item.id);
+                                    }
+
+                                    updateItemProvidedMineResources(
+                                      newData.providedResourceIds,
+                                    );
+
+                                    return newData;
+                                  });
+                                }}
+                                selected={selectedMine.providedResourceIds.includes(
+                                  item.id,
+                                )}
+                              >
+                                <CustomImage id={item.id} size={'big'} />
+                              </SProvidedResource>
+                            </SRequirement>
+                          );
+                        }}
+                        keyExtractor={(item) => String(item.id)}
+                      />
                     </View>
 
                     <View>
@@ -808,5 +874,9 @@ const SSkillRequirement = styled.View`
 `;
 
 const SSkill = styled.Pressable<{ selected?: boolean }>`
+  ${({ selected }) => (selected ? 'background: green' : '')}
+`;
+
+const SProvidedResource = styled.Pressable<{ selected?: boolean }>`
   ${({ selected }) => (selected ? 'background: green' : '')}
 `;

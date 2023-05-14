@@ -828,9 +828,15 @@ export const dictionary: IDictionary = {
       id: 1,
       lvl: 1,
       cost: 500,
-      requirements: { resources: [], orderQty: 0 },
+      requirements: {
+        resources: [
+          { id: 42, qty: 2 },
+          { id: 41, qty: 2 },
+        ],
+        orderQty: 0,
+      },
       newProvidedResourceIds: [6],
-      providedResourceIds: [6],
+      providedResourceIds: [5],
       expedition: {
         cost: 100,
         duration: 10,
@@ -846,14 +852,13 @@ export const dictionary: IDictionary = {
       cost: 1000,
       requirements: {
         resources: [
-          { id: 2, qty: 20 },
-          { id: 3, qty: 20 },
-          { id: 4, qty: 20 },
+          { id: 31, qty: 5 },
+          { id: 42, qty: 2 },
         ],
         orderQty: 10,
       },
       newProvidedResourceIds: [10],
-      providedResourceIds: [6, 10],
+      providedResourceIds: [5, 1, 2],
       expedition: {
         cost: 100,
         duration: 15,
