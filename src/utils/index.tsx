@@ -49,3 +49,13 @@ export const resourceQtyInStorage = (
 ) => {
   return storage.find((good) => good.id === goodId)?.qty || 0;
 };
+
+// Helper function to shuffle an array in-place using Fisher-Yates algorithm
+export const shuffleArray = <T,>(array: T[]): T[] => {
+  const newArray = array.slice();
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
+};

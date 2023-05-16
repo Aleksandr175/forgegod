@@ -2,7 +2,11 @@ import { ICustomerOrder, IGoodInfo, IStorageGood } from '../types';
 import { useEffect, useRef, useState } from 'react';
 import { dictionary } from '../dictionary';
 import { nanoid } from 'nanoid';
-import { hasEnoughResources, randomIntFromInterval } from '../utils';
+import {
+  hasEnoughResources,
+  randomIntFromInterval,
+  shuffleArray,
+} from '../utils';
 
 interface IProps {
   storage: IStorageGood[];
@@ -82,21 +86,21 @@ export const useCustomerOrdersLogic = ({
       return item.type === 'good' && haveSkills;
     });
 
-    const qtyTypeOfGoods = randomIntFromInterval(1, 2);
-    const goods = [];
+    const qtyTypeOfGoods = Math.min(
+      randomIntFromInterval(1, 2),
+      possibleGoods.length,
+    );
+    const shuffledGoods = shuffleArray(possibleGoods);
+    const goods: IGoodInfo[] = [];
     let timeLeft = 0;
     let cost = 0;
 
     for (let i = 0; i < qtyTypeOfGoods; i++) {
-      const randomGoodIndex = randomIntFromInterval(
-        0,
-        possibleGoods.length - 1,
-      );
+      const good = shuffledGoods[i];
       const qty = randomIntFromInterval(1, 3);
-      const good = possibleGoods[randomGoodIndex];
 
       goods.push({
-        id: possibleGoods[randomGoodIndex].id,
+        id: good.id,
         qty,
       });
 
