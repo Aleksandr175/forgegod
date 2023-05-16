@@ -279,26 +279,22 @@ export const App = () => {
     });
   };
 
-  const removeFromStorage = (goodId: number, qty: number) => {
+  const removeFromStorage = (goodId: number, qty: number): void => {
     setStorage((prevStorage) => {
-      let newStorage = [...prevStorage];
-      const index = newStorage.findIndex(
+      const newStorage = [...prevStorage];
+      const itemIndex: number = newStorage.findIndex(
         (storageItem) => storageItem.id === goodId,
       );
 
-      if (index > -1) {
-        // update qty
-        newStorage[index].qty -= qty;
-
-        if (newStorage[index].qty < 0) {
-          newStorage[index].qty = 0;
-        }
+      if (itemIndex > -1) {
+        // Update existing item's quantity
+        newStorage[itemIndex].qty = Math.max(
+          0,
+          newStorage[itemIndex].qty - qty,
+        );
       } else {
-        // add new storage item
-        newStorage.push({
-          id: goodId,
-          qty: qty,
-        });
+        // Add new storage item
+        newStorage.push({ id: goodId, qty: Math.max(0, qty) });
       }
 
       return newStorage;
@@ -347,8 +343,8 @@ export const App = () => {
   };
 
   const getGoodsFromExpedition = (expedition: IExpeditionInfoInProcess) => {
-    expedition.canBeFoundGoods.map((good) => {
-      addToStorage(good.id, good.qty);
+    expedition.canBeFoundGoodIds.map((goodId) => {
+      addToStorage(goodId, 1);
     });
   };
 
@@ -456,8 +452,8 @@ export const App = () => {
 
       setExpeditionInfo({
         duration: mine.expedition.duration,
-        mineLvl: mine.nextLvl,
-        canBeFoundGoods: mine.expedition.canBeFoundGoods,
+        mineLvl: mine.lvl,
+        canBeFoundGoodIds: mine.expedition.canBeFoundGoodIds,
       });
     }
   };

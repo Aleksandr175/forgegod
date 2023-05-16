@@ -119,7 +119,7 @@ export type TPage =
 export interface IExpeditionInfoInProcess {
   duration: number;
   mineLvl: number;
-  canBeFoundGoods: IStorageGood[];
+  canBeFoundGoodIds: number[];
 }
 
 export type TTab = 'goods' | 'mine' | 'cities';
