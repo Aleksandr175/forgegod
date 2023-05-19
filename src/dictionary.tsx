@@ -767,6 +767,327 @@ export const dictionary: IDictionary = {
       },
     },
     {
+      id: 50,
+      name: 'Knife',
+      time: 20,
+      cost: 35,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 2, qty: 2 },
+          { id: 3, qty: 2 },
+        ],
+        upgrades: {},
+      },
+    },
+    {
+      id: 51,
+      name: 'Long Sword',
+      time: 20,
+      cost: 65,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 2, qty: 4 },
+          { id: 4, qty: 1 },
+        ],
+        upgrades: { skillIds: [7] },
+      },
+    },
+    {
+      id: 52,
+      name: 'Axe',
+      time: 30,
+      cost: 80,
+      type: 'good',
+      requirements: {
+        resources: [{ id: 4, qty: 2 }],
+        upgrades: { skillIds: [7] },
+      },
+    },
+    {
+      id: 53,
+      name: 'Bronze Bow',
+      time: 25,
+      cost: 55,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 7, qty: 1 },
+          { id: 9, qty: 1 },
+        ],
+        upgrades: { skillIds: [8] },
+      },
+    },
+    {
+      id: 54,
+      name: 'Bronze Axe',
+      time: 40,
+      cost: 125,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 9, qty: 2 },
+          { id: 7, qty: 2 },
+        ],
+        upgrades: { skillIds: [7] },
+      },
+    },
+    {
+      id: 55,
+      name: 'Bronze Bracers',
+      time: 40,
+      cost: 130,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 8, qty: 1 },
+          { id: 9, qty: 2 },
+        ],
+        upgrades: { skillIds: [11] },
+      },
+    },
+    {
+      id: 56,
+      name: 'Bronze Shield',
+      time: 35,
+      cost: 100,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 4, qty: 1 },
+          { id: 9, qty: 1 },
+        ],
+        upgrades: { skillIds: [10] },
+      },
+    },
+    {
+      id: 57,
+      name: 'Bronze Scepter',
+      time: 75,
+      cost: 205,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 8, qty: 2 },
+          { id: 9, qty: 3 },
+        ],
+        upgrades: { skillIds: [9] },
+      },
+    },
+    {
+      id: 58,
+      name: 'Scythe',
+      time: 45,
+      cost: 125,
+      type: 'good',
+      requirements: {
+        resources: [{ id: 4, qty: 3 }],
+        upgrades: { skillIds: [8] },
+      },
+    },
+    {
+      id: 59,
+      name: 'Bronze Wand',
+      time: 65,
+      cost: 175,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 8, qty: 4 },
+          { id: 9, qty: 1 },
+        ],
+        upgrades: { skillIds: [9] },
+      },
+    },
+    {
+      id: 61,
+      name: 'Knife',
+      time: 20,
+      cost: 35,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 2, qty: 2 },
+          { id: 3, qty: 2 },
+        ],
+        upgrades: {},
+      },
+    },
+    {
+      id: 63,
+      name: 'Long Sword',
+      time: 20,
+      cost: 65,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 2, qty: 4 },
+          { id: 4, qty: 1 },
+        ],
+        upgrades: { skillIds: [7] },
+      },
+    },
+    {
+      id: 64,
+      name: 'Axe',
+      time: 30,
+      cost: 80,
+      type: 'good',
+      requirements: {
+        resources: [{ id: 4, qty: 2 }],
+        upgrades: { skillIds: [7] },
+      },
+    },
+    {
+      id: 65,
+      name: 'Bronze Bow',
+      time: 25,
+      cost: 55,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 7, qty: 1 },
+          { id: 9, qty: 1 },
+        ],
+        upgrades: { skillIds: [8] },
+      },
+    },
+    {
+      id: 66,
+      name: 'Bronze Axe',
+      time: 40,
+      cost: 125,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 9, qty: 2 },
+          { id: 7, qty: 2 },
+        ],
+        upgrades: { skillIds: [7] },
+      },
+    },
+    {
+      id: 67,
+      name: 'Bronze Bracers',
+      time: 40,
+      cost: 130,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 8, qty: 1 },
+          { id: 9, qty: 2 },
+        ],
+        upgrades: { skillIds: [11] },
+      },
+    },
+    {
+      id: 70,
+      name: 'Scythe',
+      time: 45,
+      cost: 125,
+      type: 'good',
+      requirements: {
+        resources: [{ id: 4, qty: 3 }],
+        upgrades: { skillIds: [8] },
+      },
+    },
+    {
+      id: 71,
+      name: 'Bronze Wand',
+      time: 65,
+      cost: 175,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 8, qty: 4 },
+          { id: 9, qty: 1 },
+        ],
+        upgrades: { skillIds: [9] },
+      },
+    },
+    {
+      id: 72,
+      name: 'Knife',
+      time: 20,
+      cost: 35,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 2, qty: 2 },
+          { id: 3, qty: 2 },
+        ],
+        upgrades: {},
+      },
+    },
+    {
+      id: 73,
+      name: 'Long Sword',
+      time: 20,
+      cost: 65,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 2, qty: 4 },
+          { id: 4, qty: 1 },
+        ],
+        upgrades: { skillIds: [7] },
+      },
+    },
+    {
+      id: 75,
+      name: 'Axe',
+      time: 30,
+      cost: 80,
+      type: 'good',
+      requirements: {
+        resources: [{ id: 4, qty: 2 }],
+        upgrades: { skillIds: [7] },
+      },
+    },
+    {
+      id: 76,
+      name: 'Bronze Bow',
+      time: 25,
+      cost: 55,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 7, qty: 1 },
+          { id: 9, qty: 1 },
+        ],
+        upgrades: { skillIds: [8] },
+      },
+    },
+    {
+      id: 77,
+      name: 'Bronze Axe',
+      time: 40,
+      cost: 125,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 9, qty: 2 },
+          { id: 7, qty: 2 },
+        ],
+        upgrades: { skillIds: [7] },
+      },
+    },
+    {
+      id: 78,
+      name: 'Bronze Bracers',
+      time: 40,
+      cost: 130,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 8, qty: 1 },
+          { id: 9, qty: 2 },
+        ],
+        upgrades: { skillIds: [11] },
+      },
+    },
+    {
       id: 200,
       name: 'Toxic Crystal',
       time: 10,
@@ -886,7 +1207,78 @@ export const dictionary: IDictionary = {
         orderQty: 10,
       },
       providedResourceIds: [5, 1, 2, 3, 6],
-      expedition: { cost: 120, duration: 20, canBeFoundGoodIds: [200, 201] },
+      expedition: { cost: 120, duration: 20, canBeFoundGoodIds: [200] },
+    },
+    {
+      id: 6,
+      lvl: 6,
+      cost: 3000,
+      requirements: {
+        resources: [
+          { id: 32, qty: 5 },
+          { id: 33, qty: 2 },
+        ],
+        orderQty: 10,
+      },
+      providedResourceIds: [5, 1, 2, 3, 6, 7],
+      expedition: { cost: 150, duration: 25, canBeFoundGoodIds: [200, 201] },
+    },
+    {
+      id: 7,
+      lvl: 7,
+      cost: 4000,
+      requirements: {
+        resources: [
+          { id: 33, qty: 2 },
+          { id: 34, qty: 2 },
+        ],
+        orderQty: 10,
+      },
+      providedResourceIds: [5, 1, 2, 3, 6, 7, 8],
+      expedition: { cost: 150, duration: 25, canBeFoundGoodIds: [200, 201] },
+    },
+    {
+      id: 8,
+      lvl: 8,
+      cost: 5000,
+      requirements: {
+        resources: [
+          { id: 33, qty: 2 },
+          { id: 34, qty: 2 },
+          { id: 36, qty: 2 },
+        ],
+        orderQty: 10,
+      },
+      providedResourceIds: [5, 1, 2, 3, 6, 7, 8, 10],
+      expedition: { cost: 150, duration: 25, canBeFoundGoodIds: [200, 201] },
+    },
+    {
+      id: 9,
+      lvl: 9,
+      cost: 6000,
+      requirements: {
+        resources: [
+          { id: 34, qty: 2 },
+          { id: 36, qty: 4 },
+        ],
+        orderQty: 10,
+      },
+      providedResourceIds: [5, 1, 2, 3, 6, 7, 8, 10, 11],
+      expedition: { cost: 150, duration: 25, canBeFoundGoodIds: [200, 201] },
+    },
+    {
+      id: 10,
+      lvl: 10,
+      cost: 7000,
+      requirements: {
+        resources: [
+          { id: 34, qty: 2 },
+          { id: 36, qty: 4 },
+        ],
+        orderQty: 10,
+      },
+      providedResourceIds: [5, 1, 2, 3, 6, 7, 8, 10, 11, 12],
+      expedition: { cost: 150, duration: 25, canBeFoundGoodIds: [200, 201] },
     },
   ],
   liberateCities: [

@@ -432,10 +432,10 @@ export const PageEditor = ({ dictionary }: IProps) => {
               <FlatList
                 style={stylesCommon.gridListFullHeight}
                 data={data.mine}
-                numColumns={5}
+                numColumns={3}
                 renderItem={({ item }) => {
                   return (
-                    <SGoodWrapper
+                    <SMineGoodWrapper
                       onPress={() => setSelectedMine(item)}
                       selected={selectedMine.id === item.id}
                     >
@@ -448,7 +448,7 @@ export const PageEditor = ({ dictionary }: IProps) => {
                         <CustomText>Cost: {item.cost}</CustomText>
                       </View>
                       <CustomText>Requirements:</CustomText>
-                      <SResources>
+                      <SResourcesMines>
                         {item.requirements.resources.map((requirement) => {
                           return (
                             <View key={requirement.id}>
@@ -457,10 +457,10 @@ export const PageEditor = ({ dictionary }: IProps) => {
                             </View>
                           );
                         })}
-                      </SResources>
+                      </SResourcesMines>
 
                       <CustomText>Provide resources:</CustomText>
-                      <SResources>
+                      <SResourcesMines>
                         {item.providedResourceIds.map((id) => {
                           return (
                             <View key={id}>
@@ -468,8 +468,8 @@ export const PageEditor = ({ dictionary }: IProps) => {
                             </View>
                           );
                         })}
-                      </SResources>
-                    </SGoodWrapper>
+                      </SResourcesMines>
+                    </SMineGoodWrapper>
                   );
                 }}
                 keyExtractor={(item) => String(item.id)}
@@ -971,6 +971,14 @@ const SGoodWrapper = styled.Pressable<{ selected?: boolean }>`
   ${({ selected }) => (selected ? 'background: green' : '')}
 `;
 
+const SMineGoodWrapper = styled.Pressable<{ selected?: boolean }>`
+  padding-bottom: 30px;
+  padding-right: 20px;
+  width: 200px;
+
+  ${({ selected }) => (selected ? 'background: green' : '')}
+`;
+
 const STextInput = styled.TextInput`
   background: white;
 `;
@@ -990,4 +998,11 @@ const SSkill = styled.Pressable<{ selected?: boolean }>`
 
 const SProvidedResource = styled.Pressable<{ selected?: boolean }>`
   ${({ selected }) => (selected ? 'background: green' : '')}
+`;
+
+const SResourcesMines = styled.View`
+  gap: 0 10px;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
 `;
