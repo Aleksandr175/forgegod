@@ -359,7 +359,7 @@ export const dictionary: IDictionary = {
     {
       id: 4,
       name: 'Blue Ingot',
-      time: 15,
+      time: 22,
       cost: 34,
       type: 'good',
       requirements: {
@@ -419,8 +419,8 @@ export const dictionary: IDictionary = {
     {
       id: 10,
       name: 'Row Bronze Ore',
-      time: 2,
-      cost: 3,
+      time: 3,
+      cost: 5,
       type: 'resource',
       requirements: { resources: [], upgrades: {} },
     },
@@ -428,7 +428,7 @@ export const dictionary: IDictionary = {
       id: 11,
       name: 'Bronze Ore',
       time: 3,
-      cost: 7,
+      cost: 13,
       type: 'good',
       requirements: { resources: [{ id: 10, qty: 2 }], upgrades: {} },
     },
@@ -436,20 +436,20 @@ export const dictionary: IDictionary = {
       id: 12,
       name: 'Bronze Powder',
       time: 5,
-      cost: 10,
+      cost: 35,
       type: 'good',
       requirements: { resources: [{ id: 11, qty: 2 }], upgrades: {} },
     },
     {
       id: 13,
       name: 'Bronze Ingot',
-      time: 10,
-      cost: 25,
+      time: 13,
+      cost: 75,
       type: 'good',
       requirements: {
         resources: [
-          { id: 11, qty: 1 },
-          { id: 10, qty: 1 },
+          { id: 11, qty: 2 },
+          { id: 12, qty: 1 },
         ],
         upgrades: {},
       },
@@ -457,8 +457,8 @@ export const dictionary: IDictionary = {
     {
       id: 18,
       name: 'Bronze Ingot',
-      time: 10,
-      cost: 25,
+      time: 4,
+      cost: 7,
       type: 'good',
       requirements: { resources: [], upgrades: {} },
     },
@@ -466,23 +466,23 @@ export const dictionary: IDictionary = {
       id: 19,
       name: 'Bronze Ingot',
       time: 10,
-      cost: 25,
+      cost: 17,
       type: 'good',
       requirements: { resources: [{ id: 18, qty: 2 }], upgrades: {} },
     },
     {
       id: 20,
       name: 'Bronze Ingot',
-      time: 10,
-      cost: 25,
+      time: 23,
+      cost: 40,
       type: 'good',
       requirements: { resources: [{ id: 19, qty: 2 }], upgrades: {} },
     },
     {
       id: 21,
       name: 'Bronze Ingot',
-      time: 10,
-      cost: 25,
+      time: 50,
+      cost: 90,
       type: 'good',
       requirements: {
         resources: [
@@ -495,32 +495,32 @@ export const dictionary: IDictionary = {
     {
       id: 22,
       name: 'Bronze Ingot',
-      time: 10,
-      cost: 25,
+      time: 2,
+      cost: 4,
       type: 'good',
       requirements: { resources: [], upgrades: {} },
     },
     {
       id: 23,
       name: 'Bronze Ingot',
-      time: 10,
-      cost: 25,
+      time: 6,
+      cost: 12,
       type: 'good',
       requirements: { resources: [{ id: 22, qty: 2 }], upgrades: {} },
     },
     {
       id: 24,
       name: 'Bronze Ingot',
-      time: 10,
-      cost: 25,
+      time: 15,
+      cost: 30,
       type: 'good',
       requirements: { resources: [{ id: 23, qty: 2 }], upgrades: {} },
     },
     {
       id: 25,
       name: 'Bronze Ingot',
-      time: 10,
-      cost: 25,
+      time: 34,
+      cost: 68,
       type: 'good',
       requirements: {
         resources: [
@@ -533,15 +533,15 @@ export const dictionary: IDictionary = {
     {
       id: 26,
       name: 'Bronze Ingot',
-      time: 10,
-      cost: 25,
+      time: 5,
+      cost: 10,
       type: 'good',
       requirements: { resources: [], upgrades: {} },
     },
     {
       id: 27,
       name: 'Bronze Ingot',
-      time: 10,
+      time: 12,
       cost: 25,
       type: 'good',
       requirements: { resources: [{ id: 26, qty: 2 }], upgrades: {} },
@@ -549,16 +549,16 @@ export const dictionary: IDictionary = {
     {
       id: 28,
       name: 'Bronze Ingot',
-      time: 10,
-      cost: 25,
+      time: 30,
+      cost: 68,
       type: 'good',
       requirements: { resources: [{ id: 27, qty: 2 }], upgrades: {} },
     },
     {
       id: 29,
       name: 'Bronze Ingot',
-      time: 10,
-      cost: 25,
+      time: 60,
+      cost: 140,
       type: 'good',
       requirements: {
         resources: [
@@ -571,8 +571,8 @@ export const dictionary: IDictionary = {
     {
       id: 30,
       name: 'Knife',
-      time: 20,
-      cost: 35,
+      time: 33,
+      cost: 55,
       type: 'good',
       requirements: {
         resources: [
@@ -585,8 +585,8 @@ export const dictionary: IDictionary = {
     {
       id: 31,
       name: 'Long Sword',
-      time: 20,
-      cost: 65,
+      time: 45,
+      cost: 75,
       type: 'good',
       requirements: {
         resources: [
@@ -599,8 +599,8 @@ export const dictionary: IDictionary = {
     {
       id: 32,
       name: 'Axe',
-      time: 30,
-      cost: 80,
+      time: 50,
+      cost: 85,
       type: 'good',
       requirements: {
         resources: [{ id: 4, qty: 2 }],
@@ -611,7 +611,7 @@ export const dictionary: IDictionary = {
       id: 33,
       name: 'Bronze Bow',
       time: 25,
-      cost: 55,
+      cost: 65,
       type: 'good',
       requirements: {
         resources: [
@@ -624,8 +624,8 @@ export const dictionary: IDictionary = {
     {
       id: 34,
       name: 'Bronze Hammer',
-      time: 40,
-      cost: 125,
+      time: 50,
+      cost: 135,
       type: 'good',
       requirements: {
         resources: [
@@ -638,7 +638,7 @@ export const dictionary: IDictionary = {
     {
       id: 35,
       name: 'Bronze Bracers',
-      time: 40,
+      time: 50,
       cost: 130,
       type: 'good',
       requirements: {
@@ -652,8 +652,8 @@ export const dictionary: IDictionary = {
     {
       id: 36,
       name: 'Bronze Shield',
-      time: 35,
-      cost: 100,
+      time: 40,
+      cost: 95,
       type: 'good',
       requirements: {
         resources: [
@@ -680,7 +680,7 @@ export const dictionary: IDictionary = {
     {
       id: 38,
       name: 'Scythe',
-      time: 45,
+      time: 60,
       cost: 125,
       type: 'good',
       requirements: {
@@ -692,7 +692,7 @@ export const dictionary: IDictionary = {
       id: 39,
       name: 'Bronze Wand',
       time: 65,
-      cost: 175,
+      cost: 160,
       type: 'good',
       requirements: {
         resources: [
@@ -728,7 +728,7 @@ export const dictionary: IDictionary = {
       id: 43,
       name: 'Wooden Bow',
       time: 9,
-      cost: 16,
+      cost: 18,
       type: 'good',
       requirements: {
         resources: [
@@ -742,7 +742,7 @@ export const dictionary: IDictionary = {
       id: 44,
       name: 'Wooden Hammer',
       time: 10,
-      cost: 18,
+      cost: 16,
       type: 'good',
       requirements: {
         resources: [
@@ -770,7 +770,7 @@ export const dictionary: IDictionary = {
       id: 50,
       name: 'Cobalt Knife',
       time: 20,
-      cost: 35,
+      cost: 90,
       type: 'good',
       requirements: {
         resources: [
@@ -785,7 +785,7 @@ export const dictionary: IDictionary = {
       id: 51,
       name: 'Cobalt Sword',
       time: 20,
-      cost: 65,
+      cost: 110,
       type: 'good',
       requirements: {
         resources: [
@@ -1009,55 +1009,65 @@ export const dictionary: IDictionary = {
     },
     {
       id: 70,
-      name: 'Scythe',
+      name: 'Bone Knife',
       time: 45,
       cost: 125,
       type: 'good',
       requirements: {
-        resources: [{ id: 4, qty: 3 }],
-        upgrades: { skillIds: [8] },
+        resources: [
+          { id: 29, qty: 2 },
+          { id: 204, qty: 1 },
+          { id: 211, qty: 1 },
+        ],
+        upgrades: { skillIds: [] },
       },
     },
     {
       id: 71,
-      name: 'Bronze Wand',
+      name: 'Bone Sword',
       time: 65,
       cost: 175,
       type: 'good',
       requirements: {
         resources: [
-          { id: 8, qty: 4 },
-          { id: 9, qty: 1 },
+          { id: 29, qty: 3 },
+          { id: 4, qty: 2 },
+          { id: 204, qty: 1 },
+          { id: 211, qty: 1 },
         ],
-        upgrades: { skillIds: [9] },
+        upgrades: { skillIds: [7] },
       },
     },
     {
       id: 72,
-      name: 'Knife',
+      name: 'Bone Axe',
       time: 20,
       cost: 35,
       type: 'good',
       requirements: {
         resources: [
           { id: 2, qty: 2 },
-          { id: 3, qty: 2 },
+          { id: 29, qty: 3 },
+          { id: 204, qty: 1 },
+          { id: 211, qty: 1 },
         ],
-        upgrades: {},
+        upgrades: { skillIds: [7] },
       },
     },
     {
       id: 73,
-      name: 'Long Sword',
+      name: 'Bone Bow',
       time: 20,
       cost: 65,
       type: 'good',
       requirements: {
         resources: [
-          { id: 2, qty: 4 },
-          { id: 4, qty: 1 },
+          { id: 43, qty: 1 },
+          { id: 29, qty: 3 },
+          { id: 211, qty: 1 },
+          { id: 204, qty: 1 },
         ],
-        upgrades: { skillIds: [7] },
+        upgrades: { skillIds: [8] },
       },
     },
     {
@@ -1067,8 +1077,13 @@ export const dictionary: IDictionary = {
       cost: 80,
       type: 'good',
       requirements: {
-        resources: [{ id: 4, qty: 2 }],
-        upgrades: { skillIds: [7] },
+        resources: [
+          { id: 35, qty: 1 },
+          { id: 29, qty: 3 },
+          { id: 204, qty: 1 },
+          { id: 211, qty: 1 },
+        ],
+        upgrades: { skillIds: [11] },
       },
     },
     {
@@ -1079,38 +1094,44 @@ export const dictionary: IDictionary = {
       type: 'good',
       requirements: {
         resources: [
-          { id: 7, qty: 1 },
-          { id: 9, qty: 1 },
+          { id: 36, qty: 1 },
+          { id: 29, qty: 4 },
+          { id: 204, qty: 1 },
+          { id: 211, qty: 1 },
         ],
-        upgrades: { skillIds: [8] },
+        upgrades: { skillIds: [10] },
       },
     },
     {
       id: 77,
-      name: 'Bronze Axe',
+      name: 'Bone Scepter',
       time: 40,
       cost: 125,
       type: 'good',
       requirements: {
         resources: [
-          { id: 9, qty: 2 },
-          { id: 7, qty: 2 },
+          { id: 37, qty: 1 },
+          { id: 28, qty: 3 },
+          { id: 204, qty: 1 },
+          { id: 211, qty: 2 },
         ],
-        upgrades: { skillIds: [7] },
+        upgrades: { skillIds: [9] },
       },
     },
     {
       id: 78,
-      name: 'Bronze Bracers',
+      name: 'Bone Scythe',
       time: 40,
       cost: 130,
       type: 'good',
       requirements: {
         resources: [
-          { id: 8, qty: 1 },
-          { id: 9, qty: 2 },
+          { id: 38, qty: 1 },
+          { id: 29, qty: 2 },
+          { id: 204, qty: 1 },
+          { id: 211, qty: 2 },
         ],
-        upgrades: { skillIds: [11] },
+        upgrades: { skillIds: [8] },
       },
     },
     {
