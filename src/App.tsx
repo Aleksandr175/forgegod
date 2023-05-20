@@ -601,6 +601,7 @@ export const App = () => {
                   onChangeGoodId={onChangeGoodId}
                   selectedGoodId={selectedGoodId}
                   skillIds={learnedSkillIds}
+                  mineLvl={mineLvl}
                 />
               </View>
             </View>

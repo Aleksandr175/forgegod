@@ -2,7 +2,7 @@ import { IDictionary, IGood } from './types';
 
 const RESOURCE_ROW_BLUE_ORE: IGood = {
   id: 1,
-  name: 'Row Blue Ore',
+  name: 'Raw Blue Ore',
   time: 2,
   cost: 3,
   type: 'resource',
@@ -53,7 +53,7 @@ const GOOD_BLUE_INGOT: IGood = {
 
 const RESOURCE_ROW_BRONZE_ORE: IGood = {
   id: 6,
-  name: 'Row Bronze Ore',
+  name: 'Raw Bronze Ore',
   time: 2,
   cost: 3,
   type: 'resource',
@@ -104,7 +104,7 @@ const GOOD_BRONZE_INGOT: IGood = {
 
 const RESOURCE_ROW_COBALT_ORE: IGood = {
   id: 10,
-  name: 'Row Bronze Ore',
+  name: 'Raw Bronze Ore',
   time: 2,
   cost: 3,
   type: 'resource',
@@ -334,7 +334,7 @@ export const dictionary: IDictionary = {
   goods: [
     {
       id: 1,
-      name: 'Row Blue Ore',
+      name: 'Raw Blue Ore',
       time: 0,
       cost: 3,
       type: 'resource',
@@ -383,14 +383,14 @@ export const dictionary: IDictionary = {
       name: 'Wood',
       time: 0,
       cost: 2,
-      type: 'good',
+      type: 'resource',
       requirements: { resources: [], upgrades: {} },
       resourcesCost: 0,
       additionalCost: 2,
     },
     {
       id: 6,
-      name: 'Row Bronze Ore',
+      name: 'Raw Bronze Ore',
       time: 0,
       cost: 4,
       type: 'resource',
@@ -436,7 +436,7 @@ export const dictionary: IDictionary = {
     },
     {
       id: 10,
-      name: 'Row Cobalt Ore',
+      name: 'Raw Cobalt Ore',
       time: 0,
       cost: 5,
       type: 'resource',
@@ -482,10 +482,10 @@ export const dictionary: IDictionary = {
     },
     {
       id: 18,
-      name: 'Row Gold Ore',
+      name: 'Raw Gold Ore',
       time: 0,
       cost: 7,
-      type: 'good',
+      type: 'resource',
       requirements: { resources: [], upgrades: {} },
       resourcesCost: 0,
       additionalCost: 7,
@@ -528,10 +528,10 @@ export const dictionary: IDictionary = {
     },
     {
       id: 22,
-      name: 'Row Coal Ore',
+      name: 'Raw Coal Ore',
       time: 0,
       cost: 4,
-      type: 'good',
+      type: 'resource',
       requirements: { resources: [], upgrades: {} },
       resourcesCost: 0,
       additionalCost: 4,
@@ -574,10 +574,10 @@ export const dictionary: IDictionary = {
     },
     {
       id: 26,
-      name: 'Row Amethyst Ore',
+      name: 'Raw Amethyst Ore',
       time: 0,
       cost: 10,
-      type: 'good',
+      type: 'resource',
       requirements: { resources: [], upgrades: {} },
       resourcesCost: 0,
       additionalCost: 10,
