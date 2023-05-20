@@ -1017,7 +1017,7 @@ export const dictionary: IDictionary = {
       id: 61,
       name: 'Hell Sword',
       time: 20,
-      cost: 35,
+      cost: 407,
       type: 'good',
       requirements: {
         resources: [
@@ -1027,12 +1027,14 @@ export const dictionary: IDictionary = {
         ],
         upgrades: { skillIds: [7] },
       },
+      resourcesCost: 362,
+      additionalCost: 45,
     },
     {
       id: 63,
       name: 'Hell Bow',
       time: 20,
-      cost: 65,
+      cost: 458,
       type: 'good',
       requirements: {
         resources: [
@@ -1042,12 +1044,14 @@ export const dictionary: IDictionary = {
         ],
         upgrades: { skillIds: [8] },
       },
+      resourcesCost: 398,
+      additionalCost: 60,
     },
     {
       id: 64,
       name: 'Hell Hammer',
       time: 30,
-      cost: 80,
+      cost: 569,
       type: 'good',
       requirements: {
         resources: [
@@ -1058,12 +1062,14 @@ export const dictionary: IDictionary = {
         ],
         upgrades: { skillIds: [8] },
       },
+      resourcesCost: 499,
+      additionalCost: 70,
     },
     {
       id: 65,
       name: 'Hell Bracers',
       time: 25,
-      cost: 55,
+      cost: 496,
       type: 'good',
       requirements: {
         resources: [
@@ -1074,12 +1080,14 @@ export const dictionary: IDictionary = {
         ],
         upgrades: { skillIds: [11] },
       },
+      resourcesCost: 416,
+      additionalCost: 80,
     },
     {
       id: 66,
       name: 'Hell Shield',
       time: 40,
-      cost: 125,
+      cost: 548,
       type: 'good',
       requirements: {
         resources: [
@@ -1090,12 +1098,14 @@ export const dictionary: IDictionary = {
         ],
         upgrades: { skillIds: [10] },
       },
+      resourcesCost: 473,
+      additionalCost: 75,
     },
     {
       id: 67,
       name: 'Hell Scepter',
       time: 40,
-      cost: 130,
+      cost: 681,
       type: 'good',
       requirements: {
         resources: [
@@ -1106,12 +1116,14 @@ export const dictionary: IDictionary = {
         ],
         upgrades: { skillIds: [9] },
       },
+      resourcesCost: 586,
+      additionalCost: 95,
     },
     {
       id: 70,
       name: 'Bone Knife',
       time: 45,
-      cost: 125,
+      cost: 491,
       type: 'good',
       requirements: {
         resources: [
@@ -1121,12 +1133,14 @@ export const dictionary: IDictionary = {
         ],
         upgrades: { skillIds: [] },
       },
+      resourcesCost: 441,
+      additionalCost: 50,
     },
     {
       id: 71,
       name: 'Bone Sword',
       time: 65,
-      cost: 175,
+      cost: 707,
       type: 'good',
       requirements: {
         resources: [
@@ -1137,28 +1151,32 @@ export const dictionary: IDictionary = {
         ],
         upgrades: { skillIds: [7] },
       },
+      resourcesCost: 632,
+      additionalCost: 75,
     },
     {
       id: 72,
       name: 'Bone Axe',
       time: 20,
-      cost: 35,
+      cost: 734,
       type: 'good',
       requirements: {
         resources: [
-          { id: 2, qty: 2 },
           { id: 29, qty: 3 },
           { id: 204, qty: 1 },
           { id: 211, qty: 1 },
+          { id: 32, qty: 1 },
         ],
         upgrades: { skillIds: [7] },
       },
+      resourcesCost: 649,
+      additionalCost: 85,
     },
     {
       id: 73,
       name: 'Bone Bow',
       time: 20,
-      cost: 65,
+      cost: 668,
       type: 'good',
       requirements: {
         resources: [
@@ -1169,12 +1187,14 @@ export const dictionary: IDictionary = {
         ],
         upgrades: { skillIds: [8] },
       },
+      resourcesCost: 588,
+      additionalCost: 80,
     },
     {
       id: 75,
       name: 'Axe',
       time: 30,
-      cost: 80,
+      cost: 810,
       type: 'good',
       requirements: {
         resources: [
@@ -1185,12 +1205,14 @@ export const dictionary: IDictionary = {
         ],
         upgrades: { skillIds: [11] },
       },
+      resourcesCost: 700,
+      additionalCost: 110,
     },
     {
       id: 76,
       name: 'Bronze Bow',
       time: 25,
-      cost: 55,
+      cost: 884,
       type: 'good',
       requirements: {
         resources: [
@@ -1201,12 +1223,14 @@ export const dictionary: IDictionary = {
         ],
         upgrades: { skillIds: [10] },
       },
+      resourcesCost: 784,
+      additionalCost: 100,
     },
     {
       id: 77,
       name: 'Bone Scepter',
       time: 40,
-      cost: 125,
+      cost: 790,
       type: 'good',
       requirements: {
         resources: [
@@ -1217,12 +1241,14 @@ export const dictionary: IDictionary = {
         ],
         upgrades: { skillIds: [9] },
       },
+      resourcesCost: 670,
+      additionalCost: 120,
     },
     {
       id: 78,
       name: 'Bone Scythe',
       time: 40,
-      cost: 130,
+      cost: 741,
       type: 'good',
       requirements: {
         resources: [
@@ -1233,30 +1259,38 @@ export const dictionary: IDictionary = {
         ],
         upgrades: { skillIds: [8] },
       },
+      resourcesCost: 646,
+      additionalCost: 95,
     },
     {
       id: 200,
       name: 'Toxic Crystal',
       time: 10,
-      cost: 100,
+      cost: 60,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
+      resourcesCost: 0,
+      additionalCost: 60,
     },
     {
       id: 201,
       name: 'Fire Crystal',
       time: 10,
-      cost: 100,
+      cost: 70,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
+      resourcesCost: 0,
+      additionalCost: 70,
     },
     {
       id: 202,
       name: 'Silver Crystal',
       time: 10,
-      cost: 100,
+      cost: 80,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
+      resourcesCost: 0,
+      additionalCost: 80,
     },
     {
       id: 203,
@@ -1265,14 +1299,18 @@ export const dictionary: IDictionary = {
       cost: 100,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
+      resourcesCost: 0,
+      additionalCost: 100,
     },
     {
       id: 204,
-      name: 'Dragon Crystal',
+      name: 'Amethyst Crystal',
       time: 10,
-      cost: 150,
+      cost: 115,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
+      resourcesCost: 0,
+      additionalCost: 115,
     },
     {
       id: 210,
@@ -1281,14 +1319,18 @@ export const dictionary: IDictionary = {
       cost: 50,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
+      resourcesCost: 0,
+      additionalCost: 50,
     },
     {
       id: 211,
       name: 'Silver Skull',
       time: 10,
-      cost: 50,
+      cost: 80,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
+      resourcesCost: 0,
+      additionalCost: 80,
     },
   ],
   mine: [

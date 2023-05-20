@@ -31,7 +31,7 @@ import { PageHero } from './components/PageHero';
 import { PageEditor } from './components/PageEditor';
 
 export const App = () => {
-  const [page, setPage] = useState<TPage>('forge');
+  const [page, setPage] = useState<TPage>('editor');
   const [mineLvl, setMineLvl] = useState(1);
   const [money, setMoney] = useState(20000);
   const [maxOrdersQty, setMaxOrdersQty] = useState(5);
