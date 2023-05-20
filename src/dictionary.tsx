@@ -653,7 +653,7 @@ export const dictionary: IDictionary = {
     {
       id: 32,
       name: 'Axe',
-      time: 50,
+      time: 22,
       cost: 85,
       type: 'good',
       requirements: {
@@ -666,7 +666,7 @@ export const dictionary: IDictionary = {
     {
       id: 33,
       name: 'Bronze Bow',
-      time: 25,
+      time: 20,
       cost: 70,
       type: 'good',
       requirements: {
@@ -682,7 +682,7 @@ export const dictionary: IDictionary = {
     {
       id: 34,
       name: 'Bronze Hammer',
-      time: 50,
+      time: 25,
       cost: 135,
       type: 'good',
       requirements: {
@@ -698,7 +698,7 @@ export const dictionary: IDictionary = {
     {
       id: 35,
       name: 'Bronze Bracers',
-      time: 50,
+      time: 17,
       cost: 136,
       type: 'good',
       requirements: {
@@ -714,7 +714,7 @@ export const dictionary: IDictionary = {
     {
       id: 36,
       name: 'Bronze Shield',
-      time: 40,
+      time: 15,
       cost: 97,
       type: 'good',
       requirements: {
@@ -730,7 +730,7 @@ export const dictionary: IDictionary = {
     {
       id: 37,
       name: 'Bronze Scepter',
-      time: 75,
+      time: 25,
       cost: 215,
       type: 'good',
       requirements: {
@@ -746,7 +746,7 @@ export const dictionary: IDictionary = {
     {
       id: 38,
       name: 'Scythe',
-      time: 60,
+      time: 23,
       cost: 125,
       type: 'good',
       requirements: {
@@ -759,7 +759,7 @@ export const dictionary: IDictionary = {
     {
       id: 39,
       name: 'Bronze Wand',
-      time: 65,
+      time: 20,
       cost: 160,
       type: 'good',
       requirements: {
@@ -866,7 +866,7 @@ export const dictionary: IDictionary = {
     {
       id: 51,
       name: 'Cobalt Sword',
-      time: 20,
+      time: 22,
       cost: 110,
       type: 'good',
       requirements: {
@@ -882,7 +882,7 @@ export const dictionary: IDictionary = {
     {
       id: 52,
       name: 'Cobalt Axe',
-      time: 30,
+      time: 25,
       cost: 238,
       type: 'good',
       requirements: {
@@ -899,7 +899,7 @@ export const dictionary: IDictionary = {
     {
       id: 53,
       name: 'Cobalt Bow',
-      time: 25,
+      time: 27,
       cost: 230,
       type: 'good',
       requirements: {
@@ -916,7 +916,7 @@ export const dictionary: IDictionary = {
     {
       id: 54,
       name: 'Cobalt Hammer',
-      time: 40,
+      time: 30,
       cost: 331,
       type: 'good',
       requirements: {
@@ -932,7 +932,7 @@ export const dictionary: IDictionary = {
     {
       id: 55,
       name: 'Cobalt Bracers',
-      time: 40,
+      time: 30,
       cost: 306,
       type: 'good',
       requirements: {
@@ -949,7 +949,7 @@ export const dictionary: IDictionary = {
     {
       id: 56,
       name: 'Cobalt Shield',
-      time: 35,
+      time: 27,
       cost: 277,
       type: 'good',
       requirements: {
@@ -966,7 +966,7 @@ export const dictionary: IDictionary = {
     {
       id: 57,
       name: 'Cobalt Scepter',
-      time: 75,
+      time: 40,
       cost: 299,
       type: 'good',
       requirements: {
@@ -983,7 +983,7 @@ export const dictionary: IDictionary = {
     {
       id: 58,
       name: 'Cobalt Scythe',
-      time: 45,
+      time: 35,
       cost: 326,
       type: 'good',
       requirements: {
@@ -999,7 +999,7 @@ export const dictionary: IDictionary = {
     {
       id: 59,
       name: 'Cobalt Wand',
-      time: 65,
+      time: 40,
       cost: 297,
       type: 'good',
       requirements: {
@@ -1016,7 +1016,7 @@ export const dictionary: IDictionary = {
     {
       id: 61,
       name: 'Hell Sword',
-      time: 20,
+      time: 30,
       cost: 407,
       type: 'good',
       requirements: {
@@ -1033,7 +1033,7 @@ export const dictionary: IDictionary = {
     {
       id: 63,
       name: 'Hell Bow',
-      time: 20,
+      time: 35,
       cost: 458,
       type: 'good',
       requirements: {
@@ -1050,7 +1050,7 @@ export const dictionary: IDictionary = {
     {
       id: 64,
       name: 'Hell Hammer',
-      time: 30,
+      time: 40,
       cost: 569,
       type: 'good',
       requirements: {
@@ -1068,7 +1068,7 @@ export const dictionary: IDictionary = {
     {
       id: 65,
       name: 'Hell Bracers',
-      time: 25,
+      time: 50,
       cost: 496,
       type: 'good',
       requirements: {
@@ -1104,7 +1104,7 @@ export const dictionary: IDictionary = {
     {
       id: 67,
       name: 'Hell Scepter',
-      time: 40,
+      time: 55,
       cost: 681,
       type: 'good',
       requirements: {
@@ -1122,7 +1122,7 @@ export const dictionary: IDictionary = {
     {
       id: 70,
       name: 'Bone Knife',
-      time: 45,
+      time: 35,
       cost: 491,
       type: 'good',
       requirements: {
@@ -1139,7 +1139,7 @@ export const dictionary: IDictionary = {
     {
       id: 71,
       name: 'Bone Sword',
-      time: 65,
+      time: 50,
       cost: 707,
       type: 'good',
       requirements: {
@@ -1157,7 +1157,7 @@ export const dictionary: IDictionary = {
     {
       id: 72,
       name: 'Bone Axe',
-      time: 20,
+      time: 55,
       cost: 734,
       type: 'good',
       requirements: {
@@ -1175,7 +1175,7 @@ export const dictionary: IDictionary = {
     {
       id: 73,
       name: 'Bone Bow',
-      time: 20,
+      time: 50,
       cost: 668,
       type: 'good',
       requirements: {
@@ -1193,7 +1193,7 @@ export const dictionary: IDictionary = {
     {
       id: 75,
       name: 'Axe',
-      time: 30,
+      time: 65,
       cost: 810,
       type: 'good',
       requirements: {
@@ -1211,7 +1211,7 @@ export const dictionary: IDictionary = {
     {
       id: 76,
       name: 'Bronze Bow',
-      time: 25,
+      time: 60,
       cost: 884,
       type: 'good',
       requirements: {
@@ -1229,7 +1229,7 @@ export const dictionary: IDictionary = {
     {
       id: 77,
       name: 'Bone Scepter',
-      time: 40,
+      time: 70,
       cost: 790,
       type: 'good',
       requirements: {
@@ -1247,7 +1247,7 @@ export const dictionary: IDictionary = {
     {
       id: 78,
       name: 'Bone Scythe',
-      time: 40,
+      time: 55,
       cost: 741,
       type: 'good',
       requirements: {
@@ -1265,7 +1265,7 @@ export const dictionary: IDictionary = {
     {
       id: 200,
       name: 'Toxic Crystal',
-      time: 10,
+      time: 20,
       cost: 60,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
@@ -1275,7 +1275,7 @@ export const dictionary: IDictionary = {
     {
       id: 201,
       name: 'Fire Crystal',
-      time: 10,
+      time: 25,
       cost: 70,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
@@ -1285,7 +1285,7 @@ export const dictionary: IDictionary = {
     {
       id: 202,
       name: 'Silver Crystal',
-      time: 10,
+      time: 30,
       cost: 80,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
@@ -1295,7 +1295,7 @@ export const dictionary: IDictionary = {
     {
       id: 203,
       name: 'Gold Crystal',
-      time: 10,
+      time: 35,
       cost: 100,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
@@ -1305,7 +1305,7 @@ export const dictionary: IDictionary = {
     {
       id: 204,
       name: 'Amethyst Crystal',
-      time: 10,
+      time: 40,
       cost: 115,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
@@ -1315,7 +1315,7 @@ export const dictionary: IDictionary = {
     {
       id: 210,
       name: 'Cobalt Crystal',
-      time: 10,
+      time: 15,
       cost: 50,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
@@ -1325,7 +1325,7 @@ export const dictionary: IDictionary = {
     {
       id: 211,
       name: 'Silver Skull',
-      time: 10,
+      time: 15,
       cost: 80,
       type: 'crystal',
       requirements: { resources: [], upgrades: {} },
