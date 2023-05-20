@@ -146,6 +146,32 @@ export const PageEditor = ({ dictionary }: IProps) => {
     );
   };
 
+  // Function to calculate the time for a resource
+  const getFullResourcesTime = (resource: IGood): number => {
+    // Base case: If no requirements, return the resource's own time
+    if (!resource.requirements || !resource.requirements.resources) {
+      return resource.time;
+    }
+
+    // Recursive case: Calculate the cumulative time for required resources
+    let cumulativeTime = 0;
+
+    if (resource.id !== selectedGood.id) {
+      cumulativeTime = resource.time;
+    }
+    const requiredResources = resource.requirements.resources;
+    for (const req of requiredResources) {
+      const requiredResource = dictionary.goods.find(
+        (item) => item.id === req.id,
+      );
+      if (requiredResource) {
+        cumulativeTime += req.qty * getFullResourcesTime(requiredResource);
+      }
+    }
+
+    return cumulativeTime;
+  };
+
   const updateMineItem = (
     item: IMine,
     field: string,
@@ -236,7 +262,10 @@ export const PageEditor = ({ dictionary }: IProps) => {
                       </View>
                       <View>
                         <CustomText>
-                          Cost: {item.cost}, Time: {item.time}
+                          Add. Cost: {item.additionalCost}
+                        </CustomText>
+                        <CustomText>
+                          Cost: {item.cost}, Time: {item.time}.
                         </CustomText>
                       </View>
                       <CustomText>Requirements:</CustomText>
@@ -289,20 +318,51 @@ export const PageEditor = ({ dictionary }: IProps) => {
                         />
                       </CustomText>
                     </View>
-                    <View>
-                      <CustomText>
-                        Cost:{' '}
-                        <STextInput
-                          onChangeText={(value) => {
-                            setSelectedGood((prevState) => {
-                              return { ...prevState, cost: Number(value) };
-                            });
+                    <View style={{ flexDirection: 'row' }}>
+                      <SColumn>
+                        <CustomText>Total Cost: {selectedGood.cost}</CustomText>
+                        <CustomText>
+                          Additional Cost:{' '}
+                          <STextInput
+                            onChangeText={(value) => {
+                              const additionalCost = Number(value);
+                              const resourcesCost = getRequiredResourcesCost();
 
-                            updateItem(selectedGood, 'cost', Number(value));
-                          }}
-                          value={String(selectedGood.cost)}
-                        />
-                        , Time:{' '}
+                              setSelectedGood((prevState) => {
+                                return {
+                                  ...prevState,
+                                  additionalCost,
+                                  cost: additionalCost + resourcesCost,
+                                };
+                              });
+
+                              updateItem(
+                                selectedGood,
+                                'cost',
+                                additionalCost + resourcesCost,
+                              );
+                              updateItem(
+                                selectedGood,
+                                'resourcesCost',
+                                resourcesCost,
+                              );
+                              updateItem(
+                                selectedGood,
+                                'additionalCost',
+                                additionalCost,
+                              );
+                            }}
+                            value={String(selectedGood.additionalCost || 0)}
+                          />
+                        </CustomText>
+
+                        <CustomText>
+                          Row Resources cost: {getRequiredResourcesCost()}
+                        </CustomText>
+                      </SColumn>
+
+                      <SColumn>
+                        <CustomText>Time:</CustomText>
                         <STextInput
                           onChangeText={(value) => {
                             setSelectedGood((prevState) => {
@@ -313,17 +373,19 @@ export const PageEditor = ({ dictionary }: IProps) => {
                           }}
                           value={String(selectedGood.time)}
                         />
-                      </CustomText>
 
-                      <CustomText>
-                        Resources cost: {getRequiredResourcesCost()}
-                      </CustomText>
-                      <CustomText>
-                        Resources time: {getRequiredResourcesTime()}
-                      </CustomText>
+                        <CustomText>
+                          Row resources time:{' '}
+                          {getFullResourcesTime(selectedGood)}
+                        </CustomText>
+
+                        <CustomText>
+                          Resources time: {getRequiredResourcesTime()}
+                        </CustomText>
+                      </SColumn>
                     </View>
 
-                    <View>
+                    <View style={{ paddingTop: 10 }}>
                       <CustomText>Requirements:</CustomText>
 
                       <FlatList
@@ -967,6 +1029,7 @@ const SResource = styled.View`
 const SGoodWrapper = styled.Pressable<{ selected?: boolean }>`
   padding-bottom: 30px;
   padding-right: 20px;
+  width: 150px;
 
   ${({ selected }) => (selected ? 'background: green' : '')}
 `;
@@ -1005,4 +1068,8 @@ const SResourcesMines = styled.View`
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
+`;
+
+const SColumn = styled.View`
+  width: 50%;
 `;

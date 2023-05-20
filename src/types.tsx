@@ -30,6 +30,8 @@ export interface IGood {
   id: number;
   name: string;
   time: number;
+  resourcesCost: number;
+  additionalCost: number;
   cost: number;
   type: TTypeGood;
   requirements: {
