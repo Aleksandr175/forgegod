@@ -1263,6 +1263,86 @@ export const dictionary: IDictionary = {
       additionalCost: 95,
     },
     {
+      id: 141,
+      name: 'Poison Sword',
+      time: 15,
+      cost: 106,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 41, qty: 1 },
+          { id: 200, qty: 1 },
+        ],
+        upgrades: { skillIds: [8] },
+      },
+      resourcesCost: 71,
+      additionalCost: 35,
+    },
+    {
+      id: 142,
+      name: 'Poison Axe',
+      time: 15,
+      cost: 112,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 42, qty: 1 },
+          { id: 200, qty: 1 },
+        ],
+        upgrades: { skillIds: [8] },
+      },
+      resourcesCost: 75,
+      additionalCost: 37,
+    },
+    {
+      id: 143,
+      name: 'Poison Bow',
+      time: 15,
+      cost: 123,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 43, qty: 1 },
+          { id: 200, qty: 1 },
+        ],
+        upgrades: { skillIds: [8] },
+      },
+      resourcesCost: 84,
+      additionalCost: 39,
+    },
+    {
+      id: 144,
+      name: 'Poison Hammer',
+      time: 15,
+      cost: 122,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 44, qty: 1 },
+          { id: 200, qty: 1 },
+        ],
+        upgrades: { skillIds: [8] },
+      },
+      resourcesCost: 82,
+      additionalCost: 40,
+    },
+    {
+      id: 146,
+      name: 'Poison Shield',
+      time: 15,
+      cost: 112,
+      type: 'good',
+      requirements: {
+        resources: [
+          { id: 46, qty: 1 },
+          { id: 200, qty: 1 },
+        ],
+        upgrades: { skillIds: [8] },
+      },
+      resourcesCost: 76,
+      additionalCost: 36,
+    },
+    {
       id: 200,
       name: 'Toxic Crystal',
       time: 20,

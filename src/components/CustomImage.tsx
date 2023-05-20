@@ -155,27 +155,36 @@ const getImageSource = (id: number, type?: TImage) => {
   if (id === 58) return require(`../images/goods/32/58.png`);
   if (id === 59) return require(`../images/goods/32/59.png`);
 
-  if (id === 60) return require(`../images/goods/32/60.png`);
   if (id === 61) return require(`../images/goods/32/61.png`);
-  if (id === 62) return require(`../images/goods/32/62.png`);
+
   if (id === 63) return require(`../images/goods/32/63.png`);
   if (id === 64) return require(`../images/goods/32/64.png`);
   if (id === 65) return require(`../images/goods/32/65.png`);
   if (id === 66) return require(`../images/goods/32/66.png`);
   if (id === 67) return require(`../images/goods/32/67.png`);
-  if (id === 68) return require(`../images/goods/32/68.png`);
-  if (id === 69) return require(`../images/goods/32/69.png`);
 
   if (id === 70) return require(`../images/goods/32/70.png`);
   if (id === 71) return require(`../images/goods/32/71.png`);
   if (id === 72) return require(`../images/goods/32/72.png`);
   if (id === 73) return require(`../images/goods/32/73.png`);
-  if (id === 74) return require(`../images/goods/32/74.png`);
+
   if (id === 75) return require(`../images/goods/32/75.png`);
   if (id === 76) return require(`../images/goods/32/76.png`);
   if (id === 77) return require(`../images/goods/32/77.png`);
   if (id === 78) return require(`../images/goods/32/78.png`);
-  if (id === 79) return require(`../images/goods/32/79.png`);
+
+  if (id === 141) return require(`../images/goods/32/141.png`);
+  if (id === 142) return require(`../images/goods/32/142.png`);
+  if (id === 143) return require(`../images/goods/32/143.png`);
+  if (id === 144) return require(`../images/goods/32/144.png`);
+  if (id === 146) return require(`../images/goods/32/146.png`);
+
+  if (id === 161) return require(`../images/goods/32/161.png`);
+  if (id === 163) return require(`../images/goods/32/163.png`);
+  if (id === 164) return require(`../images/goods/32/164.png`);
+  if (id === 165) return require(`../images/goods/32/165.png`);
+  if (id === 166) return require(`../images/goods/32/166.png`);
+  if (id === 167) return require(`../images/goods/32/167.png`);
 
   if (id === 200) return require(`../images/goods/32/200.png`);
   if (id === 201) return require(`../images/goods/32/201.png`);
