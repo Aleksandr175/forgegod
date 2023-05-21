@@ -209,25 +209,7 @@ export const PageEditor = ({ dictionary }: IProps) => {
   };
 
   const getAllRawResourcesCost = (resource: IGood): number => {
-    // Base case: If no requirements, return the resource's own time
-    if (!resource.requirements || !resource.requirements.resources) {
-      return resource.additionalCost;
-    }
-
-    // Recursive case: Calculate the cumulative time for required resources
-    let cumulativeCost = 0;
-
-    const requiredResources = resource.requirements.resources;
-    for (const req of requiredResources) {
-      const requiredResource = dictionary.goods.find(
-        (item) => item.id === req.id,
-      );
-      if (requiredResource) {
-        cumulativeCost += req.qty * getAllRawResourcesCost(requiredResource);
-      }
-    }
-
-    return cumulativeCost;
+    return resource.resourcesCost ? resource.resourcesCost : resource.cost;
   };
 
   const updateMineItem = (
@@ -919,7 +901,9 @@ export const PageEditor = ({ dictionary }: IProps) => {
               <Pressable onPress={addNewCity}>
                 <CustomText>Add new city</CustomText>
               </Pressable>
-              <CustomText>All cities cost: {getAllCitiesCost()}</CustomText>
+              <CustomText>
+                All cities raw resources cost: {getAllCitiesCost()}
+              </CustomText>
               <CustomText>All cities time: {getAllCitiesTime()}</CustomText>
 
               <FlatList
