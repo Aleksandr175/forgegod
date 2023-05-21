@@ -1,4 +1,5 @@
-import { ICustomerOrder, IGoodInfo, IMine, IStorageGood } from '../types';
+import { IGood, IGoodInfo, IMine, IStorageGood } from '../types';
+import { dictionary } from '../dictionary';
 
 export const randomIntFromInterval = (min: number, max: number) => {
   // min and max included
@@ -58,4 +59,30 @@ export const shuffleArray = <T,>(array: T[]): T[] => {
     [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
   }
   return newArray;
+};
+
+export // Function to retrieve the required resource IDs of a resource (duplicates are possible)
+const getRequiredRawResourceIds = (resource: IGood): number[] => {
+  const requiredResourceIds = [];
+
+  if (resource.requirements && resource.requirements.resources) {
+    const requiredResources = resource.requirements.resources;
+    for (const req of requiredResources) {
+      const requiredResource = dictionary.goods.find(
+        (item) => item.id === req.id,
+      );
+
+      if (requiredResource && requiredResource.type === 'resource') {
+        requiredResourceIds.push(req.id);
+      }
+
+      if (requiredResource) {
+        requiredResourceIds.push(
+          ...getRequiredRawResourceIds(requiredResource),
+        );
+      }
+    }
+  }
+
+  return requiredResourceIds;
 };

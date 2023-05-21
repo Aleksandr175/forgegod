@@ -42,7 +42,7 @@ export const PanelOrders = ({ orders, maxOrdersQty }: IProps) => {
             <SOrderDetails>
               <SResource>
                 <CustomImage id={item.goodId} size={'big'} />
-                <SQty>{item.qty}</SQty>
+                {/*<SQty>{item.qty}</SQty>*/}
               </SResource>
 
               <ProgressBar

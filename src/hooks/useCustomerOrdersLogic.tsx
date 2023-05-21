@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { dictionary } from '../dictionary';
 import { nanoid } from 'nanoid';
 import {
+  getRequiredRawResourceIds,
   hasEnoughResources,
   randomIntFromInterval,
   shuffleArray,
@@ -16,6 +17,7 @@ interface IProps {
   maxCustomerOrdersQty: number;
   economistBonus: number;
   skillIds: number[];
+  mineLvl: number;
 }
 
 export const useCustomerOrdersLogic = ({
@@ -26,6 +28,7 @@ export const useCustomerOrdersLogic = ({
   maxCustomerOrdersQty,
   economistBonus,
   skillIds,
+  mineLvl,
 }: IProps) => {
   const [customerOrders, setCustomerOrders] = useState<ICustomerOrder[]>([]);
 
@@ -74,16 +77,29 @@ export const useCustomerOrdersLogic = ({
 
   const generateCustomerOrders = () => {
     const possibleGoods = dictionary.goods.filter((item) => {
-      // TODO: add some conditions, check upgrades
       let haveSkills = true;
+      let areAllRequiredRawResourcesOpened = true;
       item.requirements.upgrades.skillIds?.forEach((skillId) => {
         if (!skillIds.includes(skillId)) {
           haveSkills = false;
         }
       });
 
-      // add some conditions, check upgrades
-      return item.type === 'good' && haveSkills;
+      // get all raw resources for good
+      const requiredRawResourceIds = getRequiredRawResourceIds(item);
+      const mine = dictionary.mine.find((m) => m.lvl === mineLvl);
+
+      if (mine) {
+        requiredRawResourceIds.forEach((rawResourceId) => {
+          if (!mine.providedResourceIds.includes(rawResourceId)) {
+            areAllRequiredRawResourcesOpened = false;
+          }
+        });
+      }
+
+      return (
+        item.type === 'good' && haveSkills && areAllRequiredRawResourcesOpened
+      );
     });
 
     const qtyTypeOfGoods = Math.min(
@@ -92,7 +108,7 @@ export const useCustomerOrdersLogic = ({
     );
     const shuffledGoods = shuffleArray(possibleGoods);
     const goods: IGoodInfo[] = [];
-    let timeLeft = 0;
+    let timeLeft = 5; // add extra 5 sec every time
     let cost = 0;
 
     for (let i = 0; i < qtyTypeOfGoods; i++) {

@@ -31,7 +31,7 @@ import { PageHero } from './components/PageHero';
 import { PageEditor } from './components/PageEditor';
 
 export const App = () => {
-  const [page, setPage] = useState<TPage>('editor');
+  const [page, setPage] = useState<TPage>('forge');
   const [mineLvl, setMineLvl] = useState(1);
   const [money, setMoney] = useState(20000);
   const [maxOrdersQty, setMaxOrdersQty] = useState(5);
@@ -170,8 +170,8 @@ export const App = () => {
   const [orders, setOrders] = useState<IOrder[]>([]);
 
   useEffect(() => {
-    createOrder(2, 10);
-    createOrder(3, 2);
+    createOrder(2, 1);
+    createOrder(3, 1);
     createOrder(3, 1);
   }, []);
 
@@ -310,6 +310,7 @@ export const App = () => {
       maxCustomerOrdersQty,
       economistBonus,
       skillIds: learnedSkillIds,
+      mineLvl,
     });
 
   const { liberatedCityIds, liberateCity } = useLiberateCityLogic({
