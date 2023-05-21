@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { IDictionary, IGood, IGoodInfo, IMine, TTab } from '../types';
+import {
+  IDictionary,
+  IGood,
+  IGoodInfo,
+  ILiberateCity,
+  IMine,
+  TTab,
+} from '../types';
 import { CustomImage } from './CustomImage';
 import { CustomText } from './CustomText';
 import { SQty, SResources, styles as stylesCommon } from '../styles';
@@ -185,17 +192,9 @@ export const PageEditor = ({ dictionary }: IProps) => {
 
   // Function to calculate the time for a resource
   const getFullResourcesTime = (resource: IGood): number => {
-    // Base case: If no requirements, return the resource's own time
-    if (!resource.requirements || !resource.requirements.resources) {
-      return resource.time;
-    }
-
     // Recursive case: Calculate the cumulative time for required resources
-    let cumulativeTime = 0;
+    let cumulativeTime = resource.time;
 
-    if (resource.id !== selectedGood.id) {
-      cumulativeTime = resource.time;
-    }
     const requiredResources = resource.requirements.resources;
     for (const req of requiredResources) {
       const requiredResource = dictionary.goods.find(
@@ -212,15 +211,12 @@ export const PageEditor = ({ dictionary }: IProps) => {
   const getAllRawResourcesCost = (resource: IGood): number => {
     // Base case: If no requirements, return the resource's own time
     if (!resource.requirements || !resource.requirements.resources) {
-      return resource.cost;
+      return resource.additionalCost;
     }
 
     // Recursive case: Calculate the cumulative time for required resources
     let cumulativeCost = 0;
 
-    if (resource.id !== selectedGood.id) {
-      cumulativeCost = resource.time;
-    }
     const requiredResources = resource.requirements.resources;
     for (const req of requiredResources) {
       const requiredResource = dictionary.goods.find(
@@ -307,6 +303,51 @@ export const PageEditor = ({ dictionary }: IProps) => {
 
       return newData;
     });
+  };
+
+  // Function to calculate the time needed for a liberateCity
+  function calculateLiberateCityTime(liberateCity: ILiberateCity) {
+    let totalTime = 0;
+
+    if (liberateCity.resources) {
+      const requiredResources = liberateCity.resources;
+      for (const req of requiredResources) {
+        const requiredResource = dictionary.goods.find(
+          (item) => item.id === req.id,
+        );
+        if (requiredResource) {
+          totalTime += req.qty * getFullResourcesTime(requiredResource);
+        }
+      }
+    }
+
+    return totalTime;
+  }
+
+  const getAllCitiesCost = () => {
+    let cost = 0;
+    dictionary.liberateCities.forEach((city) => {
+      city.resources.forEach((resource) => {
+        const requiredResource = dictionary.goods.find(
+          (item) => item.id === resource.id,
+        );
+
+        if (requiredResource) {
+          cost = cost + resource.qty * getAllRawResourcesCost(requiredResource);
+        }
+      });
+    });
+
+    return cost;
+  };
+
+  const getAllCitiesTime = () => {
+    let time = 0;
+    dictionary.liberateCities.forEach((city) => {
+      time = time + calculateLiberateCityTime(city);
+    });
+
+    return time;
   };
 
   return (
@@ -463,7 +504,7 @@ export const PageEditor = ({ dictionary }: IProps) => {
                         />
 
                         <CustomText>
-                          Row resources time:{' '}
+                          Raw resources time + production:{' '}
                           {getFullResourcesTime(selectedGood)}
                         </CustomText>
 
@@ -878,6 +919,8 @@ export const PageEditor = ({ dictionary }: IProps) => {
               <Pressable onPress={addNewCity}>
                 <CustomText>Add new city</CustomText>
               </Pressable>
+              <CustomText>All cities cost: {getAllCitiesCost()}</CustomText>
+              <CustomText>All cities time: {getAllCitiesTime()}</CustomText>
 
               <FlatList
                 style={stylesCommon.gridListFullHeight}
