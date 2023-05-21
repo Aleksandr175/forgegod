@@ -13,6 +13,7 @@ interface IProps {
 export const PageEditor = ({ dictionary }: IProps) => {
   const [data, setData] = useState(dictionary);
   const [selectedGood, setSelectedGood] = useState(data.goods[0]);
+  const [selectedCity, setSelectedCity] = useState(data.liberateCities[0]);
   const [selectedMine, setSelectedMine] = useState(data.mine[0]);
   const [tab, setTab] = useState<TTab>('goods');
 
@@ -48,6 +49,30 @@ export const PageEditor = ({ dictionary }: IProps) => {
         if (item.id === selectedGood.id) {
           item.requirements.resources = [...processedRequiredResources];
         }
+
+        return item;
+      });
+
+      return newData;
+    });
+  };
+
+  const updateCityRequiredResources = (requiredResources: IGoodInfo[]) => {
+    let processedRequiredResources = [...requiredResources].filter(
+      (resource) => {
+        return resource.qty > 0;
+      },
+    );
+
+    setData((prevData) => {
+      let newData = { ...prevData };
+
+      newData.liberateCities = newData.liberateCities.map((item) => {
+        if (item.id === selectedCity.id) {
+          item.resources = [...processedRequiredResources];
+        }
+
+        console.log(item.resources);
 
         return item;
       });
@@ -115,6 +140,10 @@ export const PageEditor = ({ dictionary }: IProps) => {
     );
   };
 
+  const getRequiredCityQty = (goodId: number) => {
+    return selectedCity.resources.find((good) => good.id === goodId)?.qty || '';
+  };
+
   const getRequirementMineQty = (goodId: number) => {
     return (
       selectedMine.requirements.resources.find((good) => good.id === goodId)
@@ -130,10 +159,18 @@ export const PageEditor = ({ dictionary }: IProps) => {
     return dictionary.goods.find((good) => good.id === resourceId)?.cost || 0;
   };
 
-  const getRequiredResourcesCost = () => {
-    return selectedGood.requirements.resources.reduce(
+  const getRequiredResourcesCost = (resources: IGoodInfo[]) => {
+    return resources.reduce(
       (partialSum, resource) =>
         partialSum + resource.qty * getCostOfResource(resource.id),
+      0,
+    );
+  };
+
+  const getCityRequiredResourcesTime = () => {
+    return selectedCity.resources.reduce(
+      (partialSum, resource) =>
+        partialSum + resource.qty * getTimeForResource(resource.id),
       0,
     );
   };
@@ -172,6 +209,31 @@ export const PageEditor = ({ dictionary }: IProps) => {
     return cumulativeTime;
   };
 
+  const getAllRawResourcesCost = (resource: IGood): number => {
+    // Base case: If no requirements, return the resource's own time
+    if (!resource.requirements || !resource.requirements.resources) {
+      return resource.cost;
+    }
+
+    // Recursive case: Calculate the cumulative time for required resources
+    let cumulativeCost = 0;
+
+    if (resource.id !== selectedGood.id) {
+      cumulativeCost = resource.time;
+    }
+    const requiredResources = resource.requirements.resources;
+    for (const req of requiredResources) {
+      const requiredResource = dictionary.goods.find(
+        (item) => item.id === req.id,
+      );
+      if (requiredResource) {
+        cumulativeCost += req.qty * getAllRawResourcesCost(requiredResource);
+      }
+    }
+
+    return cumulativeCost;
+  };
+
   const updateMineItem = (
     item: IMine,
     field: string,
@@ -203,6 +265,27 @@ export const PageEditor = ({ dictionary }: IProps) => {
 
         return item;
       });
+
+      return newData;
+    });
+  };
+
+  const addNewCity = () => {
+    setData((prevData) => {
+      let newData = { ...prevData };
+
+      newData.liberateCities.push(
+        JSON.parse(
+          JSON.stringify(
+            newData.liberateCities[newData.liberateCities.length - 1],
+          ),
+        ),
+      );
+
+      newData.liberateCities[newData.liberateCities.length - 1] = {
+        ...newData.liberateCities[newData.liberateCities.length - 1],
+        id: newData.liberateCities[newData.liberateCities.length - 1].id + 1,
+      };
 
       return newData;
     });
@@ -326,7 +409,9 @@ export const PageEditor = ({ dictionary }: IProps) => {
                           <STextInput
                             onChangeText={(value) => {
                               const additionalCost = Number(value);
-                              const resourcesCost = getRequiredResourcesCost();
+                              const resourcesCost = getRequiredResourcesCost(
+                                selectedGood.requirements.resources,
+                              );
 
                               setSelectedGood((prevState) => {
                                 return {
@@ -357,7 +442,10 @@ export const PageEditor = ({ dictionary }: IProps) => {
                         </CustomText>
 
                         <CustomText>
-                          Row Resources cost: {getRequiredResourcesCost()}
+                          Row Resources cost:{' '}
+                          {getRequiredResourcesCost(
+                            selectedGood.requirements.resources,
+                          )}
                         </CustomText>
                       </SColumn>
 
@@ -784,213 +872,184 @@ export const PageEditor = ({ dictionary }: IProps) => {
           </>
         )}
 
-        {/*{tab === 'cities' && (
-        <>
-          <SColumnDictionary>
-            <FlatList
-              style={stylesCommon.gridListFullHeight}
-              data={data}
-              numColumns={5}
-              renderItem={({ item }) => {
-                return (
-                  <SGoodWrapper
-                    onPress={() => setSelectedGood(item)}
-                    selected={selectedGood.id === item.id}
-                  >
-                    <View>
-                      <CustomImage id={item.id} size={'big'} />
-                      <CustomText>
-                        ID: {item.id}, {item.name}
-                      </CustomText>
-                    </View>
-                    <View>
-                      <CustomText>
-                        Cost: {item.cost}, Time: {item.time}
-                      </CustomText>
-                    </View>
-                    <CustomText>Requirements:</CustomText>
-                    <SResources>
-                      {item.requirements.resources.map((requirement) => {
-                        return (
-                          <View key={requirement.id}>
-                            <CustomImage id={requirement.id} size={'small'} />
-                            <SQty>{requirement.qty}</SQty>
-                          </View>
-                        );
-                      })}
-                    </SResources>
-                  </SGoodWrapper>
-                );
-              }}
-              keyExtractor={(item) => String(item.id)}
-            />
-          </SColumnDictionary>
-          <SColumnGoods>
-            <ScrollView>
-              {selectedGood && (
-                <View>
+        {tab === 'cities' && (
+          <>
+            <SColumnDictionary>
+              <Pressable onPress={addNewCity}>
+                <CustomText>Add new city</CustomText>
+              </Pressable>
+
+              <FlatList
+                style={stylesCommon.gridListFullHeight}
+                data={data.liberateCities}
+                numColumns={3}
+                renderItem={({ item }) => {
+                  return (
+                    <SGoodWrapper
+                      onPress={() => setSelectedCity(item)}
+                      selected={selectedCity.id === item.id}
+                    >
+                      <View>
+                        <CustomText>
+                          ID: {item.id}, {item.name}
+                        </CustomText>
+                      </View>
+                      <View>
+                        <CustomText>Exp: {item.experience}</CustomText>
+                      </View>
+                      <CustomText>Requirements:</CustomText>
+                      <SResources>
+                        {item.resources.map((resource) => {
+                          return (
+                            <View key={resource.id}>
+                              <CustomImage id={resource.id} size={'small'} />
+                              <SQty>{resource.qty}</SQty>
+                            </View>
+                          );
+                        })}
+                      </SResources>
+                    </SGoodWrapper>
+                  );
+                }}
+                keyExtractor={(item) => String(item.id)}
+              />
+            </SColumnDictionary>
+            <SColumnGoods>
+              <ScrollView>
+                {selectedCity && (
                   <View>
-                    <CustomImage id={selectedGood.id} size={'big'} />
-                    <CustomText>
-                      ID:
-                      {selectedGood.id},
-                      <STextInput
-                        onChangeText={(value) => {
-                          setSelectedGood((prevState) => {
-                            return { ...prevState, name: value };
-                          });
-
-                          setData((prevData) => {
-                            let newData = [...prevData];
-
-                            newData = newData.map((item) => {
-                              if (item.id === selectedGood.id) {
-                                item.name = value;
-                              }
-
-                              return item;
+                    <View>
+                      <CustomText>
+                        ID:
+                        {selectedCity.id},
+                        <STextInput
+                          onChangeText={(value) => {
+                            setSelectedCity((prevState) => {
+                              return { ...prevState, name: value };
                             });
 
-                            return newData;
-                          });
-                        }}
-                        value={selectedGood.name}
-                      />
-                    </CustomText>
-                  </View>
-                  <View>
-                    <CustomText>
-                      Cost:{' '}
-                      <STextInput
-                        onChangeText={(value) => {
-                          setSelectedGood((prevState) => {
-                            return { ...prevState, cost: Number(value) };
-                          });
+                            setData((prevData) => {
+                              let newData = { ...prevData };
 
-                          updateItem(selectedGood, 'cost', Number(value));
-                        }}
-                        value={String(selectedGood.cost)}
-                      />
-                      , Time:{' '}
-                      <STextInput
-                        onChangeText={(value) => {
-                          setSelectedGood((prevState) => {
-                            return { ...prevState, time: Number(value) };
-                          });
-
-                          updateItem(selectedGood, 'time', Number(value));
-                        }}
-                        value={String(selectedGood.time)}
-                      />
-                    </CustomText>
-
-                    <CustomText>
-                      Resources cost: {getRequiredResourcesCost()}
-                    </CustomText>
-                    <CustomText>
-                      Resources time: {getRequiredResourcesTime()}
-                    </CustomText>
-                  </View>
-
-                  <View>
-                    <CustomText>Requirements:</CustomText>
-
-                    <FlatList
-                      style={stylesCommon.gridListFullHeight}
-                      data={dictionary.goods}
-                      numColumns={3}
-                      renderItem={({ item }) => {
-                        return (
-                          <SRequirement key={item.id}>
-                            <CustomImage id={item.id} size={'big'} />
-                            <STextInput
-                              onChangeText={(value) => {
-                                setSelectedGood((prevState) => {
-                                  let requirementResources = [
-                                    ...selectedGood.requirements.resources,
-                                  ];
-
-                                  let hasUpdated = false;
-
-                                  requirementResources =
-                                    requirementResources.map(
-                                      (requirementResource) => {
-                                        if (
-                                          requirementResource.id === item.id
-                                        ) {
-                                          requirementResource.qty =
-                                            Number(value);
-                                          hasUpdated = true;
-                                        }
-
-                                        return requirementResource;
-                                      },
-                                    );
-
-                                  if (!hasUpdated) {
-                                    requirementResources.push({
-                                      id: item.id,
-                                      qty: Number(value),
-                                    });
+                              newData.liberateCities =
+                                newData.liberateCities.map((item) => {
+                                  if (item.id === selectedCity.id) {
+                                    item.name = value;
                                   }
 
-                                  updateItemRequiredResources(
-                                    requirementResources,
-                                  );
-
-                                  return {
-                                    ...prevState,
-                                    requirements: {
-                                      upgrades: prevState.requirements.upgrades,
-                                      resources: requirementResources,
-                                    },
-                                  };
+                                  return item;
                                 });
-                              }}
-                              value={String(getRequirementQty(item.id))}
-                            ></STextInput>
-                          </SRequirement>
-                        );
-                      }}
-                      keyExtractor={(item) => String(item.id)}
-                    />
+
+                              return newData;
+                            });
+                          }}
+                          value={selectedCity.name}
+                        />
+                        Exp:
+                        <STextInput
+                          onChangeText={(value) => {
+                            setSelectedCity((prevState) => {
+                              return {
+                                ...prevState,
+                                experience: Number(value),
+                              };
+                            });
+
+                            setData((prevData) => {
+                              let newData = { ...prevData };
+
+                              newData.liberateCities =
+                                newData.liberateCities.map((item) => {
+                                  if (item.id === selectedCity.id) {
+                                    item.experience = Number(value);
+                                  }
+
+                                  return item;
+                                });
+
+                              return newData;
+                            });
+                          }}
+                          value={String(selectedCity.experience)}
+                        />
+                      </CustomText>
+                    </View>
+                    <View>
+                      <CustomText>
+                        Resources cost:{' '}
+                        {getRequiredResourcesCost(selectedCity.resources)}
+                      </CustomText>
+                      <CustomText>
+                        Resources time: {getCityRequiredResourcesTime()}
+                      </CustomText>
+                    </View>
+
+                    <View>
+                      <CustomText>Requirements:</CustomText>
+
+                      <FlatList
+                        style={stylesCommon.gridListFullHeight}
+                        data={dictionary.goods}
+                        numColumns={3}
+                        renderItem={({ item }) => {
+                          return (
+                            <SRequirement key={item.id}>
+                              <CustomImage id={item.id} size={'big'} />
+                              <STextInput
+                                onChangeText={(value) => {
+                                  setSelectedCity((prevState) => {
+                                    let requirementResources = [
+                                      ...selectedCity.resources,
+                                    ];
+
+                                    let hasUpdated = false;
+
+                                    requirementResources =
+                                      requirementResources.map(
+                                        (requirementResource) => {
+                                          if (
+                                            requirementResource.id === item.id
+                                          ) {
+                                            requirementResource.qty =
+                                              Number(value);
+                                            hasUpdated = true;
+                                          }
+
+                                          return requirementResource;
+                                        },
+                                      );
+
+                                    if (!hasUpdated) {
+                                      requirementResources.push({
+                                        id: item.id,
+                                        qty: Number(value),
+                                      });
+                                    }
+
+                                    updateCityRequiredResources(
+                                      requirementResources,
+                                    );
+
+                                    return {
+                                      ...prevState,
+                                      resources: requirementResources,
+                                    };
+                                  });
+                                }}
+                                value={String(getRequiredCityQty(item.id))}
+                              ></STextInput>
+                            </SRequirement>
+                          );
+                        }}
+                        keyExtractor={(item) => String(item.id)}
+                      />
+                    </View>
                   </View>
-
-                  <View>
-                    <CustomText>Skills:</CustomText>
-
-                    {dictionary.skills.map((skill) => {
-                      return (
-                        <SSkillRequirement key={skill.id}>
-                          <CustomText>{skill.name}</CustomText>
-
-                          {skill.levels.map((skillLvl) => {
-                            return (
-                              <SSkill
-                                onPress={() =>
-                                  setRequiredSkill(skillLvl.skillId)
-                                }
-                                selected={(
-                                  selectedGood.requirements.upgrades.skillIds ||
-                                  []
-                                ).includes(skillLvl.skillId)}
-                              >
-                                <CustomText>
-                                  {skillLvl.skillId}. {skillLvl.description}
-                                </CustomText>
-                              </SSkill>
-                            );
-                          })}
-                        </SSkillRequirement>
-                      );
-                    })}
-                  </View>
-                </View>
-              )}
-            </ScrollView>
-          </SColumnGoods>
-        </>
-      )}*/}
+                )}
+              </ScrollView>
+            </SColumnGoods>
+          </>
+        )}
       </SPageContent>
     </SPageEditor>
   );

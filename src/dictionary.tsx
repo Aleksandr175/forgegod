@@ -1,334 +1,4 @@
-import { IDictionary, IGood } from './types';
-
-const RESOURCE_ROW_BLUE_ORE: IGood = {
-  id: 1,
-  name: 'Raw Blue Ore',
-  time: 2,
-  cost: 3,
-  type: 'resource',
-  requirements: {
-    resources: [],
-    upgrades: {},
-  },
-};
-
-const GOOD_BLUE_ORE: IGood = {
-  id: 2,
-  name: 'Blue Ore',
-  time: 3,
-  cost: 7,
-  type: 'good',
-  requirements: {
-    resources: [{ id: 1, qty: 2 }],
-    upgrades: {},
-  },
-};
-
-const GOOD_BLUE_POWDER: IGood = {
-  id: 3,
-  name: 'Blue Powder',
-  time: 5,
-  cost: 10,
-  type: 'good',
-  requirements: {
-    resources: [{ id: 2, qty: 2 }],
-    upgrades: {},
-  },
-};
-
-const GOOD_BLUE_INGOT: IGood = {
-  id: 4,
-  name: 'Blue Ingot',
-  time: 10,
-  cost: 25,
-  type: 'good',
-  requirements: {
-    resources: [
-      { id: 3, qty: 1 },
-      { id: 2, qty: 1 },
-    ],
-    upgrades: {},
-  },
-};
-
-const RESOURCE_ROW_BRONZE_ORE: IGood = {
-  id: 6,
-  name: 'Raw Bronze Ore',
-  time: 2,
-  cost: 3,
-  type: 'resource',
-  requirements: {
-    resources: [],
-    upgrades: {},
-  },
-};
-
-const GOOD_BRONZE_ORE: IGood = {
-  id: 7,
-  name: 'Bronze Ore',
-  time: 3,
-  cost: 7,
-  type: 'good',
-  requirements: {
-    resources: [{ id: 6, qty: 2 }],
-    upgrades: {},
-  },
-};
-
-const GOOD_BRONZE_POWDER: IGood = {
-  id: 8,
-  name: 'Bronze Powder',
-  time: 5,
-  cost: 10,
-  type: 'good',
-  requirements: {
-    resources: [{ id: 7, qty: 2 }],
-    upgrades: {},
-  },
-};
-
-const GOOD_BRONZE_INGOT: IGood = {
-  id: 9,
-  name: 'Bronze Ingot',
-  time: 10,
-  cost: 25,
-  type: 'good',
-  requirements: {
-    resources: [
-      { id: 7, qty: 1 },
-      { id: 6, qty: 1 },
-    ],
-    upgrades: {},
-  },
-};
-
-const RESOURCE_ROW_COBALT_ORE: IGood = {
-  id: 10,
-  name: 'Raw Bronze Ore',
-  time: 2,
-  cost: 3,
-  type: 'resource',
-  requirements: {
-    resources: [],
-    upgrades: {},
-  },
-};
-
-const GOOD_COBALT_ORE: IGood = {
-  id: 11,
-  name: 'Bronze Ore',
-  time: 3,
-  cost: 7,
-  type: 'good',
-  requirements: {
-    resources: [{ id: 10, qty: 2 }],
-    upgrades: {},
-  },
-};
-
-const GOOD_COBALT_POWDER: IGood = {
-  id: 12,
-  name: 'Bronze Powder',
-  time: 5,
-  cost: 10,
-  type: 'good',
-  requirements: {
-    resources: [{ id: 11, qty: 2 }],
-    upgrades: {},
-  },
-};
-
-const GOOD_COBALT_INGOT: IGood = {
-  id: 13,
-  name: 'Bronze Ingot',
-  time: 10,
-  cost: 25,
-  type: 'good',
-  requirements: {
-    resources: [
-      { id: 11, qty: 1 },
-      { id: 10, qty: 1 },
-    ],
-    upgrades: {},
-  },
-};
-
-const GOOD_SHORT_SWORD: IGood = {
-  id: 30,
-  name: 'Short Sword',
-  time: 20,
-  cost: 35,
-  type: 'good',
-  requirements: {
-    resources: [
-      { id: 2, qty: 2 },
-      { id: 3, qty: 2 },
-    ],
-    upgrades: {},
-  },
-};
-
-const GOOD_LONG_SWORD: IGood = {
-  id: 31,
-  name: 'Long Sword',
-  time: 20,
-  cost: 35,
-  type: 'good',
-  requirements: {
-    resources: [
-      { id: 2, qty: 2 },
-      { id: 3, qty: 2 },
-    ],
-    upgrades: {},
-  },
-};
-
-const GOOD_AXE: IGood = {
-  id: 32,
-  name: 'Axe',
-  time: 20,
-  cost: 35,
-  type: 'good',
-  requirements: {
-    resources: [
-      { id: 2, qty: 2 },
-      { id: 3, qty: 2 },
-    ],
-    upgrades: {},
-  },
-};
-
-const GOOD_BRONZE_BOW: IGood = {
-  id: 33,
-  name: 'Bronze Bow',
-  time: 20,
-  cost: 35,
-  type: 'good',
-  requirements: {
-    resources: [
-      { id: 2, qty: 2 },
-      { id: 3, qty: 2 },
-    ],
-    upgrades: {},
-  },
-};
-
-const GOOD_BRONZE_AXE: IGood = {
-  id: 34,
-  name: 'Bronze Axe',
-  time: 20,
-  cost: 35,
-  type: 'good',
-  requirements: {
-    resources: [
-      { id: 2, qty: 2 },
-      { id: 3, qty: 2 },
-    ],
-    upgrades: {},
-  },
-};
-
-const GOOD_BRONZE_BRACERS: IGood = {
-  id: 35,
-  name: 'Bronze Bracers',
-  time: 20,
-  cost: 35,
-  type: 'good',
-  requirements: {
-    resources: [
-      { id: 2, qty: 2 },
-      { id: 3, qty: 2 },
-    ],
-    upgrades: {},
-  },
-};
-
-const GOOD_BRONZE_SHIELD: IGood = {
-  id: 36,
-  name: 'Bronze Shield',
-  time: 20,
-  cost: 35,
-  type: 'good',
-  requirements: {
-    resources: [
-      { id: 2, qty: 2 },
-      { id: 3, qty: 2 },
-    ],
-    upgrades: {},
-  },
-};
-
-const GOOD_BRONZE_SCEPTER: IGood = {
-  id: 37,
-  name: 'Bronze Scepter',
-  time: 20,
-  cost: 35,
-  type: 'good',
-  requirements: {
-    resources: [
-      { id: 2, qty: 2 },
-      { id: 3, qty: 2 },
-    ],
-    upgrades: {},
-  },
-};
-
-const GOOD_BRONZE_SCYTHE: IGood = {
-  id: 38,
-  name: 'Bronze Scythe',
-  time: 20,
-  cost: 35,
-  type: 'good',
-  requirements: {
-    resources: [
-      { id: 2, qty: 2 },
-      { id: 3, qty: 2 },
-    ],
-    upgrades: {},
-  },
-};
-
-const GOOD_BRONZE_WAND: IGood = {
-  id: 39,
-  name: 'Bronze Wand',
-  time: 20,
-  cost: 35,
-  type: 'good',
-  requirements: {
-    resources: [
-      { id: 2, qty: 2 },
-      { id: 3, qty: 2 },
-    ],
-    upgrades: {},
-  },
-};
-
-const GOODS = [
-  RESOURCE_ROW_BLUE_ORE,
-  GOOD_BLUE_ORE,
-  GOOD_BLUE_POWDER,
-  GOOD_BLUE_INGOT,
-  RESOURCE_ROW_BRONZE_ORE,
-  GOOD_BRONZE_ORE,
-  GOOD_BRONZE_POWDER,
-  GOOD_BRONZE_INGOT,
-
-  RESOURCE_ROW_COBALT_ORE,
-  GOOD_COBALT_ORE,
-  GOOD_COBALT_POWDER,
-  GOOD_COBALT_INGOT,
-
-  GOOD_SHORT_SWORD,
-  GOOD_LONG_SWORD,
-  GOOD_AXE,
-  GOOD_BRONZE_BOW,
-  GOOD_BRONZE_AXE,
-  GOOD_BRONZE_BRACERS,
-  GOOD_BRONZE_SHIELD,
-  GOOD_BRONZE_SCEPTER,
-  GOOD_BRONZE_SCYTHE,
-  GOOD_BRONZE_WAND,
-];
+import { IDictionary } from './types';
 
 export const dictionary: IDictionary = {
   goods: [
@@ -1420,7 +1090,7 @@ export const dictionary: IDictionary = {
       cost: 300,
       requirements: { resources: [], orderQty: 0 },
       providedResourceIds: [5],
-      expedition: { cost: 100, duration: 15, canBeFoundGoodIds: [200] },
+      expedition: { cost: 50, duration: 15, canBeFoundGoodIds: [200] },
     },
     {
       id: 2,
@@ -1434,7 +1104,7 @@ export const dictionary: IDictionary = {
         orderQty: 10,
       },
       providedResourceIds: [5, 1],
-      expedition: { cost: 100, duration: 15, canBeFoundGoodIds: [200] },
+      expedition: { cost: 50, duration: 15, canBeFoundGoodIds: [200] },
     },
     {
       id: 3,
@@ -1448,7 +1118,7 @@ export const dictionary: IDictionary = {
         orderQty: 10,
       },
       providedResourceIds: [5, 1, 2],
-      expedition: { cost: 100, duration: 15, canBeFoundGoodIds: [200] },
+      expedition: { cost: 50, duration: 15, canBeFoundGoodIds: [200] },
     },
     {
       id: 4,
@@ -1462,7 +1132,7 @@ export const dictionary: IDictionary = {
         orderQty: 10,
       },
       providedResourceIds: [5, 1, 2, 6],
-      expedition: { cost: 100, duration: 15, canBeFoundGoodIds: [200] },
+      expedition: { cost: 50, duration: 15, canBeFoundGoodIds: [200] },
     },
     {
       id: 5,
@@ -1476,7 +1146,7 @@ export const dictionary: IDictionary = {
         orderQty: 10,
       },
       providedResourceIds: [5, 1, 2, 3, 6],
-      expedition: { cost: 120, duration: 20, canBeFoundGoodIds: [200] },
+      expedition: { cost: 50, duration: 15, canBeFoundGoodIds: [200] },
     },
     {
       id: 6,
@@ -1490,7 +1160,7 @@ export const dictionary: IDictionary = {
         orderQty: 10,
       },
       providedResourceIds: [5, 1, 2, 3, 6, 7],
-      expedition: { cost: 150, duration: 25, canBeFoundGoodIds: [200, 201] },
+      expedition: { cost: 70, duration: 20, canBeFoundGoodIds: [200, 201] },
     },
     {
       id: 7,
@@ -1504,7 +1174,7 @@ export const dictionary: IDictionary = {
         orderQty: 10,
       },
       providedResourceIds: [5, 1, 2, 3, 6, 7, 8],
-      expedition: { cost: 150, duration: 25, canBeFoundGoodIds: [200, 201] },
+      expedition: { cost: 70, duration: 20, canBeFoundGoodIds: [200, 201] },
     },
     {
       id: 8,
@@ -1519,7 +1189,7 @@ export const dictionary: IDictionary = {
         orderQty: 10,
       },
       providedResourceIds: [5, 1, 2, 3, 6, 7, 8, 10],
-      expedition: { cost: 150, duration: 25, canBeFoundGoodIds: [200, 201] },
+      expedition: { cost: 70, duration: 20, canBeFoundGoodIds: [200, 201] },
     },
     {
       id: 9,
@@ -1533,7 +1203,7 @@ export const dictionary: IDictionary = {
         orderQty: 10,
       },
       providedResourceIds: [5, 1, 2, 3, 6, 7, 8, 10, 11],
-      expedition: { cost: 150, duration: 25, canBeFoundGoodIds: [200, 201] },
+      expedition: { cost: 70, duration: 20, canBeFoundGoodIds: [200, 201] },
     },
     {
       id: 10,
@@ -1547,27 +1217,64 @@ export const dictionary: IDictionary = {
         orderQty: 10,
       },
       providedResourceIds: [5, 1, 2, 3, 6, 7, 8, 10, 11, 12],
-      expedition: { cost: 150, duration: 25, canBeFoundGoodIds: [200, 201] },
+      expedition: { cost: 70, duration: 20, canBeFoundGoodIds: [200, 201] },
     },
   ],
   liberateCities: [
     {
       id: 1,
       name: 'Arkturis',
-      resources: [
-        { id: 1, qty: 1 },
-        { id: 2, qty: 3 },
-      ],
-      experience: 1000,
+      resources: [{ id: 41, qty: 3 }],
+      experience: 50,
     },
     {
       id: 2,
       name: 'Mythradon',
       resources: [
-        { id: 1, qty: 1 },
-        { id: 2, qty: 3 },
+        { id: 41, qty: 5 },
+        { id: 46, qty: 3 },
       ],
-      experience: 3000,
+      experience: 100,
+    },
+    {
+      id: 3,
+      name: 'Atlantisoria',
+      resources: [
+        { id: 31, qty: 2 },
+        { id: 30, qty: 3 },
+        { id: 46, qty: 2 },
+      ],
+      experience: 500,
+    },
+    {
+      id: 4,
+      name: 'Eldorhaven',
+      resources: [
+        { id: 43, qty: 4 },
+        { id: 31, qty: 5 },
+        { id: 42, qty: 3 },
+      ],
+      experience: 700,
+    },
+    {
+      id: 5,
+      name: 'Zephyria',
+      resources: [
+        { id: 32, qty: 3 },
+        { id: 36, qty: 4 },
+        { id: 34, qty: 2 },
+      ],
+      experience: 1000,
+    },
+    {
+      id: 6,
+      name: 'Mythoskar',
+      resources: [
+        { id: 33, qty: 3 },
+        { id: 52, qty: 3 },
+        { id: 51, qty: 2 },
+      ],
+      experience: 1400,
     },
   ],
   heroLvls: [
