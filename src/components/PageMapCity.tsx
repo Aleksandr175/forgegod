@@ -52,8 +52,32 @@ export const PageMapCity = React.memo(
           )}
           {cityId === 2 && (
             <SCityImage
-              style={{ width: '260px', height: '326px' }}
+              style={{ width: '214px', height: '302px' }}
               source={require(`../images/cities/2.png`)}
+            />
+          )}
+          {cityId === 3 && (
+            <SCityImage
+              style={{ width: '230px', height: '256px' }}
+              source={require(`../images/cities/3.png`)}
+            />
+          )}
+          {cityId === 4 && (
+            <SCityImage
+              style={{ width: '260px', height: '272px' }}
+              source={require(`../images/cities/4.png`)}
+            />
+          )}
+          {cityId === 5 && (
+            <SCityImage
+              style={{ width: '270px', height: '310px' }}
+              source={require(`../images/cities/5.png`)}
+            />
+          )}
+          {cityId === 6 && (
+            <SCityImage
+              style={{ width: '260px', height: '326px' }}
+              source={require(`../images/cities/6.png`)}
             />
           )}
         </SCityImageWrapper>
