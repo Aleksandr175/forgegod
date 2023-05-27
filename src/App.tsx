@@ -29,6 +29,7 @@ import { PageMapCity } from './components/PageMapCity';
 import { useLiberateCityLogic } from './hooks/useLiberateCityLogic';
 import { PageHero } from './components/PageHero';
 import { PageEditor } from './components/PageEditor';
+import { SButton } from './styles';
 
 export const App = () => {
   const [page, setPage] = useState<TPage>('forge');
@@ -37,6 +38,7 @@ export const App = () => {
   const [maxOrdersQty, setMaxOrdersQty] = useState(5);
   const [expeditionInfo, setExpeditionInfo] =
     useState<IExpeditionInfoInProcess>({} as IExpeditionInfoInProcess);
+  const [isTutorialOn, setIsTutorialOn] = useState(true);
 
   const [loaded] = useFonts({
     LGGothic: require('./fonts/LGGothic.ttf'),
@@ -590,7 +592,7 @@ export const App = () => {
                 <PanelOrders orders={orders} maxOrdersQty={maxOrdersQty} />
               </View>
               <View style={styles.columnRight}>
-                <View style={styles.orderBlock}>
+                <View>
                   <PanelSelectedGood
                     canOrder={orders.length < maxOrdersQty}
                     storage={storage}
@@ -666,6 +668,40 @@ export const App = () => {
         {page === 'editor' && <PageEditor dictionary={dictionary} />}
       </View>
 
+      <STutorialModal
+        animationType="fade"
+        transparent={true}
+        visible={isTutorialOn}
+        onRequestClose={() => {
+          setIsTutorialOn(false);
+        }}
+      >
+        <SModalWrapper>
+          <SModal>
+            <STextWrapper>
+              <CustomText>Hi, Forge God!</CustomText>
+              <CustomText>
+                Many years we were under attack of enemies!
+              </CustomText>
+              <CustomText>
+                It is time to liberate our cities! And for it we need your help!
+              </CustomText>
+              <CustomText>
+                Give us weapons and we will destroy our enemies together!
+              </CustomText>
+            </STextWrapper>
+
+            <SButton
+              onPress={() => {
+                setIsTutorialOn(false);
+              }}
+            >
+              <CustomText>Close</CustomText>
+            </SButton>
+          </SModal>
+        </SModalWrapper>
+      </STutorialModal>
+
       <Menu
         setPage={setPage}
         availableSkillPoints={availableSkillPoints}
@@ -684,11 +720,9 @@ const SSomePoint = styled.View`
   width: 100px;
 `;
 
-const SHeader = styled.Text`
+const SHeader = styled(CustomText)`
   font-weight: 700;
   padding: 10px;
-  color: white;
-  font-family: 'LGGothic';
   font-size: 18px;
 `;
 
@@ -742,9 +776,30 @@ const styles = StyleSheet.create({
   columnRight: {
     width: '50%',
   },
-  orderBlock: {},
 });
 
 const SPanelStorageWrapper = styled.View`
   width: 100%;
+`;
+
+const STutorialModal = styled.Modal`
+  position: fixed;
+`;
+
+const SModalWrapper = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+`;
+
+const STextWrapper = styled.View`
+  padding-bottom: 10px;
+`;
+
+const SModal = styled.View`
+  margin: 20px;
+  background-color: #614d41;
+  padding: 10px;
+  align-items: center;
 `;
