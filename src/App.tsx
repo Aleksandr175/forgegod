@@ -38,7 +38,13 @@ export const App = () => {
   const [maxOrdersQty, setMaxOrdersQty] = useState(5);
   const [expeditionInfo, setExpeditionInfo] =
     useState<IExpeditionInfoInProcess>({} as IExpeditionInfoInProcess);
+
   const [isTutorialOn, setIsTutorialOn] = useState(true);
+  const [isHeroPageTutorialOn, setIsHeroPageTutorialOn] = useState(true);
+  const [isMinePageTutorialOn, setIsMinePageTutorialOn] = useState(true);
+  const [isOrdersPageTutorialOn, setIsOrdersPageTutorialOn] = useState(true);
+  const [isCityPageTutorialOn, setIsCityPageTutorialOn] = useState(true);
+  const [isCity1PageTutorialOn, setIsCity1PageTutorialOn] = useState(true);
 
   const [loaded] = useFonts({
     LGGothic: require('./fonts/LGGothic.ttf'),
@@ -671,7 +677,7 @@ export const App = () => {
       <STutorialModal
         animationType="fade"
         transparent={true}
-        visible={isTutorialOn}
+        visible={isTutorialOn && page === 'forge'}
         onRequestClose={() => {
           setIsTutorialOn(false);
         }}
@@ -694,6 +700,153 @@ export const App = () => {
             <SButton
               onPress={() => {
                 setIsTutorialOn(false);
+              }}
+            >
+              <CustomText>Close</CustomText>
+            </SButton>
+          </SModal>
+        </SModalWrapper>
+      </STutorialModal>
+
+      <STutorialModal
+        animationType="fade"
+        transparent={true}
+        visible={isHeroPageTutorialOn && page === 'hero'}
+        onRequestClose={() => {
+          setIsHeroPageTutorialOn(false);
+        }}
+      >
+        <SModalWrapper>
+          <SModal>
+            <STextWrapper>
+              <CustomText>Hero!</CustomText>
+              <CustomText>You can learn new skills here.</CustomText>
+              <CustomText>But you need to get experience first!</CustomText>
+            </STextWrapper>
+
+            <SButton
+              onPress={() => {
+                setIsHeroPageTutorialOn(false);
+              }}
+            >
+              <CustomText>Close</CustomText>
+            </SButton>
+          </SModal>
+        </SModalWrapper>
+      </STutorialModal>
+
+      <STutorialModal
+        animationType="fade"
+        transparent={true}
+        visible={isMinePageTutorialOn && page === 'mine'}
+        onRequestClose={() => {
+          setIsMinePageTutorialOn(false);
+        }}
+      >
+        <SModalWrapper>
+          <SModal>
+            <STextWrapper>
+              <CustomText>Mine!</CustomText>
+              <CustomText>You can buy some resources here.</CustomText>
+              <CustomText>
+                Do not forget to improve level of our mine!
+              </CustomText>
+              <CustomText>
+                And remember! Some resources can be found only in expedition! It
+                is time try it!
+              </CustomText>
+            </STextWrapper>
+
+            <SButton
+              onPress={() => {
+                setIsMinePageTutorialOn(false);
+              }}
+            >
+              <CustomText>Close</CustomText>
+            </SButton>
+          </SModal>
+        </SModalWrapper>
+      </STutorialModal>
+
+      <STutorialModal
+        animationType="fade"
+        transparent={true}
+        visible={isOrdersPageTutorialOn && page === 'orders'}
+        onRequestClose={() => {
+          setIsOrdersPageTutorialOn(false);
+        }}
+      >
+        <SModalWrapper>
+          <SModal>
+            <STextWrapper>
+              <CustomText>It is your forge!</CustomText>
+              <CustomText>
+                Do not forget to sell some goods you created in order to get
+                experience and more gold.
+              </CustomText>
+            </STextWrapper>
+
+            <SButton
+              onPress={() => {
+                setIsOrdersPageTutorialOn(false);
+              }}
+            >
+              <CustomText>Close</CustomText>
+            </SButton>
+          </SModal>
+        </SModalWrapper>
+      </STutorialModal>
+
+      <STutorialModal
+        animationType="fade"
+        transparent={true}
+        visible={isCityPageTutorialOn && page === 'city'}
+        onRequestClose={() => {
+          setIsCityPageTutorialOn(false);
+        }}
+      >
+        <SModalWrapper>
+          <SModal>
+            <STextWrapper>
+              <CustomText>City And Map</CustomText>
+              <CustomText>Use it for fast navigation.</CustomText>
+              <CustomText>
+                Your main gold is liberate all our cities! Do not hesitate!
+              </CustomText>
+            </STextWrapper>
+
+            <SButton
+              onPress={() => {
+                setIsCityPageTutorialOn(false);
+              }}
+            >
+              <CustomText>Close</CustomText>
+            </SButton>
+          </SModal>
+        </SModalWrapper>
+      </STutorialModal>
+
+      <STutorialModal
+        animationType="fade"
+        transparent={true}
+        visible={isCity1PageTutorialOn && page === 'city-1'}
+        onRequestClose={() => {
+          setIsCity1PageTutorialOn(false);
+        }}
+      >
+        <SModalWrapper>
+          <SModal>
+            <STextWrapper>
+              <CustomText>Liberate cities</CustomText>
+              <CustomText>It requires some weapons and resources.</CustomText>
+              <CustomText>
+                You can buy it or create it and liberate each city.
+              </CustomText>
+            </STextWrapper>
+
+            <SButton
+              onPress={() => {
+                setIsCity1PageTutorialOn(false);
               }}
             >
               <CustomText>Close</CustomText>
