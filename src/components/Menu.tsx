@@ -2,15 +2,22 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { CustomText } from './CustomText';
 import { TPage } from '../types';
+import { css } from 'styled-components';
 
 interface IProps {
   setPage: (page: TPage) => void;
   availableSkillPoints: number;
   customerOrdersQty: number;
+  currentPage: TPage;
 }
 
 export const Menu = React.memo(
-  ({ setPage, availableSkillPoints, customerOrdersQty }: IProps) => {
+  ({
+    setPage,
+    availableSkillPoints,
+    customerOrdersQty,
+    currentPage,
+  }: IProps) => {
     return (
       <SMenu>
         <SMenuItem
@@ -18,14 +25,14 @@ export const Menu = React.memo(
             setPage('forge');
           }}
         >
-          <SText>Forge</SText>
+          <SText active={currentPage === 'forge'}>Forge</SText>
         </SMenuItem>
         <SMenuItem
           onPress={() => {
             setPage('hero');
           }}
         >
-          <SText>Hero</SText>
+          <SText active={currentPage === 'hero'}>Hero</SText>
 
           {availableSkillPoints > 0 && (
             <SMark important={true}>{availableSkillPoints}</SMark>
@@ -36,15 +43,14 @@ export const Menu = React.memo(
             setPage('mine');
           }}
         >
-          <SText>Mine</SText>
+          <SText active={currentPage === 'mine'}>Mine</SText>
         </SMenuItem>
         <SMenuItem
           onPress={() => {
             setPage('orders');
           }}
         >
-          <SText>Orders</SText>
-
+          <SText active={currentPage === 'orders'}>Orders</SText>
           {customerOrdersQty > 0 && <SMark>{customerOrdersQty}</SMark>}
         </SMenuItem>
         <SMenuItem
@@ -52,7 +58,7 @@ export const Menu = React.memo(
             setPage('city');
           }}
         >
-          <SText>City</SText>
+          <SText active={currentPage.includes('city')}>City</SText>
         </SMenuItem>
       </SMenu>
     );
@@ -69,15 +75,23 @@ const SMenu = styled.View`
   height: 10%;
 `;
 
+const SText = styled(CustomText)<{ active?: boolean }>`
+  position: relative;
+
+  ${({ active }) =>
+    active
+      ? css`
+          font-weight: 700;
+          font-size: 16px;
+        `
+      : ''};
+`;
+
 const SMenuItem = styled.Pressable`
   width: 20%;
   padding-top: 20px;
   padding-bottom: 20px;
   align-items: center;
-  position: relative;
-`;
-
-const SText = styled(CustomText)`
   position: relative;
 `;
 

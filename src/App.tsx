@@ -856,6 +856,7 @@ export const App = () => {
       </STutorialModal>
 
       <Menu
+        currentPage={page}
         setPage={setPage}
         availableSkillPoints={availableSkillPoints}
         customerOrdersQty={customerOrders.length}
